@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Alzheimers_Detection</string>
+    <string name="title_activity_signup">Signup</string>
+    <string name="title_activity_play">Play</string>
+
+    <string-array name="languages_array">// name of the string array
+        <item>English</item>
+        // items
+        <item>Marathi</item>
+        <item>Gujurati</item>
+        <item>Hindi</item>
+        <item>Tamil</item>
+        <item>Telegu</item>
+        <item>Malayalam</item>
+    </string-array>
+
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_q_r_present">QRPresent</string>
+    <string name="title_activity_generate_q_r">GenerateQR</string>
+    <string name="title_activity_signup_phone">SignupPhone</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!-- STRINGS USED FOR STAGES !-->
+
+    <!-- Abstraction .xml!-->
+    <string name="basket1">SPORTS</string>
+    <string name="basket2">  INSTRUMENTS</string>
+    <string name="basket3"> FRUITS</string>
+
+    <!-- Attention .xml!-->
+    <string name="attentionSt1">Is this doughnut </string>
+    <string name="attentionSt2">Remember this doughnut !</string>
+    <string name="attentionsSt3">the same as previous one ?</string>
+    <string name="attentionSt4">DUNKIN\' DOUGHNUTS</string>
+    <string name="attentionbtn1">YES</string>
+    <string name="attentionbtn2">NO</string>
+
+    <!-- fluency ! .java and .xml-->
+    <string name="blueCloudText1">Give as many words as you can think of from the letter "A". Tap the microphone below to speak.</string>
+    <string name="blueCloudText2">Make sure you don\'t use proper nouns , numbers and different forms of a verb.</string>
+    <string name="buttonText1">Press on the mic to speak</string>
+    <string name="buttonText2">Listening...</string>
+
+    <!-- Orientation !-->
+    <string name="title">Select from</string>
+
+    <!-- Question Library.java !-->
+
+    <!-- Visuoperception .java and .xml!-->
+    <string name="VisuoperceptionSt1">Look for 6 Hidden Words in the picture below</string>
+    <string name="VisuoperceptionSt2">Now, choose these 6 words from the options below</string>
+    <string name="Visuoperception_opt1">Not</string>
+    <string name="Visuoperception_opt2">Pages</string>
+    <string name="Visuoperception_opt3">Tree</string>
+    <string name="Visuoperception_opt4">Novel</string>
+    <string name="Visuoperception_opt5">Read</string>
+    <string name="Visuoperception_opt6">Dog</string>
+    <string name="Visuoperception_opt7">Man</string>
+    <string name="Visuoperception_opt8">Words</string>
+    <string name="Visuoperception_opt9">No</string>
+    <string name="Visuoperception_opt10">Or</string>
+    <string name="Visuoperception_opt11">Cat</string>
+    <string name="Visuoperception_opt12">Book</string>
+
+
+</resources>

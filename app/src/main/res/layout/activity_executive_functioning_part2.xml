@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExecutiveFunctioningPart2"
+    android:background="@drawable/dark_cave">
+
+    <ImageView
+        android:id="@+id/coinsack"
+        android:layout_width="214dp"
+        android:layout_height="148dp"
+        android:layout_x="105dp"
+        android:layout_y="605dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="125dp"
+        android:layout_height="91dp"
+        android:layout_x="14dp"
+        android:layout_y="146dp"
+        android:onClick="OnClick3"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageViewB"
+        android:layout_width="137dp"
+        android:layout_height="87dp"
+        android:layout_x="88dp"
+        android:layout_y="28dp"
+        android:onClick="OnClickB"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="163dp"
+        android:layout_height="100dp"
+        android:layout_x="149dp"
+        android:layout_y="387dp"
+        android:onClick="OnClick1"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="121dp"
+        android:layout_height="97dp"
+        android:layout_x="305dp"
+        android:layout_y="230dp"
+        android:onClick="OnClick4"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageViewC"
+        android:layout_width="91dp"
+        android:layout_height="85dp"
+        android:layout_x="293dp"
+        android:layout_y="483dp"
+        android:onClick="OnClickC"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageViewD"
+        android:layout_width="89dp"
+        android:layout_height="75dp"
+        android:layout_x="250dp"
+        android:layout_y="93dp"
+        android:onClick="OnClickD"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="97dp"
+        android:layout_height="113dp"
+        android:layout_x="32dp"
+        android:layout_y="307dp"
+        android:onClick="OnClick2"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageViewA"
+        android:layout_width="107dp"
+        android:layout_height="89dp"
+        android:layout_x="29dp"
+        android:layout_y="520dp"
+        android:onClick="OnClickA"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+</AbsoluteLayout>
