@@ -29,10 +29,9 @@ String urlabstractionview;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_abstraction);
-        progressBar3 =findViewById(R.id.progressBar2);
+        progressBar3 =findViewById(R.id.progressBar3);
         abstractionview=findViewById(R.id.abstractionview);
         urlabstractionview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/stage3.gif?alt=media&token=e4b58baf-c5c9-434a-b483-1667fa9d0555";
-        Picasso.with(this).load(urlabstractionview).into(abstractionview);
         Glide.with(this)
                 .load(urlabstractionview).listener(new RequestListener<String, GlideDrawable>() {
             @Override

@@ -58,9 +58,9 @@ public class Attention extends AppCompatActivity {
         donutdecor=findViewById(R.id.donutdecor);
         donutdecor2=findViewById(R.id.donutdecor2);
         donutstand=findViewById(R.id.donutstand);
-        progressBar2 =findViewById(R.id.uncle);
+        progressBar2 =findViewById(R.id.progressBar2);
 
-
+        uncle=findViewById(R.id.uncle);
 
 
         urldonutdecor="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/pic1.png?alt=media&token=07254029-77fd-44ff-b7c5-93a9e5e0500d";

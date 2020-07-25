@@ -87,7 +87,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:scaleType="fitXY"
-        app:srcCompat="@mipmap/ic_launcher" />
+         />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/coinsgif"
@@ -97,5 +97,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="0dp"
         android:scaleType="fitXY" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="111dp" />
 
 </RelativeLayout>

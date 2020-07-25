@@ -193,7 +193,7 @@ public class Naming4 extends AppCompatActivity {
         });
     }
     public void nextActivity(View view) {
-        Intent intent = new Intent(this, Visuoperception.class);
+        Intent intent = new Intent(this, IntroAbstraction.class);
         startActivity(intent);
     }
 }

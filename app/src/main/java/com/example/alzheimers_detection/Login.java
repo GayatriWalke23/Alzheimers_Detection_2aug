@@ -1,5 +1,6 @@
 package com.example.alzheimers_detection;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -39,12 +41,14 @@ import com.squareup.picasso.Picasso;
 import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
-ImageView tootpimage,loginimage;
-String urlloginimage;
+    ImageView tootpimage,loginimage;
+    String urlloginimage;
+    TextInputLayout hidepassword;
     DatabaseReference dbUsers;
-EditText usernameT;int flag=0;
+    EditText loginusername;
+    int flag=0;
     String email,password,verificationId;
-    EditText passwordT;
+    EditText loginphonepassword;
     TextView forgotp;
     Button login;
     TextView signup;
@@ -59,19 +63,20 @@ EditText usernameT;int flag=0;
 
         askPermissions();
         FirebaseApp.initializeApp(this);
+        hidepassword=findViewById(R.id.hidepassword);
         mAuth = FirebaseAuth.getInstance();
         loginimage=findViewById(R.id.loginimage);
         urlloginimage="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/body.jpeg?alt=media&token=a4407877-110d-48d9-b42f-9f424c9b5028";
         Picasso.with(this).load(urlloginimage).into(loginimage);
 
         tootpimage=findViewById(R.id.tootpimage);
-        usernameT=(EditText) findViewById(R.id.usernameT);
-        passwordT=(EditText)findViewById(R.id.passwordT);
-forgotp=findViewById(R.id.forgotp);
+        loginusername=(EditText) findViewById(R.id.loginusername);
+        loginphonepassword=(EditText)findViewById(R.id.loginphonepassword);
+        forgotp=findViewById(R.id.forgotp);
         login=(Button)findViewById(R.id.login);
         signup=findViewById(R.id.signup);
 
-        usernameT.addTextChangedListener(new TextWatcher() {
+        loginusername.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {}
 
@@ -82,18 +87,18 @@ forgotp=findViewById(R.id.forgotp);
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 String MobilePattern = "[0-9]+";
-                if (usernameT.getText().toString().trim().matches(MobilePattern))
+                if (loginusername.getText().toString().trim().matches(MobilePattern))
                 {
-                    tootpimage.setVisibility(View.INVISIBLE);
-                    passwordT.setVisibility(View.INVISIBLE);
+                    tootpimage.setAlpha(0);
+                    hidepassword.setVisibility(View.INVISIBLE);
                     forgotp.setAlpha(0);
                     flag=1;
                 }
                 else
                 {
                     forgotp.setAlpha(1);
-                    tootpimage.setVisibility(View.VISIBLE);
-                    passwordT.setVisibility(View.VISIBLE);
+                    tootpimage.setAlpha(255);
+                    hidepassword.setVisibility(View.VISIBLE);
                     flag=0;
                 }
             }
@@ -141,15 +146,15 @@ forgotp=findViewById(R.id.forgotp);
     public  void loginToAccountbyPhone()
     {
         String MobilePattern = "[0-9]{10}";
-        if(!(usernameT.getText().toString().trim().matches(MobilePattern)))
+        if(!(loginusername.getText().toString().trim().matches(MobilePattern)))
         {
-            usernameT.requestFocus();
-            usernameT.setError("Please enter valid phone number!");
+            loginusername.requestFocus();
+            loginusername.setError("Please enter valid phone number!");
         }
         else
         {
             Intent i=new Intent(getApplicationContext(),LoginOtpByPhone.class);
-            i.putExtra("tophonenumber",""+usernameT.getText().toString().trim());
+            i.putExtra("tophonenumber",""+loginusername.getText().toString().trim());
             startActivity(i);
 
 
@@ -160,24 +165,24 @@ forgotp=findViewById(R.id.forgotp);
 
     public void loginToAccount()
     {
-        email=usernameT.getText().toString().trim();
-        password=passwordT.getText().toString().trim();
+        email=loginusername.getText().toString().trim();
+        password=loginphonepassword.getText().toString().trim();
         if(email.isEmpty())
         {
-            usernameT.setError("Email id is required!");
-            usernameT.requestFocus();
+            loginusername.setError("Email id is required!");
+            loginusername.requestFocus();
         }
         else if(password.isEmpty())
         {
-            passwordT.setError("Email id is required!");
-            passwordT.requestFocus();
+            loginphonepassword.setError("Email id is required!");
+            loginphonepassword.requestFocus();
         }
         else if(password.isEmpty() && email.isEmpty())
         {
-            passwordT.setError("Email id is required!");
-            passwordT.requestFocus();
-            usernameT.setError("Email id is required!");
-            usernameT.requestFocus();
+            loginphonepassword.setError("Email id is required!");
+            loginphonepassword.requestFocus();
+            loginusername.setError("Email id is required!");
+            loginusername.requestFocus();
         }
         else if(!password.isEmpty() && !email.isEmpty()){
             mAuth.signInWithEmailAndPassword(email, password)
@@ -228,6 +233,8 @@ forgotp=findViewById(R.id.forgotp);
             Toast.makeText(getApplicationContext(), "This app needs to record audio through the microphone....", Toast.LENGTH_SHORT).show();
             requestPermissions(new String[]{requiredPermission}, 101);
         }
+
+
     }
 
     @Override

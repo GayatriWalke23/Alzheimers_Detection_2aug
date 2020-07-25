@@ -52,10 +52,10 @@ public class Settings extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        usernamepencil=findViewById(R.id.usernamepencil);
+        /*usernamepencil=findViewById(R.id.usernamepencil);
         passwordpencil=findViewById(R.id.passwordpencil);
         firstnamepencil=findViewById(R.id.firstnamepencil);
-        lastnamepencil=findViewById(R.id.lastnamepencil);
+        lastnamepencil=findViewById(R.id.lastnamepencil);*/
         soundbutton=findViewById(R.id.soundbutton);
         soundstatus=findViewById(R.id.soundstatus);
         firstname=findViewById(R.id.firstname);
@@ -72,11 +72,7 @@ public class Settings extends AppCompatActivity {
         namesettings=findViewById(R.id.namesettings);
         tool=findViewById(R.id.tool);
 
-        lastname.setCursorVisible(false);
 
-        firstname.setClickable(false);
-        password.setClickable(false);
-        username.setCursorVisible(false);
 
 
 
@@ -137,7 +133,7 @@ public class Settings extends AppCompatActivity {
         password.setHint("");
         username.setHint(pemail);
 
-        usernamepencil.setOnClickListener(new View.OnClickListener() {
+      /*  usernamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flagusername==0) {
@@ -153,7 +149,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-
+*/
         soundbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +173,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-
+/*
         lastnamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,7 +219,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-
+*/
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
