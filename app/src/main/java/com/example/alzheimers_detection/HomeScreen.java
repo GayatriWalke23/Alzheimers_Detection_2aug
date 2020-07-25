@@ -37,7 +37,7 @@ Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
         results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),SignupPhone.class);
+                Intent i=new Intent(getApplicationContext(),Results.class);
                 startActivity(i);
             }
         });
