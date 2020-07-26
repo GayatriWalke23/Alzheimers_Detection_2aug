@@ -1,6 +1,5 @@
 package com.example.alzheimers_detection;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -213,7 +212,6 @@ public class Login extends AppCompatActivity {
 
                         }
                     });
-
         }
     }
     public void nextActivity()
@@ -235,8 +233,6 @@ public class Login extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "This app needs to record audio through the microphone....", Toast.LENGTH_SHORT).show();
             requestPermissions(new String[]{requiredPermission}, 101);
         }
-
-
     }
 
     @Override
@@ -246,7 +242,6 @@ public class Login extends AppCompatActivity {
             // This method is called when the  permissions are given
         }
     }
-
 
     private void askPermissions(){
         String[] permissions = new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
