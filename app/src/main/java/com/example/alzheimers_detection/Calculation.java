@@ -16,7 +16,7 @@ double seconds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculation);
+        setContentView(R.layout.calculation);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -76,12 +76,12 @@ double seconds;
                         score++;
                     case_[0] =1;
                 }
-                else if(v.getId()==R.id.cloud2a||v.getId()==R.id.cloud2b)
+                /*else if(v.getId()==R.id.cloud2a||v.getId()==R.id.cloud2b)
                 {
                     if(v.getId()==R.id.cloud2b)
                         score++;
                     case_[0] =2;
-                }
+                }*/
                 else if(v.getId()==R.id.cloud3a||v.getId()==R.id.cloud3b)
                 {
                     if(v.getId()==R.id.cloud3b)
@@ -91,7 +91,7 @@ double seconds;
                 else if(v.getId()==R.id.cloud4a||v.getId()==R.id.cloud4b)
                 {
                     if(v.getId()==R.id.cloud4a)
-                        //score++;
+                        score++;
                         case_[0] =4;
                 }
 
@@ -99,8 +99,8 @@ double seconds;
 
                 final ImageView cloud1a = (ImageView) findViewById(R.id.cloud1a);
                 final ImageView cloud1b = (ImageView) findViewById(R.id.cloud1b);
-                final ImageView cloud2a = (ImageView) findViewById(R.id.cloud2a);
-                final ImageView cloud2b = (ImageView) findViewById(R.id.cloud2b);
+                //final ImageView cloud2a = (ImageView) findViewById(R.id.cloud2a);
+                //final ImageView cloud2b = (ImageView) findViewById(R.id.cloud2b);
                 final ImageView cloud3a = (ImageView) findViewById(R.id.cloud3a);
                 final ImageView cloud3b = (ImageView) findViewById(R.id.cloud3b);
                 final ImageView cloud4a = (ImageView) findViewById(R.id.cloud4a);
@@ -113,15 +113,17 @@ double seconds;
                             case (1):
                                 cloud1a.setVisibility(View.INVISIBLE);
                                 cloud1b.setVisibility(View.INVISIBLE);
+                                cloud3a.setVisibility(View.VISIBLE);
+                                cloud3b.setVisibility(View.VISIBLE);
 
-                                cloud2a.setVisibility(View.VISIBLE);
-                                cloud2b.setVisibility(View.VISIBLE);
+                               // cloud2a.setVisibility(View.VISIBLE);
+                                //cloud2b.setVisibility(View.VISIBLE);
                                 //stuff
                                 break;
 
                             case (2):
-                                cloud2a.setVisibility(View.INVISIBLE);
-                                cloud2b.setVisibility(View.INVISIBLE);
+                                //cloud2a.setVisibility(View.INVISIBLE);
+                                //cloud2b.setVisibility(View.INVISIBLE);
 
                                 cloud3a.setVisibility(View.VISIBLE);
                                 cloud3b.setVisibility(View.VISIBLE);
@@ -152,7 +154,7 @@ double seconds;
                                         }
                                         else
                                         {
-                                            Intent i=new Intent(getApplicationContext(),IntroOrientation.class);
+                                            Intent i=new Intent(getApplicationContext(), Orientation_Intro.class);
                                             startActivity(i);
                                         }
                                     }
@@ -162,13 +164,9 @@ double seconds;
 
                     }
                 }, 500);
-                /*MediaPlayer mysong;
+                MediaPlayer mysong;
                 mysong = MediaPlayer.create(getApplicationContext(), R.raw.burst);
                 mysong.start();
-*/
-
-
-
             }
         }, 200);
 

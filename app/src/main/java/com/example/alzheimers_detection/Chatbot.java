@@ -38,7 +38,7 @@ public class Chatbot extends AppCompatActivity   {//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatbot);
+        setContentView(R.layout.chatbot);
        /*t= (TextView) findViewById(R.id.textView);
         tt= (TextView) findViewById(R.id.textView2);
 

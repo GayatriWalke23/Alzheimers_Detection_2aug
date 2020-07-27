@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55C8FB"
+    tools:context=".Calculation" >
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/left"
+        android:layout_width="494dp"
+        android:layout_height="321dp"
+        android:layout_x="-49dp"
+        android:layout_y="-31dp"
+
+        android:src="@drawable/rainbow" />
+
+    <!--<ImageView
+        android:id="@+id/cloud2a"
+        android:layout_width="349dp"
+        android:layout_height="299dp"
+        android:layout_x="40dp"
+        android:layout_y="142dp"
+        android:onClick="click"
+        android:visibility="visible"
+        app:srcCompat="@drawable/cloud2a" />
+
+    <ImageView
+        android:id="@+id/cloud2b"
+        android:layout_width="350dp"
+        android:layout_height="298dp"
+        android:layout_x="26dp"
+        android:layout_y="453dp"
+        android:onClick="click"
+        android:visibility="visible"
+        app:srcCompat="@drawable/cloud2b" />-->
+
+    <ImageView
+        android:id="@+id/cloud1a"
+        android:layout_width="262dp"
+        android:layout_height="206dp"
+        android:layout_x="18dp"
+        android:layout_y="267dp"
+        android:onClick="click"
+        android:visibility="visible"
+        app:srcCompat="@drawable/cloud1a" />
+
+    <ImageView
+        android:id="@+id/cloud1b"
+        android:layout_width="241dp"
+        android:layout_height="278dp"
+        android:layout_x="130dp"
+        android:layout_y="521dp"
+        android:onClick="click"
+        android:visibility="visible"
+        app:srcCompat="@drawable/cloud1b" />
+
+    <ImageView
+        android:id="@+id/cloud3a"
+        android:layout_width="228dp"
+        android:layout_height="183dp"
+        android:layout_x="36dp"
+        android:layout_y="246dp"
+        android:onClick="click"
+        android:visibility="gone"
+        app:srcCompat="@drawable/cloud3a" />
+
+    <ImageView
+        android:id="@+id/cloud3b"
+        android:layout_width="249dp"
+        android:layout_height="171dp"
+        android:layout_x="148dp"
+        android:layout_y="458dp"
+        android:onClick="click"
+        android:visibility="gone"
+        app:srcCompat="@drawable/cloud3b" />
+
+    <ImageView
+        android:id="@+id/cloud4a"
+        android:layout_width="279dp"
+        android:layout_height="199dp"
+        android:layout_x="108dp"
+        android:layout_y="224dp"
+        android:onClick="click"
+        android:visibility="gone"
+        app:srcCompat="@drawable/cloud4a" />
+
+    <ImageView
+        android:id="@+id/cloud4b"
+        android:layout_width="261dp"
+        android:layout_height="247dp"
+        android:layout_x="42dp"
+        android:layout_y="460dp"
+        android:onClick="click"
+        android:visibility="gone"
+        app:srcCompat="@drawable/cloud4b" />
+
+</AbsoluteLayout>

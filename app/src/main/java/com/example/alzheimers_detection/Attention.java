@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.graphics.Color;
 import android.os.*;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,10 +39,10 @@ public class Attention extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attention);
+        setContentView(R.layout.attention);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_attention);
+        setContentView(R.layout.attention);
         picture =  findViewById(R.id.picture);
         picture.setImageResource(mThumbIds[0]);
         yes=findViewById(R.id.yes);
@@ -138,7 +136,7 @@ public class Attention extends AppCompatActivity {
                     no.setEnabled(false);
                     Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
 
-                    Intent i=new Intent(getApplicationContext(),IntroVisuoperception.class);
+                    Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
                     startActivity(i);
                     Log.d("score",""+(score/3));
 
@@ -187,7 +185,7 @@ public class Attention extends AppCompatActivity {
                     no.setEnabled(false);
                     Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
 
-                    Intent i=new Intent(getApplicationContext(),IntroVisuoperception.class);
+                    Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
                     startActivity(i);
                     Log.d("score",""+(score/3));
                 }

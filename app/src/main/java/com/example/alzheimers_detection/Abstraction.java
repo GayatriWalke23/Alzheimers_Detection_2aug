@@ -13,18 +13,10 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -41,7 +33,7 @@ public class Abstraction extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abstraction);
+        setContentView(R.layout.abstraction);
 
         mysong = MediaPlayer.create(getApplicationContext(), R.raw.music);
         mysong.setLooping(true);    //plays sound on loop
@@ -369,7 +361,7 @@ public class Abstraction extends AppCompatActivity {
                 }
                 else
                 {
-                    Intent i=new Intent(getApplicationContext(),IntroCalculation.class);
+                    Intent i=new Intent(getApplicationContext(), Calculation_Intro.class);
                     startActivity(i);
                 }
             }

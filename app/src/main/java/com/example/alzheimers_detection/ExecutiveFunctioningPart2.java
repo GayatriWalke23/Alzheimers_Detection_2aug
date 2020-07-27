@@ -15,19 +15,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.PathInterpolator;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.animation.ObjectAnimator;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +33,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_executive_functioning_part2);
+        setContentView(R.layout.executive_functioning_part2);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -110,7 +99,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -147,7 +136,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -184,7 +173,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -221,7 +210,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -259,7 +248,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -296,7 +285,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -333,7 +322,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -370,7 +359,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(),IntroNaming.class);
+                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
                 }
@@ -402,13 +391,11 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
             //{
             //  Toast toast=Toast. makeText(getApplicationContext(),"wrong",Toast. LENGTH_SHORT);
             //toast. show();
-
             //}
             //else
             //{
             Toast toast=Toast. makeText(getApplicationContext(),"GOOD JOB !",Toast. LENGTH_SHORT);
             toast. show();
-
             //}
 
 
@@ -463,6 +450,5 @@ class AfterClick
                 imageview.setVisibility(View.GONE);
             }
         }, 2000);
-
     }
 }

@@ -4,6 +4,7 @@ package com.example.alzheimers_detection;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,26 +34,29 @@ public class Orientation extends AppCompatActivity {
         private static final String TAG = "MainActivity";
         private DatePickerDialog.OnDateSetListener dateSetListener;
         private int year, month, day;
+        int done=0;
         int score;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_orientation);
+            setContentView(R.layout.orientation);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
 
             final ListsForSpinner list = new ListsForSpinner();
             final boolean[] stateSet = {false};
 
+
+
             //date textview listener
             final TextView dateView = (TextView) findViewById(R.id.textView31);
             dateView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     DatePickerDialog dialog =  new DatePickerDialog(Orientation.this,
                             android.R.style.Theme_Holo_Light_Dialog_MinWidth,dateSetListener,
                             2013,5,15);
+
 
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
@@ -62,11 +66,15 @@ public class Orientation extends AppCompatActivity {
             dateSetListener = new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int yyyy, int mm, int dd) {
+
                     mm++;
                    dateView.setText(dd + "/" + mm + "/" + yyyy);
+                    done++;
                    year = yyyy;
                    month = mm;
                    day = dd;
+                    next_activity();
+
                 }
             };
 
@@ -78,6 +86,7 @@ public class Orientation extends AppCompatActivity {
                 @SuppressLint("ResourceAsColor")
                 @Override
                 public void onClick(View v) {
+
                     LayoutInflater layoutInflater =
                             (LayoutInflater)getBaseContext()
                                     .getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -98,6 +107,7 @@ public class Orientation extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             dayTv.setText(popupSpinner.getSelectedItem().toString());
+                            done++;
                             popupWindow.dismiss();
                         }});
                     cancel.setOnClickListener(new Button.OnClickListener(){
@@ -106,6 +116,7 @@ public class Orientation extends AppCompatActivity {
                             popupWindow.dismiss();
                         }});
                     popupWindow.showAsDropDown(dayTv, 50, -30);
+                    next_activity();
                 }
             });
 
@@ -137,6 +148,7 @@ public class Orientation extends AppCompatActivity {
                         public void onClick(View v) {
                             stateTv.setText(popupSpinner.getSelectedItem().toString());
                             popupWindow.dismiss();
+                            done++;
                             stateSet[0] = true;
                         }});
                     cancel.setOnClickListener(new Button.OnClickListener(){
@@ -145,6 +157,8 @@ public class Orientation extends AppCompatActivity {
                             popupWindow.dismiss();
                         }});
                     popupWindow.showAsDropDown(dayTv, 50, -30);
+
+                    next_activity();
                 }
             });
 
@@ -161,6 +175,7 @@ public class Orientation extends AppCompatActivity {
                         toast.show();
 
                     } else {
+
                         String state = stateTv.getText().toString().trim();
                         final String[] cities = list.getCitiesArray(state);
 
@@ -171,7 +186,7 @@ public class Orientation extends AppCompatActivity {
                         final PopupWindow popupWindow = new PopupWindow(
                                 popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
                         popupWindow.setOutsideTouchable(true);
-                        Button cancel = (Button) popupView.findViewById(R.id.cancel);
+                        Button cancel = popupView.findViewById(R.id.cancel);
                         TextView tv = popupView.findViewById(R.id.popuptv);
                         tv.setText("Select a City");
                         final Spinner popupSpinner = (Spinner) popupView.findViewById(R.id.daysSpinner);
@@ -184,6 +199,7 @@ public class Orientation extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 cityTv.setText(popupSpinner.getSelectedItem().toString());
+                                done++;
                                 popupWindow.dismiss();
                             }
                         });
@@ -194,13 +210,24 @@ public class Orientation extends AppCompatActivity {
                             }
                         });
                         popupWindow.showAsDropDown(dayTv, 50, -30);
+                        next_activity();
                     }
                 }
             });
 
         }
 
-        void calculateScore(){
+    private void next_activity() {
+        if(done>2)
+        {
+            calculateScore();
+            Intent i=new Intent(getApplicationContext(), ImmediateRecall_Intro.class);
+            startActivity(i);
+        }
+
+    }
+
+    void calculateScore(){
             Calendar cal = Calendar.getInstance();
 
             if(year == cal.get(Calendar.YEAR))

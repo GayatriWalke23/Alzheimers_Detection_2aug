@@ -17,21 +17,22 @@ import android.widget.ProgressBar;
 
 public class Naming2 extends AppCompatActivity {
     ProgressBar lion ;
+    float x_pos;
+    int user_index;
+    int score=1;
+    String[] user_input={"","","",""};
+    String[] correct_sequence={"l","i","o","n"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_naming2);
+        setContentView(R.layout.naming2);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         lion = findViewById(R.id.progressBar12);
-        final float[] count = {210};
+        user_index=-1;
+        x_pos=270;
 
-
-        final Button butt1 =  findViewById(R.id.lion_l);
-        final Button butt2 = findViewById(R.id.lion_o);
-        final Button butt3 = findViewById(R.id.lion_i);
-        final Button butt4 = findViewById(R.id.lion_n);
 
           /* Glide.with(this)
                 .load(url).listener(new RequestListener<String, GlideDrawable>() {
@@ -48,90 +49,74 @@ public class Naming2 extends AppCompatActivity {
             }
         }).into(gify);*/
 
-        butt1.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0],320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(butt1,View.X,View.Y ,path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] +180;
-
-
-            }
-
-
-        });
-        butt2.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0],320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(butt2,View.X,View.Y ,path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] + 180;
-
-
-            }
-        });
-
-        butt3.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0],320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(butt3,View.X,View.Y ,path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] +180;
-
-
-            }
-
-
-        });
-        butt4.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0],320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(butt4,View.X,View.Y ,path);
-                    anim.setDuration(1000);
-                    anim.start();
-
-                }
-                count[0] = count[0] +180;
-
-
-            }
-
-
-        });
 
     }
 
+    private void check() {
+        for(int i=0;i<correct_sequence.length;i++)
+        {
+            if(!user_input[i].contains(correct_sequence[i]))
+                score=0;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    void animate(float x_position, Button b)
+    {
+        Path path = new Path();
+        path.moveTo(x_position,340);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(b,View.X,View.Y ,path);
+        anim.setDuration(100);
+        anim.start();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void click_frog(View button) {
+        user_index++;
+        make_invisible(user_index+1);
+        switch (button.getId())
+        {
+            case R.id.lion_l:
+                user_input[user_index]="l";
+                break;
+            case R.id.lion_i:
+                user_input[user_index]="i";
+                break;
+            case R.id.lion_o:
+                user_input[user_index]="o";
+                break;
+            case R.id.lion_n:
+                user_input[user_index]="n";
+                break;
+
+        }
+        animate(x_pos, (Button) button);
+        x_pos = x_pos +200;
+    }
+
+    private void make_invisible(int dash_number)
+    {
+        View v = null;
+        if(dash_number==1)
+            v=findViewById(R.id.Dash1);
+        if(dash_number==2)
+            v=findViewById(R.id.Dash2);
+        if(dash_number==3)
+            v=findViewById(R.id.Dash3);
+        if(dash_number==4)
+            v=findViewById(R.id.Dash4);
+
+        v.setVisibility(View.GONE);
+    }
+
+
     public void nextActivity(View view) {
-        Intent intent = new Intent(this, Naming3.class);
+        check();
+        Intent intent = new Intent(this, Naming1.class);
+        startActivity(intent);
+    }
+    public void resetActivity(View view) {
+        Intent intent = new Intent(this, Naming2.class);
         startActivity(intent);
     }
 }

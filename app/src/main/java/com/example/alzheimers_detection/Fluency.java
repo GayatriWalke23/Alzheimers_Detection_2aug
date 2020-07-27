@@ -53,7 +53,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fluency);
+        setContentView(R.layout.fluency);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -85,10 +85,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
         ArrayAdapter<ChatMessage> adapter1 = new TextAdapter(this, R.layout.leftcloud, chatMessages1);
         blueCloud.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();*/
-
         speakBtn.setVisibility(View.VISIBLE);
-
-
         final int[] c = {0};
         //event for button SPEAK button
         speakBtn.setOnTouchListener(new View.OnTouchListener() {
@@ -393,7 +390,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
             }
 
             public void onFinish() {
-                Intent next=new Intent(getApplicationContext(),IntroDelayedRecall.class);
+                Intent next=new Intent(getApplicationContext(), DelayedRecall_Intro.class);
                 startActivity(next);
             }
         }.start();

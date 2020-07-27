@@ -9,20 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
-import androidx.appcompat.app.AppCompatActivity;
-import android.annotation.TargetApi;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.os.Build;
-import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -36,7 +28,7 @@ public class Visuoperception extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visuoperception);
+        setContentView(R.layout.visuoperception);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
@@ -180,7 +172,7 @@ public class Visuoperception extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(), IntroDelayedRecall.class);
+                Intent i = new Intent(getApplicationContext(), Fluency_Intro.class);
                 startActivity(i);
                 Log.d("score",""+score);
                 Log.d("cnt",""+cnt);

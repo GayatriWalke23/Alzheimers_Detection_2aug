@@ -13,42 +13,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 
 public class Naming1 extends AppCompatActivity {
 
     // Button button;
 
     ProgressBar camel ;
+    float x_pos;
+    int user_index;
+    int score=1;
+    String[] user_input={" "," "," "," "," "};
+    String[] correct_sequence={"c","a","m","e","l"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_naming1);
+        setContentView(R.layout.naming1);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         camel = findViewById(R.id.progressBar11);
 
-        final float[] count = {100};
-        /* final EditText e1 = findViewById(R.id.ed1);
-        final EditText e2 = findViewById(R.id.ed2);
-        final EditText e3 = findViewById(R.id.ed3);
-        final EditText e4 = findViewById(R.id.ed4);
-        final EditText e5 = findViewById(R.id.ed5);*/
+        user_index=-1;
+        x_pos=270;
 
-
-        final Button but1 = findViewById(R.id.camel_c);
-        final Button but2 = findViewById(R.id.camel_a);
-        final Button but3 = findViewById(R.id.camel_m);
-        final Button but4 = findViewById(R.id.camel_e);
-        final Button but5 = findViewById(R.id.camel_l);
        /* Glide.with(this)
                 .load(url).listener(new RequestListener<String, GlideDrawable>() {
             @Override
@@ -64,109 +53,79 @@ public class Naming1 extends AppCompatActivity {
             }
         }).into(gify);*/
 
-        but1.setOnClickListener(new View.OnClickListener() {
+    }
 
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
+    private void check() {
+        for(int i=0;i<correct_sequence.length;i++)
+        {
+            if(!user_input[i].contains(correct_sequence[i]))
+                score=0;
+        }
+    }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0], 320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(but1, View.X, View.Y, path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    void animate(float x_position, Button b)
+    {
+        Path path = new Path();
+        path.moveTo(x_position,320);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(b,View.X,View.Y ,path);
+        anim.setDuration(100);
+        anim.start();
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void click_cam(View button) {
+        user_index++;
+        make_invisible(user_index+1);
+        switch (button.getId())
+        {
+            case R.id.camel_c:
+                user_input[user_index]="c";
+                break;
+            case R.id.camel_a:
+                user_input[user_index]="a";
+                break;
+            case R.id.camel_m:
+                user_input[user_index]="m";
+                break;
+            case R.id.camel_e:
+                user_input[user_index]="e";
+                break;
+            case R.id.camel_l:
+                user_input[user_index]="l";
+                break;
 
-            }
+        }
+        animate(x_pos, (Button) button);
+        x_pos = x_pos +152;
+    }
 
+    private void make_invisible(int dash_number)
+    {
+        View v = null;
+        if(dash_number==1)
+            v=findViewById(R.id.Dash1);
+        if(dash_number==2)
+            v=findViewById(R.id.Dash2);
+        if(dash_number==3)
+            v=findViewById(R.id.Dash3);
+        if(dash_number==4)
+            v=findViewById(R.id.Dash4);
+        if(dash_number==5)
+            v=findViewById(R.id.Dash5);
 
-        });
-        but2.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0], 320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(but2, View.X, View.Y, path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] + 180;
-
-
-            }
-        });
-
-        but3.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0], 320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(but3, View.X, View.Y, path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] + 180;
-
-
-            }
-
-
-        });
-        but4.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0], 320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(but4, View.X, View.Y, path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] + 180;
-
-
-            }
-
-
-        });
-        but5.setOnClickListener(new View.OnClickListener() {
-
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Path path = new Path();
-                    path.moveTo(count[0], 320);
-                    ObjectAnimator anim = ObjectAnimator.ofFloat(but5, View.X, View.Y, path);
-                    anim.setDuration(1000);
-                    anim.start();
-                }
-                count[0] = count[0] + 180;
-
-
-            }
-
-
-        });
-
+        v.setVisibility(View.GONE);
     }
 
 
+
     public void nextActivity(View view) {
-        Intent intent = new Intent(this, Naming2.class);
+        check();
+        Intent intent = new Intent(this, Naming3.class);
+        startActivity(intent);
+    }
+    public void resetActivity(View view) {
+        Intent intent = new Intent(this, Naming1.class);
         startActivity(intent);
     }
 }

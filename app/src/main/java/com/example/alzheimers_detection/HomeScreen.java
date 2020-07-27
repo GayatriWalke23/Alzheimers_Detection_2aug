@@ -9,11 +9,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 public class HomeScreen extends AppCompatActivity {
-Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
+    Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.home_screen);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -29,7 +29,7 @@ Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
         playgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),IntroExecutiveFunctioning.class);
+                Intent i=new Intent(getApplicationContext(),ExecutiveFunctioning_Intro.class);
                 startActivity(i);
             }
         });
@@ -45,8 +45,8 @@ Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),SignupPhone.class);
-                startActivity(i);
+                //Intent i=new Intent(getApplicationContext(),SignupPhone.class);
+                //startActivity(i);
 
             }
         });
@@ -81,9 +81,8 @@ Button playgame,instructions,settings,news,nearbydoctors,chatwithus,results;
         news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),SignupPhone.class);
+                Intent i=new Intent(getApplicationContext(),News.class);
                 startActivity(i);
-
             }
         });
     }

@@ -9,20 +9,15 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class ExecutiveFunctioning extends AppCompatActivity {
     Timer timer;
@@ -32,7 +27,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_executive_functioning);
+        setContentView(R.layout.executive_functioning);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -57,7 +52,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
                             @Override
                             public void run() {
                                 final Intent mainIntent = new Intent(ExecutiveFunctioning.this, ExecutiveFunctioningPart2.class);
-                                getApplicationContext().startActivity(mainIntent);
+                                startActivity(mainIntent);
                                 ExecutiveFunctioning.this.finish();
                             }
                         }, 5500);

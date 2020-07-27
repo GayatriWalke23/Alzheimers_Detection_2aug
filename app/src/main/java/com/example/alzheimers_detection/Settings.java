@@ -47,15 +47,15 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.settings);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        /*usernamepencil=findViewById(R.id.usernamepencil);
+        usernamepencil=findViewById(R.id.usernamepencil);
         passwordpencil=findViewById(R.id.passwordpencil);
         firstnamepencil=findViewById(R.id.firstnamepencil);
-        lastnamepencil=findViewById(R.id.lastnamepencil);*/
+        lastnamepencil=findViewById(R.id.lastnamepencil);
         soundbutton=findViewById(R.id.soundbutton);
         soundstatus=findViewById(R.id.soundstatus);
         firstname=findViewById(R.id.firstname);
@@ -71,11 +71,7 @@ public class Settings extends AppCompatActivity {
         birthdateview=findViewById(R.id.birthdateview);
         namesettings=findViewById(R.id.namesettings);
         tool=findViewById(R.id.tool);
-
-
-
-
-
+        
         urlbirthdateview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/birthdate.jpg?alt=media&token=78199019-d0d0-42d2-84a0-98110c37f554";
         urlemailview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/email.jpg?alt=media&token=15dc7155-dae7-4a86-bebf-e8deeeb7b75e";
         urlfnamepencil="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/pencil.jpg?alt=media&token=2fbe316b-82f2-4707-89ac-6334c55e32dd";
