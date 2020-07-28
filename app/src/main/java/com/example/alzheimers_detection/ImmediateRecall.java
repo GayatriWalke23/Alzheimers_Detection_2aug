@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,11 +38,18 @@ public class ImmediateRecall extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.immediate_recall);
+        description = "\nAnswer the next two questions based on the previous video."+
+                "\n\n\nNote that you cannot go back to any of the questions that you have already answered.";
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+        final String stage_name="ImmediateRecall";
         mAuth = FirebaseAuth.getInstance();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -57,6 +65,22 @@ public class ImmediateRecall extends AppCompatActivity {
         urlnext="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/nextgreenbutton.png?alt=media&token=60064096-a57e-4aa0-8cb7-511e933d97ca";
         Picasso.with(this).load(urlnext).into(next);
         Picasso.with(this).load(urlcaterpillar).into(caterpillar);
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(10,10){
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    PlayGamePopUp p = new PlayGamePopUp();
+                    p.showPopUp(ImmediateRecall.this,description,stage_name);
+                }
+            }.start();
+
+        }
 
 
         mQuestionView.setText(myQuestionLibrary.mQuestions[counter]);

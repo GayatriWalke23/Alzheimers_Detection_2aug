@@ -6,25 +6,17 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AskForJournal"></activity>
-        <activity android:name=".JournalQuestions" />
-        <activity android:name=".Results" />
-        <activity android:name=".Chatbot" />
-        <activity android:name=".ImmediateRecallVideo" />
-        <activity android:name=".Naming4" />
-        <activity android:name=".Naming3" />
-        <activity android:name=".Naming2" />
-        <activity android:name=".Settings" />
-        <activity android:name=".NearbyDoctors" />
-        <activity android:name=".LoginOtpByPhone" />
+
 
         <meta-data
             android:name="com.google.android.actions"
@@ -33,46 +25,60 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Abstraction" />
-        <activity android:name=".Attention" />
-        <activity android:name=".Calculation" />
-        <activity android:name=".DelayedRecall" />
-        <activity android:name=".ExecutiveFunctioning" />
-        <activity android:name=".ExecutiveFunctioningPart2" />
-        <activity android:name=".FamilyHistory" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".Fluency" />
-        <activity android:name=".HomeScreen" />
-        <activity android:name=".ImmediateRecall" />
-        <activity android:name=".Immediate_recallPlayVideo" />
-
-        <activity android:name=".Abstraction_Intro" />
-        <activity android:name=".Attention_Intro" />
-        <activity android:name=".Calculation_Intro" />
-        <activity android:name=".DelayedRecall_Intro" />
-        <activity android:name=".ExecutiveFunctioning_Intro" />
-        <activity android:name=".Fluency_Intro" />
-        <activity android:name=".ImmediateRecall_Intro" />
-        <activity android:name=".Naming_Intro" />
-        <activity android:name=".Orientation_Intro" />
-        <activity android:name=".Visuoperception_Intro" />
-        <activity android:name=".Login">
+        <activity android:name=".OpeningScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Naming1" />
-        <activity android:name=".Orientation" />
+        </activity> <!-- Login/Sign up/Home Screen -->
+        <activity android:name=".Login" />
+        <activity android:name=".LoginOtpByPhone" />
         <activity
             android:name=".Signup"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Signup"
             android:theme="@style/FullscreenTheme" />
         <activity android:name=".SignupPhone" />
-        <activity android:name=".Visuoperception" />
+        <activity android:name=".AskForJournal" />
+        <activity android:name=".JournalQuestions" />
+        <activity android:name=".HomeScreen" />
+        <activity android:name=".Results" />
+        <activity android:name=".Chatbot" />
+        <activity android:name=".Settings" />
+        <activity android:name=".NearbyDoctors" />
+        <activity android:name=".FamilyHistory" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".Option_Screen"/>
+        <activity android:name=".Roadmap" />
 
+        <!-- 10 Stages -->
+        <activity android:name=".ExecutiveFunctioning_Intro"/>
+        <activity android:name=".ExecutiveFunctioning" />
+        <activity android:name=".ExecutiveFunctioningPart2" />
+        <activity android:name=".Naming_Intro" />
+        <activity android:name=".Naming4" />
+        <activity android:name=".Naming2" />
+        <activity android:name=".Naming1" />
+        <activity android:name=".Naming3" />
+        <activity android:name=".Abstraction_Intro" />
+        <activity android:name=".Abstraction" />
+        <activity android:name=".Calculation_Intro" />
+        <activity android:name=".Calculation" />
+        <activity android:name=".Orientation_Intro" />
+        <activity android:name=".Orientation" />
+        <activity android:name=".ImmediateRecall_Intro" />
+        <activity android:name=".Immediate_recallPlayVideo" />
+        <activity android:name=".ImmediateRecallVideo" />
+        <activity android:name=".ImmediateRecall" />
+        <activity android:name=".Attention_Intro" />
+        <activity android:name=".Attention" />
+        <activity android:name=".Visuoperception_Intro" />
+        <activity android:name=".Visuoperception" />
+        <activity android:name=".Fluency_Intro" />
+        <activity android:name=".Fluency" />
+        <activity android:name=".DelayedRecall_Intro" />
+        <activity android:name=".DelayedRecall" /> <!-- Visually Impaired -->
         <uses-library android:name="com.google.android.maps" />
     </application>
 

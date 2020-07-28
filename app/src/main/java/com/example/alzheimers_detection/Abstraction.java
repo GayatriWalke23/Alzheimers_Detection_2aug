@@ -3,20 +3,21 @@
 //Images added to firebase storage
 package com.example.alzheimers_detection;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +39,7 @@ public class Abstraction extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
 
     String urlbucket,urlavocado,urlguitar,urllamo,urlpineapple,urlgrapes,urltabla,urltrumpet,urlball,urlsoccerball,urltennis;
     ImageView chandlier1,chandlier2,chandlier3, pineapple,tennis,ball,guitar,soccerball,trumpet,grapes,tabla,avocado,fruitsbucket,instrumentsbucket,sportsbucket,a;
@@ -45,6 +47,13 @@ public class Abstraction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abstraction);
+
+        description = "\nMultiple items corresponding to three different categories namely -\n Sports, Instruments and Fruits \nare displayed on a shelf."+"\n\nDrag and drop each item into its corresponding " +
+                "basket to empty\n the shelf.";
+
+
+        final String stage_name="Abstraction";
+
         mAuth = FirebaseAuth.getInstance();
 
         mysong = MediaPlayer.create(getApplicationContext(), R.raw.music);
@@ -114,6 +123,25 @@ public class Abstraction extends AppCompatActivity {
         i2.setVisibility(View.INVISIBLE);
         s2.setVisibility(View.INVISIBLE);
         f2.setVisibility(View.INVISIBLE);
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(10,10){
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    PlayGamePopUp p = new PlayGamePopUp();
+                    p.showPopUp(Abstraction.this,description,stage_name);
+                }
+            }.start();
+
+        }
 
         grapes.setOnTouchListener(onTouchListener());
         guitar.setOnTouchListener(onTouchListener());

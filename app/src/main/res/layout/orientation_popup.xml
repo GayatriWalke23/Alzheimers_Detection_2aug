@@ -3,7 +3,7 @@
     android:id="@+id/popup_element"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/popupshape"
+    android:background="@drawable/popupshape_orientation"
     android:orientation="vertical">
 
     <TextView

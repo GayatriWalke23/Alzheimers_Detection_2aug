@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -44,9 +45,19 @@ public class DelayedRecall extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delayed_recall);
 
+        final String stage_name="DelayedRecall";
+        final String description = "\nRecall the story from Caterpillar's adventure, and answer six related " +
+                "questions.\n\nNote that you cannot go back to any of the questions that you have already answered.";
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
+
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+
+
+
 
         next=findViewById(R.id.next);
         mQuestionView = (TextView) findViewById(R.id.question);
@@ -58,75 +69,96 @@ public class DelayedRecall extends AppCompatActivity {
         urlnext="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/nextgreenbutton.png?alt=media&token=60064096-a57e-4aa0-8cb7-511e933d97ca";
         Picasso.with(this).load(urlnext).into(next);
         Picasso.with(this).load(urlcaterpillar).into(caterpillar);
-        mButtonChoice1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
-                mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
-                mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(10,10){
 
-            }
-        });
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
 
-        mButtonChoice2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
-                mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
-                mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+                @Override
+                public void onFinish() {
+                    PlayGamePopUp p = new PlayGamePopUp();
+                    p.showPopUp(DelayedRecall.this,description,stage_name);
+                }
+            }.start();
 
-            }
-        });
-        mButtonChoice3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
-                mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
-                mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+        }
+        else
+        {
+            mButtonChoice1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
+                    mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+                    mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
 
-            }
-        });
+                }
+            });
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mButtonChoice1.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
-                {
-                    if(mButtonChoice1.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+            mButtonChoice2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
+                    mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+                    mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+
+                }
+            });
+            mButtonChoice3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mButtonChoice3.setBackgroundResource(R.drawable.roundbuttonimmediaterecall2);
+                    mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+                    mButtonChoice2.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);
+
+                }
+            });
+
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mButtonChoice1.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
                     {
-                        mScore+=0.5;
+                        if(mButtonChoice1.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+                        {
+                            mScore+=0.5;
+                        }
+                        updateQuestion();
                     }
-                    updateQuestion();
-                }
-                else if(mButtonChoice2.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
-                {
-                    if(mButtonChoice2.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+                    else if(mButtonChoice2.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
                     {
-                        mScore+=0.5;
+                        if(mButtonChoice2.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+                        {
+                            mScore+=0.5;
+                        }
+                        updateQuestion();
                     }
-                    updateQuestion();
-                }
-                else if(mButtonChoice3.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
-                {
-                    if(mButtonChoice3.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+                    else if(mButtonChoice3.getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.roundbuttonimmediaterecall2).getConstantState()))
                     {
-                        mScore+=0.5;
+                        if(mButtonChoice3.getText().toString().equals(myQuestionLibrary.mCorrect_answer[counter]))
+                        {
+                            mScore+=0.5;
+                        }
+                        updateQuestion();
                     }
-                    updateQuestion();
-                }
 
-                if(counter==6)
-                {
-                    fuser = mAuth.getCurrentUser();
-                    uid=fuser.getUid();
-                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
-                    dbUsers.child("delayedRecall").setValue(mScore);
+                    if(counter==6)
+                    {
+                        fuser = mAuth.getCurrentUser();
+                        uid=fuser.getUid();
+                        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                        dbUsers.child("delayedRecall").setValue(mScore);
 
-                    Intent i=new Intent(getApplicationContext(),AskForJournal.class);
-                    startActivity(i);
+                        Intent i=new Intent(getApplicationContext(),AskForJournal.class);
+                        startActivity(i);
+                    }
                 }
-            }
-        });
+            });
+
+        }
+
     }
     public  void  updateQuestion()
     {

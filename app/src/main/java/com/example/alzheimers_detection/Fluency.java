@@ -59,17 +59,44 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fluency);
 
+        final String stage_name="Fluency";
+         description = "\nPress the microphone on the screen, and speak as many words as you can, think of words from the " +
+                "letter given in 60 seconds.\n\nWords that are proper nouns, numbers, and different forms of a verb " +
+                "are not permitted.";
+
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
 
         askPermission();
+
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(10,10){
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    PlayGamePopUp p = new PlayGamePopUp();
+                    p.showPopUp(Fluency.this,description,stage_name);
+                }
+            }.start();
+
+        }
 
         chatMessages = new ArrayList<>();
         words = new ArrayList<>();

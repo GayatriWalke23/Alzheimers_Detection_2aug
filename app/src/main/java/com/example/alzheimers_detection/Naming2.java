@@ -22,6 +22,7 @@ public class Naming2 extends AppCompatActivity {
     int score=1;
     String[] user_input={"","","",""};
     String[] correct_sequence={"l","i","o","n"};
+    String[] Score={"zero","one","two","three"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,13 +117,35 @@ public class Naming2 extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         String stringVariableName = extras.getString("score");
-        float prevScore=Float.parseFloat(stringVariableName);
+        int prevScore=0;
+        for(int i=0;i<Score.length;i++)
+        {
+            if(stringVariableName.contains(Score[i]))
+            {
+                prevScore=i;
+                break;
+            }
+        }
+        //float prevScore=Float.parseFloat(stringVariableName);
 
-        intent.putExtra("score",(prevScore+score));
+        intent.putExtra("score",(Score[prevScore+score]));
         startActivity(intent);
     }
     public void resetActivity(View view) {
         Intent intent = new Intent(this, Naming2.class);
+        check();
+        Bundle extras = getIntent().getExtras();
+        String stringVariableName = extras.getString("score");
+        int prevScore=0;
+        for(int i=0;i<Score.length;i++)
+        {
+            if(stringVariableName.contains(Score[i]))
+            {
+                prevScore=i;
+                break;
+            }
+        }
+        intent.putExtra("score",(Score[prevScore+score]));
         startActivity(intent);
     }
 }

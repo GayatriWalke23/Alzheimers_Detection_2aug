@@ -30,6 +30,7 @@ public class Naming3 extends AppCompatActivity {
     int score=1;
     String[] user_input={"","","",""};
     String[] correct_sequence={"f","r","o","g"};
+    String[] Score={"zero","one","two","three"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,18 @@ public class Naming3 extends AppCompatActivity {
         check();
         Bundle extras = getIntent().getExtras();
         String stringVariableName = extras.getString("score");
-        float prevScore=Float.parseFloat(stringVariableName);
+        float prevScore=0;
+        for(int i=0;i<Score.length;i++)
+        {
+           if(stringVariableName.contains(Score[i]))
+           {
+               prevScore=i;
+               break;
+           }
+        }
+
+
+        //float prevScore=Float.parseFloat(stringVariableName);
 
         fuser = mAuth.getCurrentUser();
         uid=fuser.getUid();
@@ -135,6 +147,19 @@ public class Naming3 extends AppCompatActivity {
 
     public void resetActivity(View view) {
         Intent intent = new Intent(this, Naming3.class);
+        check();
+        Bundle extras = getIntent().getExtras();
+        String stringVariableName = extras.getString("score");
+        int prevScore=0;
+        for(int i=0;i<Score.length;i++)
+        {
+            if(stringVariableName.contains(Score[i]))
+            {
+                prevScore=i;
+                break;
+            }
+        }
+        intent.putExtra("score",(Score[prevScore+score]));
         startActivity(intent);
     }
 

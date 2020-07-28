@@ -29,7 +29,7 @@ public class HomeScreen extends AppCompatActivity {
         playgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),ExecutiveFunctioning_Intro.class);
+                Intent i=new Intent(getApplicationContext(),Option_Screen.class);
                 startActivity(i);
             }
         });

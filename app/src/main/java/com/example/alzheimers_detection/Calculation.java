@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,15 +24,40 @@ double seconds;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculation);
 
+         description = "\n\nFly and enjoy through three \nlevels of sky. \n\nTap on the cloud with greater value to burst it and move to a higher level in the sky.";
+
+        final String stage_name="Calculation";
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
+
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(10,10){
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    PlayGamePopUp p = new PlayGamePopUp();
+                    p.showPopUp(Calculation.this,description,stage_name);
+                }
+            }.start();
+
+        }
 
 
     }

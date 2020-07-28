@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.graphics.Color;
@@ -32,11 +33,16 @@ public class Visuoperception extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
     CheckBox readbox,bookbox,orbox,novelbox,pagesbox,wordsbox,notbox,nobox,treebox,manbox,dogbox,catbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visuoperception);
+        final String stage_name="Visuoperception";
+        description = "\nUse your visuoperceptual skills to identify six hidden" +
+                " words inside the living room. \n\nTick the \ncheckboxes with these hidden words from the list of words given below.";
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
@@ -55,6 +61,24 @@ public class Visuoperception extends AppCompatActivity {
         manbox=findViewById(R.id.manbox);
         treebox=findViewById(R.id.treebox);
 
+        Intent intent = getIntent();
+        final String Play = intent.getStringExtra("Play");
+
+        if(Play==null||Play.contains("no"))
+        {
+            new CountDownTimer(1000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                PlayGamePopUp p = new PlayGamePopUp();
+                p.showPopUp(Visuoperception.this,description,stage_name);
+            }
+        }.start();
+        }
         picture=findViewById(R.id.picture);
         urlpicture="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/picture.jpg?alt=media&token=57797058-ccc8-43ff-99aa-3825503ee41a";
         Picasso.with(this).load(urlpicture).into(picture);

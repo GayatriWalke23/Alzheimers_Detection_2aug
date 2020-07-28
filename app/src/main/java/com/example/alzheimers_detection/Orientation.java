@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -45,16 +46,42 @@ public class Orientation extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    String description;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.orientation);
+            description = "\nYou are xyz, the Chief Editor of “The Alzheimer’s Times “! An incomplete Newspaper format" +
+                    " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
+                    " format.";
+
+            final String stage_name="Orientation";
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
             mAuth = FirebaseAuth.getInstance();
 
             final ListsForSpinner list = new ListsForSpinner();
             final boolean[] stateSet = {false};
+
+            Intent intent = getIntent();
+            final String Play = intent.getStringExtra("Play");
+
+            if(Play==null||Play.contains("no"))
+            {
+                new CountDownTimer(1000,1000){
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        PlayGamePopUp p = new PlayGamePopUp();
+                        p.showPopUp(Orientation.this,description,stage_name);
+                    }
+                }.start();
+
+            }
 
 
 
