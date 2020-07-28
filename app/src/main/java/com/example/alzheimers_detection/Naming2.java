@@ -113,6 +113,12 @@ public class Naming2 extends AppCompatActivity {
     public void nextActivity(View view) {
         check();
         Intent intent = new Intent(this, Naming1.class);
+
+        Bundle extras = getIntent().getExtras();
+        String stringVariableName = extras.getString("score");
+        float prevScore=Float.parseFloat(stringVariableName);
+
+        intent.putExtra("score",(prevScore+score));
         startActivity(intent);
     }
     public void resetActivity(View view) {

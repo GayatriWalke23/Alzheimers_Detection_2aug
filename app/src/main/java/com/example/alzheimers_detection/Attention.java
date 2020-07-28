@@ -22,6 +22,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +36,10 @@ public class Attention extends AppCompatActivity {
     ProgressBar progressBar2;
     String urldonutdecor2,urldonutdecor,urluncle,urldonutstand,urlopen;
     Button yes,no;
-
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
     public static Integer[] mThumbIds = {
             R.drawable.tree1, R.drawable.tree2,R.drawable.tree2,  R.drawable.tree3,R.drawable.tree1, R.drawable.tree1,R.drawable.tree1,R.drawable.tree6,R.drawable.tree2, R.drawable.tree6};
     int i;
@@ -43,6 +50,8 @@ public class Attention extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.attention);
+        mAuth = FirebaseAuth.getInstance();
+
         picture =  findViewById(R.id.picture);
         picture.setImageResource(mThumbIds[0]);
         yes=findViewById(R.id.yes);
@@ -105,7 +114,6 @@ public class Attention extends AppCompatActivity {
                 if(mThumbIds[i]==mThumbIds[i-1])
                 {
                     score=score+1;
-                    Toast.makeText(getApplicationContext(),"score:"+score,Toast.LENGTH_LONG).show();
                 }
                 i++;
                 if(!(i==mThumbIds.length))
@@ -152,7 +160,6 @@ public class Attention extends AppCompatActivity {
                 if(mThumbIds[i]!=mThumbIds[i-1])
                 {
                     score=score+1;
-                    Toast.makeText(getApplicationContext(),"score:"+score,Toast.LENGTH_LONG).show();
 
                 }
 
@@ -185,6 +192,10 @@ public class Attention extends AppCompatActivity {
                     no.setEnabled(false);
                     Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
 
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("attention").setValue((score/3));
                     Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
                     startActivity(i);
                     Log.d("score",""+(score/3));

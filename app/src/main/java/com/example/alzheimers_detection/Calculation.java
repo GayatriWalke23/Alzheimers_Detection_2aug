@@ -10,9 +10,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Calculation extends AppCompatActivity {
     int score=0;
 double seconds;
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +31,7 @@ double seconds;
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -154,8 +166,13 @@ double seconds;
                                         }
                                         else
                                         {
+                                            fuser = mAuth.getCurrentUser();
+                                            uid=fuser.getUid();
+                                            dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                                            dbUsers.child("calculation").setValue(score);
                                             Intent i=new Intent(getApplicationContext(), Orientation_Intro.class);
                                             startActivity(i);
+
                                         }
                                     }
                                 });

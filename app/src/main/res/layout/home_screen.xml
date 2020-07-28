@@ -20,7 +20,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Play Game"
         android:textColor="#FFFFFF"
-        android:onClick="PlayGame"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
 
@@ -37,7 +36,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:isScrollContainer="false"
         android:text="Instructions"
-        android:onClick="GotoInstructions"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="italic" />
@@ -58,7 +56,6 @@
         android:drawablePadding="-100dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Results"
-        android:onClick="GotoResults"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="italic" />
@@ -75,7 +72,6 @@
         android:drawablePadding="-100dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Nearby Doctors"
-        android:onClick="GotoNearByDoctors"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="italic" />
@@ -113,14 +109,13 @@
         android:drawableBottom="@android:drawable/stat_notify_chat"
         android:drawablePadding="-95dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="GotoChatbot"
         android:text="Chat With Us"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         android:textStyle="italic" />
 
     <Button
-        android:id="@+id/setting"
+        android:id="@+id/settings"
         android:layout_width="182dp"
         android:layout_height="160dp"
         android:layout_below="@id/news"
@@ -136,7 +131,6 @@
         android:text="Settings"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:onClick="changeSettings"
         android:textStyle="italic"
         />
 

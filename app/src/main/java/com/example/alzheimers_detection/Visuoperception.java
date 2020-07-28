@@ -17,6 +17,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class Visuoperception extends AppCompatActivity {
@@ -24,6 +28,10 @@ public class Visuoperception extends AppCompatActivity {
     ImageView picture,eyesgif;
     String urlpicture,urleyesgif;
     float score=0,cnt=0;
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
     CheckBox readbox,bookbox,orbox,novelbox,pagesbox,wordsbox,notbox,nobox,treebox,manbox,dogbox,catbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class Visuoperception extends AppCompatActivity {
         setContentView(R.layout.visuoperception);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         go=findViewById(R.id.go);
         bookbox=findViewById(R.id.bookbox);
@@ -172,6 +181,10 @@ public class Visuoperception extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                fuser = mAuth.getCurrentUser();
+                uid=fuser.getUid();
+                dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                dbUsers.child("visuoperception").setValue(score);
                 Intent i = new Intent(getApplicationContext(), Fluency_Intro.class);
                 startActivity(i);
                 Log.d("score",""+score);

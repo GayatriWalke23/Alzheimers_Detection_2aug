@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class ImmediateRecall extends AppCompatActivity {
@@ -27,11 +31,18 @@ public class ImmediateRecall extends AppCompatActivity {
     int counter=1;
     private String mAnswer,urlcaterpillar,urlnext;
     private int mQuestion_number = 0;
-    private int mScore = 0;
+    private float mScore = 0;
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.immediate_recall);
+        mAuth = FirebaseAuth.getInstance();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -118,6 +129,11 @@ public class ImmediateRecall extends AppCompatActivity {
 
                 if(counter==5 && flag==3)
                 {
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("immediateRecall").setValue(mScore);
+
                     Intent i=new Intent(getApplicationContext(), Attention_Intro.class);
                     startActivity(i);
                 }

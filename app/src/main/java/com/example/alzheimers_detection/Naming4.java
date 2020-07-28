@@ -50,7 +50,9 @@ public class Naming4 extends AppCompatActivity {
     }
     public void nextActivity(View view) {
         check();
-        startActivity(new Intent(getApplicationContext(), Naming2.class));
+        Intent i=new Intent(getApplicationContext(), Naming2.class);
+        i.putExtra("score",score);
+        startActivity(i);
     }
 
     private void check() {

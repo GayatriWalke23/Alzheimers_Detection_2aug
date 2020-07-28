@@ -14,9 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Results">
-
-        </activity>
+        <activity android:name=".AskForJournal"></activity>
+        <activity android:name=".JournalQuestions" />
+        <activity android:name=".Results" />
         <activity android:name=".Chatbot" />
         <activity android:name=".ImmediateRecallVideo" />
         <activity android:name=".Naming4" />
@@ -44,16 +44,18 @@
         <activity android:name=".Fluency" />
         <activity android:name=".HomeScreen" />
         <activity android:name=".ImmediateRecall" />
-        <activity android:name=".IntroAbstraction" />
-        <activity android:name=".IntroAttention" />
-        <activity android:name=".IntroCalculation" />
-        <activity android:name=".IntroDelayedRecall" />
-        <activity android:name=".IntroExecutiveFunctioning" />
-        <activity android:name=".IntroFluency" />
-        <activity android:name=".IntroImmediateRecall" />
-        <activity android:name=".IntroNaming" />
-        <activity android:name=".IntroOrientation" />
-        <activity android:name=".IntroVisuoperception" />
+        <activity android:name=".Immediate_recallPlayVideo" />
+
+        <activity android:name=".Abstraction_Intro" />
+        <activity android:name=".Attention_Intro" />
+        <activity android:name=".Calculation_Intro" />
+        <activity android:name=".DelayedRecall_Intro" />
+        <activity android:name=".ExecutiveFunctioning_Intro" />
+        <activity android:name=".Fluency_Intro" />
+        <activity android:name=".ImmediateRecall_Intro" />
+        <activity android:name=".Naming_Intro" />
+        <activity android:name=".Orientation_Intro" />
+        <activity android:name=".Visuoperception_Intro" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +64,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Naming1" />
-        <activity android:name=".Orientation"></activity>
+        <activity android:name=".Orientation" />
         <activity
             android:name=".Signup"
             android:configChanges="orientation|keyboardHidden|screenSize"

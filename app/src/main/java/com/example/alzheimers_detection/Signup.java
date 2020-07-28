@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 
 
 public class Signup extends AppCompatActivity {
-
+    public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     String flag="email";
 
@@ -39,7 +39,7 @@ public class Signup extends AppCompatActivity {
     RadioButton female,male,other;
     EditText usernameT,passwordT,firstnameT,lastnameT,confirmpasswordT;
     Button next;
-    public FirebaseAuth mAuth;
+
     DatePicker birthdate;
 
     @Override

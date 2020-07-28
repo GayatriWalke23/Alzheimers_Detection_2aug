@@ -10,7 +10,17 @@ public class User {
     String firstname,lastname,gender;
     String username;
     String birthdate;
-    float executiveFunctioning,naming,abstraction,calculation,orientation,immediateRecall,attention,visuoperception,fluency,delayedRecall;
+    int countProgressHistory,behaviouralResultOrNot;
+    float executiveFunctioning,naming,abstraction,calculation,orientation,immediateRecall,attention,visuoperception,fluency,delayedRecall,carryingOutMyDailyActivities,mood,imWorkingIfeel,sleepCycle,experienceBodyPain,starRating,totalBehaviouralScore,totalFamilyHistoryScore;
+
+    public float getStarRating() {
+        return starRating;
+    }
+
+    public void setStarRating(float starRating) {
+        this.starRating = starRating;
+    }
+
     String QRC;
     public User()
     {
@@ -64,6 +74,14 @@ public class User {
         this.QRC = QRC;
     }
 
+    public int getBehaviouralResultOrNot() {
+        return behaviouralResultOrNot;
+    }
+
+    public void setBehaviouralResultOrNot(int behaviouralResultOrNot) {
+        this.behaviouralResultOrNot = behaviouralResultOrNot;
+    }
+
     public float getOrientation() {
         return orientation;
     }
@@ -94,6 +112,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public int getCountProgressHistory() {
+        return countProgressHistory;
+    }
+
+    public void setCountProgressHistory(int countProgressHistory) {
+        this.countProgressHistory = countProgressHistory;
     }
 
     public float getFluency() {
@@ -158,6 +184,46 @@ public class User {
 
     public void setAbstraction(float abstraction) {
         this.abstraction = abstraction;
+    }
+
+    public float getCarryingOutMyDailyActivities() {
+        return carryingOutMyDailyActivities;
+    }
+
+    public void setCarryingOutMyDailyActivities(float carryingOutMyDailyActivities) {
+        this.carryingOutMyDailyActivities = carryingOutMyDailyActivities;
+    }
+
+    public float getExperienceBodyPain() {
+        return experienceBodyPain;
+    }
+
+    public float getImWorkingIfeel() {
+        return imWorkingIfeel;
+    }
+
+    public float getMood() {
+        return mood;
+    }
+
+    public float getSleepCycle() {
+        return sleepCycle;
+    }
+
+    public void setSleepCycle(float sleepCycle) {
+        this.sleepCycle = sleepCycle;
+    }
+
+    public void setMood(float mood) {
+        this.mood = mood;
+    }
+
+    public void setImWorkingIfeel(float imWorkingIfeel) {
+        this.imWorkingIfeel = imWorkingIfeel;
+    }
+
+    public void setExperienceBodyPain(float experienceBodyPain) {
+        this.experienceBodyPain = experienceBodyPain;
     }
 }
 

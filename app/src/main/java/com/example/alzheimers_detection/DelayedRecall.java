@@ -15,11 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class DelayedRecall extends AppCompatActivity {
     private QuestionLibrary myQuestionLibrary = new QuestionLibrary();
     ImageView next;
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     ImageView caterpillar;
     private TextView mQuestionView;
     private Button mButtonChoice1;
@@ -37,6 +46,7 @@ public class DelayedRecall extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         next=findViewById(R.id.next);
         mQuestionView = (TextView) findViewById(R.id.question);
@@ -107,7 +117,12 @@ public class DelayedRecall extends AppCompatActivity {
 
                 if(counter==6)
                 {
-                    Intent i=new Intent(getApplicationContext(),HomeScreen.class);
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("delayedRecall").setValue(mScore);
+
+                    Intent i=new Intent(getApplicationContext(),AskForJournal.class);
                     startActivity(i);
                 }
             }
@@ -128,6 +143,7 @@ public class DelayedRecall extends AppCompatActivity {
         }
         else
         {
+
             Toast.makeText(getApplicationContext(),"score"+mScore,Toast.LENGTH_LONG).show();
         }
     }

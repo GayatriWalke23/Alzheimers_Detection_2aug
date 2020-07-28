@@ -25,6 +25,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -36,12 +41,17 @@ public class Orientation extends AppCompatActivity {
         private int year, month, day;
         int done=0;
         int score;
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.orientation);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
+            mAuth = FirebaseAuth.getInstance();
 
             final ListsForSpinner list = new ListsForSpinner();
             final boolean[] stateSet = {false};
@@ -221,6 +231,10 @@ public class Orientation extends AppCompatActivity {
         if(done>2)
         {
             calculateScore();
+            fuser = mAuth.getCurrentUser();
+            uid=fuser.getUid();
+            dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+            dbUsers.child("orientation").setValue(score);
             Intent i=new Intent(getApplicationContext(), ImmediateRecall_Intro.class);
             startActivity(i);
         }

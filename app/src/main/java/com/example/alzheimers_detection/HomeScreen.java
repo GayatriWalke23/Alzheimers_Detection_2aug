@@ -45,6 +45,7 @@ public class HomeScreen extends AppCompatActivity {
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Put "instructions" activity in the below Intent and uncomment it
                 //Intent i=new Intent(getApplicationContext(),SignupPhone.class);
                 //startActivity(i);
 

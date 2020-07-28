@@ -18,22 +18,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class Abstraction extends AppCompatActivity {
     MediaPlayer mysong;
     double seconds=3;
+
     int totalscore=3,instrumentscore=0,sportscore=0,fruitscore=0,countofdroppeditems=0;
     TextView i1,i2,f1,f2,s1,s2;
     ImageView fruitsb,instrumentsb,sportsb;
     int xs,ys,xf,yf,xi,yi;
     private int xdelta,ydelta;
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     String urlbucket,urlavocado,urlguitar,urllamo,urlpineapple,urlgrapes,urltabla,urltrumpet,urlball,urlsoccerball,urltennis;
     ImageView chandlier1,chandlier2,chandlier3, pineapple,tennis,ball,guitar,soccerball,trumpet,grapes,tabla,avocado,fruitsbucket,instrumentsbucket,sportsbucket,a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abstraction);
+        mAuth = FirebaseAuth.getInstance();
 
         mysong = MediaPlayer.create(getApplicationContext(), R.raw.music);
         mysong.setLooping(true);    //plays sound on loop
@@ -349,6 +361,14 @@ public class Abstraction extends AppCompatActivity {
         Log.d("fruit",""+fruitscore);
 
         Log.d("total",""+totalscore);
+
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("abstraction").setValue(totalscore);
+
+
+
         seconds=1;
         final Handler handler=new Handler();
         handler.post(new Runnable() {

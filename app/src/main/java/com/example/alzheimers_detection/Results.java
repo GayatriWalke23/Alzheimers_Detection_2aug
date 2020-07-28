@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Results extends AppCompatActivity {
 float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
-int seconds=1;
+int seconds=1,behaviouralResultOrNot=0;// if 1 , user has played behavioural questions .
 String uid;
     public FirebaseAuth mAuth;
 
@@ -41,6 +41,7 @@ String uid;
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 abstractionScore=user.getAbstraction();
+                behaviouralResultOrNot=user.getBehaviouralResultOrNot();
                 attentionScore=user.getAttention();
                 namingScore=user.getNaming();
                 calculationScore=user.getCalculation();

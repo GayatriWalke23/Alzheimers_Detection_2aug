@@ -13,9 +13,19 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Naming3 extends AppCompatActivity {
     ProgressBar frog ;
     float x_pos;
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     int user_index;
     int score=1;
     String[] user_input={"","","",""};
@@ -24,6 +34,7 @@ public class Naming3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.naming3);
+        mAuth = FirebaseAuth.getInstance();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -50,7 +61,20 @@ public class Naming3 extends AppCompatActivity {
 
     public void nextActivity(View view) {
         check();
-        startActivity(new Intent(getApplicationContext(), Abstraction_Intro.class));
+        Bundle extras = getIntent().getExtras();
+        String stringVariableName = extras.getString("score");
+        float prevScore=Float.parseFloat(stringVariableName);
+
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("naming").setValue((prevScore+score));
+
+
+        Intent intent = new Intent(this, Abstraction_Intro.class);
+        startActivity(intent);
+
+
     }
 
     private void check() {

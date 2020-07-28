@@ -18,13 +18,20 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class ExecutiveFunctioningPart2 extends AppCompatActivity {
     ImageView coinsack,imageView1,imageView2,imageView3,imageView4,imageViewA,imageViewB,imageViewC,imageViewD;
     int count=0,seconds=1;
     String url1,url2,url3,url4,urla,urlb,urlc,urld,urlsack;
-
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
     int sequence[]=new int[8];
     int index=0;
     int score=1;
@@ -37,6 +44,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         coinsack=findViewById(R.id.coinsack);
         imageView1=findViewById(R.id.imageView1);
@@ -99,6 +107,11 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
+                        fuser = mAuth.getCurrentUser();
+                        uid=fuser.getUid();
+                        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                        dbUsers.child("executiveFunctioning").setValue(score);
+
                         Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }
@@ -136,6 +149,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
+
                         Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
                         startActivity(i);
                     }

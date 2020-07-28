@@ -168,12 +168,12 @@ public class Login extends AppCompatActivity {
         }
         else if(password.isEmpty())
         {
-            loginphonepassword.setError("Email id is required!");
+            loginphonepassword.setError("Password is required!");
             loginphonepassword.requestFocus();
         }
         else if(password.isEmpty() && email.isEmpty())
         {
-            loginphonepassword.setError("Email id is required!");
+            loginphonepassword.setError("Password is required!");
             loginphonepassword.requestFocus();
             loginusername.setError("Email id is required!");
             loginusername.requestFocus();
