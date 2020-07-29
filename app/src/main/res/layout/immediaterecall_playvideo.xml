@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".ImmediateRecallVideo">
+    tools:context=".ImmediateRecallVideo"
+    android:id="@+id/ImmediateRecallVideo">
 
 
     <Button
@@ -17,7 +18,8 @@
         android:background="@drawable/roundbutton"
         android:onClick="playvideo"
         android:text="Play"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+         />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gify"

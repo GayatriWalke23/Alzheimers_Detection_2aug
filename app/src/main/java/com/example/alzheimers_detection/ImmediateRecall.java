@@ -39,6 +39,7 @@ public class ImmediateRecall extends AppCompatActivity {
     FirebaseUser fuser;
     String uid;
     String description;
+    OnSwipeTouchListener onSwipeTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,41 +47,33 @@ public class ImmediateRecall extends AppCompatActivity {
         setContentView(R.layout.immediate_recall);
         description = "\nAnswer the next two questions based on the previous video."+
                 "\n\n\nNote that you cannot go back to any of the questions that you have already answered.";
+        final String stage_name="ImmediateRecall";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.ImmediateRecall),stage_name);
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        final String stage_name="ImmediateRecall";
+
         mAuth = FirebaseAuth.getInstance();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
         next=findViewById(R.id.next);
-        mQuestionView = (TextView) findViewById(R.id.question);
-        mButtonChoice1 = (Button) findViewById(R.id.option1);
-        mButtonChoice2 = (Button) findViewById(R.id.option2);
-        mButtonChoice3 = (Button) findViewById(R.id.option3);
+        mQuestionView = findViewById(R.id.question);
+        mButtonChoice1 = findViewById(R.id.option1);
+        mButtonChoice2 = findViewById(R.id.option2);
+        mButtonChoice3 = findViewById(R.id.option3);
         caterpillar=findViewById(R.id.caterpillar);
         urlcaterpillar="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/caterpillar.jpg?alt=media&token=faffd502-6614-4125-93b8-50de67fe0546";
         urlnext="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/nextgreenbutton.png?alt=media&token=60064096-a57e-4aa0-8cb7-511e933d97ca";
         Picasso.with(this).load(urlnext).into(next);
         Picasso.with(this).load(urlcaterpillar).into(caterpillar);
-        if(Play==null||Play.contains("no"))
+        /*if(Play==null||Play.contains("no"))
         {
-            new CountDownTimer(10,10){
+            PopUp_PlayGame p = new PopUp_PlayGame();
+            p.showPopUp(getApplicationContext(),description,stage_name);
 
-                @Override
-                public void onTick(long millisUntilFinished) {
-                }
-
-                @Override
-                public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
-                    p.showPopUp(ImmediateRecall.this,description,stage_name);
-                }
-            }.start();
-
-        }
+        }*/
 
 
         mQuestionView.setText(myQuestionLibrary.mQuestions[counter]);
@@ -158,8 +151,11 @@ public class ImmediateRecall extends AppCompatActivity {
                     dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                     dbUsers.child("immediateRecall").setValue(mScore);
 
-                    Intent i=new Intent(getApplicationContext(), Attention_Intro.class);
-                    startActivity(i);
+                   Popup_aftergame panel = new Popup_aftergame();
+                    panel.showPopUp(ImmediateRecall.this, stage_name);
+
+                   /* Intent i=new Intent(getApplicationContext(), Attention_Intro.class);
+                    startActivity(i);*/
                 }
             }
         });

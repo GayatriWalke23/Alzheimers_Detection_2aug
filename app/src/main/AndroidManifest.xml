@@ -31,7 +31,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Login/Sign up/Home Screen -->
+        </activity>
+
+        <!-- Login/Sign up/Home Screen -->
         <activity android:name=".Login" />
         <activity android:name=".LoginOtpByPhone" />
         <activity
@@ -70,7 +72,7 @@
         <activity android:name=".ImmediateRecall_Intro" />
         <activity android:name=".Immediate_recallPlayVideo" />
         <activity android:name=".ImmediateRecallVideo" />
-        <activity android:name=".ImmediateRecall" />
+        <activity android:name=".ImmediateRecall"/>
         <activity android:name=".Attention_Intro" />
         <activity android:name=".Attention" />
         <activity android:name=".Visuoperception_Intro" />
@@ -78,7 +80,10 @@
         <activity android:name=".Fluency_Intro" />
         <activity android:name=".Fluency" />
         <activity android:name=".DelayedRecall_Intro" />
-        <activity android:name=".DelayedRecall" /> <!-- Visually Impaired -->
+        <activity android:name=".DelayedRecall" />
+
+
+        <!-- Visually Impaired -->
         <uses-library android:name="com.google.android.maps" />
     </application>
 

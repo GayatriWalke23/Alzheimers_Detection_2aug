@@ -12,10 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AbsoluteLayout;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 public class FamilyHistory extends AppCompatActivity {
     @Override
@@ -44,14 +41,14 @@ public class FamilyHistory extends AppCompatActivity {
                                 popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
                 popupWindow.setOutsideTouchable(true);
 
-                AbsoluteLayout layout = findViewById(R.id.parentView);
+                AbsoluteLayout layout = findViewById(R.id.FamilyHistory);
                 //to set height and width of a popup
                 int height = layout.getHeight();
                 popupWindow.setHeight(height/2);
                 int width = layout.getWidth();
                 popupWindow.setWidth(width);
 
-                Button cancel = (Button)popupView.findViewById(R.id.cancel);
+                Button cancel = popupView.findViewById(R.id.cancel);
 
                 //PopupWindow popup = new PopupWindow(contentView, width, height);
                 popupWindow.setBackgroundDrawable(null);
@@ -80,8 +77,7 @@ public class FamilyHistory extends AppCompatActivity {
 
     }
 
-    void next_Activity()
-    {
+    public void Save(View view) {
         Intent i=new Intent(getApplicationContext(),Login.class);
         startActivity(i);
     }

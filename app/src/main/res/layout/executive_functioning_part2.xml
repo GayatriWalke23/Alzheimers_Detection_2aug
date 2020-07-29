@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExecutiveFunctioningPart2"
+    android:id="@+id/ExecutiveFunctioningPart2"
     android:background="@drawable/dark_cave">
 
     <ImageView

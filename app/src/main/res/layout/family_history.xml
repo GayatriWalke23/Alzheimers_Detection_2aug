@@ -6,16 +6,8 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".FamilyHistory"
-    android:id="@+id/parentView">
+    android:id="@+id/FamilyHistory">
 
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="763dp"
-        android:layout_height="183dp"
-        android:layout_x="-173dp"
-        android:layout_y="73dp"
-        app:srcCompat="@drawable/family234" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,40 +17,32 @@
         android:layout_y="-11dp"
         app:srcCompat="@drawable/strip" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="68dp"
-        android:layout_height="63dp"
-        android:layout_x="173dp"
-        android:layout_y="17dp"
-        app:srcCompat="@drawable/family1" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="70dp"
-        android:layout_y="79dp"
-        android:text="Family History and Lifestyle Patterns"
+        android:layout_x="25dp"
+        android:layout_y="81dp"
+        android:text=" Lifestyle Patterns , Family History and more..."
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="338dp"
-        android:layout_height="57dp"
-        android:layout_x="50dp"
-        android:layout_y="205dp"
-        android:text="    Do you  have a close relative who has been diagnosed with Alzheimer's disease in the past ?"
+        android:layout_width="230dp"
+        android:layout_height="92dp"
+        android:layout_x="210dp"
+        android:layout_y="668dp"
+        android:textColor="#FF3D00"
         android:textSize="15sp" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_x="95dp"
-        android:layout_y="259dp"
+        android:layout_x="72dp"
+        android:layout_y="618dp"
         android:background="#00E676"
         android:text="Yes"
         android:textAllCaps="false"
@@ -66,15 +50,294 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_x="232dp"
-        android:layout_y="253dp"
+        android:layout_height="20dp"
+        android:layout_x="249dp"
+        android:layout_y="619dp"
         android:background="#FF3D00"
         android:text="No"
         android:textAllCaps="false"
         android:textColor="#ffffff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="397dp"
+        android:layout_height="48dp"
+        android:layout_x="23dp"
+        android:layout_y="126dp"
+        android:fontFamily="sans-serif-black"
+        android:text="1. Please select your level of  education"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_x="23dp"
+        android:layout_y="559dp"
+        android:fontFamily="sans-serif-black"
+        android:text="4. Do you have a close relative who was/is diagnosed with Alzheimer's ?"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="355dp"
+        android:layout_height="48dp"
+        android:layout_x="22dp"
+        android:layout_y="375dp"
+        android:fontFamily="sans-serif-black"
+        android:text="3. Select your lifestyle patterns"
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="376dp"
+        android:layout_height="48dp"
+        android:layout_x="20dp"
+        android:layout_y="191dp"
+        android:fontFamily="sans-serif-black"
+        android:text="2.  Select medical conditions that you experience or  experienced  in the past                     "
+        android:textColor="#000"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_x="30dp"
+        android:layout_y="158dp"
+        android:fontFamily="serif"
+        android:text=">= 12 Years"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_x="29dp"
+        android:layout_y="442dp"
+        android:fontFamily="serif"
+        android:text="Never"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox11"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_x="28dp"
+        android:layout_y="517dp"
+        android:fontFamily="serif"
+        android:text="Never"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox9"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_x="140dp"
+        android:layout_y="444dp"
+        android:fontFamily="serif"
+        android:text="Often"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox12"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_x="140dp"
+        android:layout_y="518dp"
+        android:fontFamily="serif"
+        android:text="Often"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox10"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_x="240dp"
+        android:layout_y="444dp"
+        android:fontFamily="serif"
+        android:text="Sometimes"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_x="244dp"
+        android:layout_y="519dp"
+        android:fontFamily="serif"
+        android:text="Sometimes"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox8"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_x="23dp"
+        android:layout_y="257dp"
+        android:fontFamily="serif"
+        android:text="Head Injury"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_x="24dp"
+        android:layout_y="333dp"
+        android:fontFamily="serif"
+        android:text="Cardiovascular Disease"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_x="23dp"
+        android:layout_y="295dp"
+        android:fontFamily="serif"
+        android:text="Down's Syndrome"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_x="234dp"
+        android:layout_y="157dp"
+        android:fontFamily="serif"
+        android:text=" 12 Years"
+        android:textColor="#7E7E7E"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="34dp"
+        android:layout_y="414dp"
+        android:fontFamily="serif"
+        android:text="Smoking : "
+        android:textColor="#00B0FF"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="34dp"
+        android:layout_y="487dp"
+        android:fontFamily="serif"
+        android:text="Drinking :"
+        android:textColor="#00B0FF"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/save_changes"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:layout_x="93dp"
+        android:layout_y="678dp"
+        android:background="@drawable/roundbutton"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Save Changes"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:onClick="Save"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="46dp"
+        android:layout_height="31dp"
+        android:layout_x="133dp"
+        android:layout_y="480dp"
+        app:srcCompat="@drawable/alcohol" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="25dp"
+        android:layout_height="33dp"
+        android:layout_x="149dp"
+        android:layout_y="405dp"
+        app:srcCompat="@drawable/smoking" />
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="34dp"
+        android:layout_height="22dp"
+        android:layout_x="266dp"
+        android:layout_y="340dp"
+        app:srcCompat="@drawable/heart" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_x="158dp"
+        android:layout_y="262dp"
+        app:srcCompat="@drawable/brain" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="17dp"
+        android:layout_height="18dp"
+        android:layout_x="211dp"
+        android:layout_y="306dp"
+        app:srcCompat="@drawable/downsyndrome" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="75dp"
+        android:layout_height="65dp"
+        android:layout_x="172dp"
+        android:layout_y="19dp"
+        app:srcCompat="@drawable/lifestyle" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="392dp"
+        android:layout_height="wrap_content"
+        android:layout_x="44dp"
+        android:layout_y="239dp"
+        android:text="**Please note that you can select multiple medical conditions."
+        android:textColor="#FF3D00"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
 

@@ -26,6 +26,7 @@ public class Naming1 extends AppCompatActivity {
     String[] user_input={" "," "," "," "," "};
     String[] correct_sequence={"c","a","m","e","l"};
     String[] Score={"zero","one","two","three"};
+    OnSwipeTouchListener onSwipeTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class Naming1 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         camel = findViewById(R.id.progressBar11);
+        final String stage_name="Naming";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Naming1),stage_name);
 
         user_index=-1;
         x_pos=270;

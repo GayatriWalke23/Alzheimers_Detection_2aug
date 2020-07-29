@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/desert12"
-    tools:context=".Naming1">
+    tools:context=".Naming1"
+    android:id="@+id/Naming1">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gify"
@@ -170,7 +171,7 @@
         android:onClick="resetActivity"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/save_changes"
         android:layout_width="46dp"
         android:layout_height="30dp"
         android:layout_x="210dp"

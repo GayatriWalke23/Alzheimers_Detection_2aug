@@ -18,13 +18,11 @@ import android.widget.ImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.Timer;
-
 public class ExecutiveFunctioning extends AppCompatActivity {
     ImageView nature;
     String urlnature;
     MediaPlayer mysong;
-
+    OnSwipeTouchListener onSwipeTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
         final String description = "You are “ xyz the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
                 "collect them into sack such that a number is followed by its corresponding alphabet, in " +
                 "increasing order, making an alternate trail.";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.ExecutiveFunctioning),stage_name);
 
 
 
@@ -59,7 +58,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(ExecutiveFunctioning.this,description,stage_name);
                 }
             }.start();
@@ -86,6 +85,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //change_activity(Play);
                                     final Intent mainIntent = new Intent(ExecutiveFunctioning.this, ExecutiveFunctioningPart2.class);
                                     startActivity(mainIntent);
                                     ExecutiveFunctioning.this.finish();
@@ -97,19 +97,11 @@ public class ExecutiveFunctioning extends AppCompatActivity {
 
                 @Override
                 public void onError() {
-
                 }
             });
-
-
         }
-
-
-
-
-
-
     }
+
     @Override
     protected  void onPause()
     {

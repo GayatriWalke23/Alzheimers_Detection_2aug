@@ -33,6 +33,7 @@ public class Visuoperception extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    OnSwipeTouchListener onSwipeTouchListener;
     String description;
     CheckBox readbox,bookbox,orbox,novelbox,pagesbox,wordsbox,notbox,nobox,treebox,manbox,dogbox,catbox;
     @Override
@@ -42,6 +43,8 @@ public class Visuoperception extends AppCompatActivity {
         final String stage_name="Visuoperception";
         description = "\nUse your visuoperceptual skills to identify six hidden" +
                 " words inside the living room. \n\nTick the \ncheckboxes with these hidden words from the list of words given below.";
+
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Visuoperception),stage_name);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -74,7 +77,7 @@ public class Visuoperception extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                PlayGamePopUp p = new PlayGamePopUp();
+                PopUp_PlayGame p = new PopUp_PlayGame();
                 p.showPopUp(Visuoperception.this,description,stage_name);
             }
         }.start();
@@ -209,8 +212,10 @@ public class Visuoperception extends AppCompatActivity {
                 uid=fuser.getUid();
                 dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                 dbUsers.child("visuoperception").setValue(score);
-                Intent i = new Intent(getApplicationContext(), Fluency_Intro.class);
-                startActivity(i);
+                Popup_aftergame panel = new Popup_aftergame();
+                panel.showPopUp(Visuoperception.this, stage_name);
+                /*Intent i = new Intent(getApplicationContext(), Fluency_Intro.class);
+                startActivity(i);*/
                 Log.d("score",""+score);
                 Log.d("cnt",""+cnt);
             }

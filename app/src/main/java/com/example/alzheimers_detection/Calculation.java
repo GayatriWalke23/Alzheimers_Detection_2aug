@@ -25,7 +25,8 @@ double seconds;
     FirebaseUser fuser;
     String uid;
     String description;
-
+    OnSwipeTouchListener onSwipeTouchListener;
+    String stage_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,8 @@ double seconds;
 
          description = "\n\nFly and enjoy through three \nlevels of sky. \n\nTap on the cloud with greater value to burst it and move to a higher level in the sky.";
 
-        final String stage_name="Calculation";
+        stage_name="Calculation";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Calculation),stage_name);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -52,7 +54,7 @@ double seconds;
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(Calculation.this,description,stage_name);
                 }
             }.start();
@@ -196,8 +198,10 @@ double seconds;
                                             uid=fuser.getUid();
                                             dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                                             dbUsers.child("calculation").setValue(score);
-                                            Intent i=new Intent(getApplicationContext(), Orientation_Intro.class);
-                                            startActivity(i);
+                                            Popup_aftergame panel = new Popup_aftergame();
+                                            panel.showPopUp(Calculation.this, stage_name);
+                                            /*Intent i=new Intent(getApplicationContext(), Orientation_Intro.class);
+                                            startActivity(i);*/
 
                                         }
                                     }

@@ -40,6 +40,7 @@ public class Attention extends AppCompatActivity {
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
+    OnSwipeTouchListener onSwipeTouchListener;
     String uid;
     public static Integer[] mThumbIds = {
             R.drawable.tree1, R.drawable.tree2,R.drawable.tree2,  R.drawable.tree3,R.drawable.tree1, R.drawable.tree1,R.drawable.tree1,R.drawable.tree6,R.drawable.tree2, R.drawable.tree6};
@@ -48,10 +49,12 @@ public class Attention extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attention);
+        final String stage_name="Attention";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Attention),stage_name);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        final String stage_name="Attention";
+
 
         description = "\nYou are \n“xyz – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
                 " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
@@ -129,7 +132,7 @@ public class Attention extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(Attention.this,description,stage_name);
                 }
             }.start();

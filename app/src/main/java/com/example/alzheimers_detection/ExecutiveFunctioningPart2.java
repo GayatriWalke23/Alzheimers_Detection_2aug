@@ -3,11 +3,8 @@
 //added images to firebase
 package com.example.alzheimers_detection;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.animation.ObjectAnimator;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Path;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -17,6 +14,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,10 +31,12 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
+    OnSwipeTouchListener onSwipeTouchListener;
     String uid;
     int sequence[]=new int[8];
     int index=0;
     int score=1;
+    String stage_name;
 
     int done=0;
     @Override
@@ -45,6 +47,8 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
+        stage_name="ExecutiveFunctioningPart";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.ExecutiveFunctioningPart2),stage_name);
 
         coinsack=findViewById(R.id.coinsack);
         imageView1=findViewById(R.id.imageView1);
@@ -107,19 +111,26 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        fuser = mAuth.getCurrentUser();
-                        uid=fuser.getUid();
-                        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
-                        dbUsers.child("executiveFunctioning").setValue(score);
 
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
+                        /*Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
+                        startActivity(i);*/
                     }
                 }
             });
 
         }
     }
+
+    private void change_activity(Context C, String stage_name) {
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("executiveFunctioning").setValue(score);
+        Popup_aftergame panel = new Popup_aftergame();
+        panel.showPopUp(ExecutiveFunctioningPart2.this, stage_name);
+    }
+
     public void OnClickB(View view)
     {
         count++;
@@ -150,8 +161,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     else
                     {
 
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -187,8 +197,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -224,8 +233,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -262,8 +270,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -277,9 +284,9 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
         sequence[index]=2;
         index++;
         done++;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            ImageView imageButton =(ImageView) findViewById(R.id.imageView2);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            ImageView imageButton = findViewById(R.id.imageView2);
             AfterClick clickand = new AfterClick(imageButton);
             clickand.animation(140f, 803f, 450f, 2700f, 270f, 80f, false);
             play();
@@ -299,8 +306,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -336,8 +342,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });
@@ -373,8 +378,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent i=new Intent(getApplicationContext(), Naming_Intro.class);
-                        startActivity(i);
+                        change_activity(getApplicationContext(),stage_name);
                     }
                 }
             });

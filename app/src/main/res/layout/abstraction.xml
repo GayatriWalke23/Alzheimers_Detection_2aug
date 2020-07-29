@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/brickwall"
-    tools:context=".Abstraction">
+    tools:context=".Abstraction"
+    android:id="@+id/Abstraction">
 
 
 

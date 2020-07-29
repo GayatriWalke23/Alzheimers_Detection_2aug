@@ -25,17 +25,21 @@ public class Naming3 extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
-
+     String stage_name;
     int user_index;
     int score=1;
     String[] user_input={"","","",""};
     String[] correct_sequence={"f","r","o","g"};
     String[] Score={"zero","one","two","three"};
+    OnSwipeTouchListener onSwipeTouchListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.naming3);
         mAuth = FirebaseAuth.getInstance();
+
+       stage_name="Naming";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Naming3),stage_name);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -83,8 +87,10 @@ public class Naming3 extends AppCompatActivity {
         dbUsers.child("naming").setValue((prevScore+score));
 
 
-        Intent intent = new Intent(this, Abstraction_Intro.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(this, Abstraction_Intro.class);
+        startActivity(intent);*/
+        Popup_aftergame panel = new Popup_aftergame();
+        panel.showPopUp(Naming3.this, stage_name);
 
 
     }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/popup_element"
+    android:id="@+id/pop_upaftergame"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/popupshape"
@@ -19,23 +19,22 @@
         android:fontFamily="@font/annie_use_your_telescope"
         android:paddingLeft="20dp"
         android:text="Exit"
-        android:clickable="true"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/how_to_play"
+        android:id="@+id/my_progress"
         android:layout_width="205dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/goldScore"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="36dp"
-        android:clickable="true"
         android:fontFamily="@font/annie_use_your_telescope"
         android:paddingLeft="20dp"
-        android:text="How to play"
+        android:text="My Progress"
         android:textColor="#000000"
+        android:clickable="true"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -43,13 +42,12 @@
         android:id="@+id/nextstage"
         android:layout_width="205dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/how_to_play"
+        android:layout_below="@+id/my_progress"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="29dp"
         android:fontFamily="@font/annie_use_your_telescope"
         android:paddingLeft="20dp"
         android:text="Next Stage"
-        android:clickable="true"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -64,7 +62,6 @@
         android:fontFamily="@font/annie_use_your_telescope"
         android:paddingLeft="20dp"
         android:text="Settings"
-        android:clickable="true"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -108,12 +105,12 @@
         android:id="@+id/imageButton4"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_below="@id/how_to_play"
+        android:layout_below="@id/my_progress"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/menu_buttons"
         android:backgroundTint="#96E627"
-        app:srcCompat="@drawable/next"/>
+        app:srcCompat="@drawable/next" />
 
     <ImageButton
         android:id="@+id/imageButton5"

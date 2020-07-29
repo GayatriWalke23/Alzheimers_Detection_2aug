@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#B242D8FF"
+    android:id="@+id/Naming3"
     tools:context=".Naming3">
 
     <ImageView
@@ -182,7 +183,7 @@
         android:onClick="resetActivity"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/save_changes"
         android:layout_width="46dp"
         android:layout_height="30dp"
         android:layout_x="210dp"

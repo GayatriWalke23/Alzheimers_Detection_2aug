@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#55C8FB"
-    tools:context=".Calculation" >
+    tools:context=".Calculation"
+    android:id="@+id/Calculation">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/left"

@@ -29,6 +29,7 @@ public class DelayedRecall extends AppCompatActivity {
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+    OnSwipeTouchListener onSwipeTouchListener;
 
     ImageView caterpillar;
     private TextView mQuestionView;
@@ -51,6 +52,8 @@ public class DelayedRecall extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
+
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.DelayedRecall),stage_name);
 
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
@@ -79,7 +82,7 @@ public class DelayedRecall extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(DelayedRecall.this,description,stage_name);
                 }
             }.start();
@@ -150,9 +153,11 @@ public class DelayedRecall extends AppCompatActivity {
                         uid=fuser.getUid();
                         dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                         dbUsers.child("delayedRecall").setValue(mScore);
+                        Popup_aftergame panel = new Popup_aftergame();
+                        panel.showPopUp(DelayedRecall.this, stage_name);
 
-                        Intent i=new Intent(getApplicationContext(),AskForJournal.class);
-                        startActivity(i);
+                        /*Intent i=new Intent(getApplicationContext(),AskForJournal.class);
+                        startActivity(i);*/
                     }
                 }
             });

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".AskForJournal">
+    tools:context=".AskForJournal"
+    android:id="@+id/AskForJournal">
 
     <Button
         android:id="@+id/gotoresults"

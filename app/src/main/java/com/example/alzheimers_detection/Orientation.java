@@ -42,11 +42,13 @@ public class Orientation extends AppCompatActivity {
         private int year, month, day;
         int done=0;
         int score;
+        String stage_name;
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
     String description;
+    OnSwipeTouchListener onSwipeTouchListener;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -55,7 +57,9 @@ public class Orientation extends AppCompatActivity {
                     " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
                     " format.";
 
-            final String stage_name="Orientation";
+            stage_name="Orientation";
+
+            onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Orientation),stage_name);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getSupportActionBar().hide();
             mAuth = FirebaseAuth.getInstance();
@@ -76,7 +80,7 @@ public class Orientation extends AppCompatActivity {
 
                     @Override
                     public void onFinish() {
-                        PlayGamePopUp p = new PlayGamePopUp();
+                        PopUp_PlayGame p = new PopUp_PlayGame();
                         p.showPopUp(Orientation.this,description,stage_name);
                     }
                 }.start();
@@ -262,8 +266,11 @@ public class Orientation extends AppCompatActivity {
             uid=fuser.getUid();
             dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
             dbUsers.child("orientation").setValue(score);
+            Popup_aftergame panel = new Popup_aftergame();
+            panel.showPopUp(Orientation.this, stage_name);
+            /*
             Intent i=new Intent(getApplicationContext(), ImmediateRecall_Intro.class);
-            startActivity(i);
+            startActivity(i);*/
         }
 
     }

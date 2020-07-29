@@ -54,22 +54,25 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
     char letter;
     int correctWords;
     float score=0.0f;
-
+    String stage_name;
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
     String description;
+    OnSwipeTouchListener onSwipeTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fluency);
 
-        final String stage_name="Fluency";
+        stage_name="Fluency";
          description = "\nPress the microphone on the screen, and speak as many words as you can, think of words from the " +
                 "letter given in 60 seconds.\n\nWords that are proper nouns, numbers, and different forms of a verb " +
                 "are not permitted.";
+
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Fluency),stage_name);
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -91,7 +94,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(Fluency.this,description,stage_name);
                 }
             }.start();
@@ -434,8 +437,11 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
                 dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                 dbUsers.child("fluency").setValue(score);
 
-                Intent next=new Intent(getApplicationContext(), DelayedRecall_Intro.class);
-                startActivity(next);
+                Popup_aftergame panel = new Popup_aftergame();
+                panel.showPopUp(Fluency.this, stage_name);
+
+                /*Intent next=new Intent(getApplicationContext(), DelayedRecall_Intro.class);
+                startActivity(next);*/
             }
         }.start();
     }

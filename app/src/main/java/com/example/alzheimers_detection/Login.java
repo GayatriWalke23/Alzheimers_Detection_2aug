@@ -62,7 +62,6 @@ public class Login extends AppCompatActivity {
         loginimage=findViewById(R.id.loginimage);
         urlloginimage="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/body.jpeg?alt=media&token=a4407877-110d-48d9-b42f-9f424c9b5028";
         Picasso.with(this).load(urlloginimage).into(loginimage);
-        rememberme=findViewById(R.id.rememberme);
         tootpimage=findViewById(R.id.tootpimage);
         loginusername=(EditText) findViewById(R.id.loginusername);
         loginphonepassword=(EditText)findViewById(R.id.loginphonepassword);
@@ -190,6 +189,8 @@ public class Login extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if(mAuth.getCurrentUser().isEmailVerified()) {
 
+                                    UserSharedPreferences userSharedPreferences=new UserSharedPreferences(getApplicationContext());
+                                    userSharedPreferences.setUsername(loginusername.getText().toString().trim());
                                     nextActivity();
                                 }
                                 else

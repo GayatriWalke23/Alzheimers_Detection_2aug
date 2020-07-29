@@ -40,6 +40,8 @@ public class Abstraction extends AppCompatActivity {
     FirebaseUser fuser;
     String uid;
     String description;
+    String stage_name;
+    OnSwipeTouchListener onSwipeTouchListener;
 
     String urlbucket,urlavocado,urlguitar,urllamo,urlpineapple,urlgrapes,urltabla,urltrumpet,urlball,urlsoccerball,urltennis;
     ImageView chandlier1,chandlier2,chandlier3, pineapple,tennis,ball,guitar,soccerball,trumpet,grapes,tabla,avocado,fruitsbucket,instrumentsbucket,sportsbucket,a;
@@ -47,12 +49,14 @@ public class Abstraction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abstraction);
+        stage_name="Abstraction";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Abstraction),stage_name);
 
         description = "\nMultiple items corresponding to three different categories namely -\n Sports, Instruments and Fruits \nare displayed on a shelf."+"\n\nDrag and drop each item into its corresponding " +
                 "basket to empty\n the shelf.";
 
 
-        final String stage_name="Abstraction";
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -136,7 +140,7 @@ public class Abstraction extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(Abstraction.this,description,stage_name);
                 }
             }.start();
@@ -409,8 +413,10 @@ public class Abstraction extends AppCompatActivity {
                 }
                 else
                 {
-                    Intent i=new Intent(getApplicationContext(), Calculation_Intro.class);
-                    startActivity(i);
+                    Popup_aftergame panel = new Popup_aftergame();
+                    panel.showPopUp(Abstraction.this, stage_name);
+                    //Intent i=new Intent(getApplicationContext(), Calculation_Intro.class);
+                    //startActivity(i);
                 }
             }
         });

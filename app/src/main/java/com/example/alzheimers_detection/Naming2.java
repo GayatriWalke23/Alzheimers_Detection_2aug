@@ -23,10 +23,13 @@ public class Naming2 extends AppCompatActivity {
     String[] user_input={"","","",""};
     String[] correct_sequence={"l","i","o","n"};
     String[] Score={"zero","one","two","three"};
+    OnSwipeTouchListener onSwipeTouchListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.naming2);
+        final String stage_name="Naming";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Naming2),stage_name);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();

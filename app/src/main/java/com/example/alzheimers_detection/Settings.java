@@ -1,5 +1,3 @@
-
-
 //added images to firebase storage
 package com.example.alzheimers_detection;
 
@@ -34,7 +32,7 @@ public class Settings extends AppCompatActivity {
     ImageView usernamepencil,passwordpencil,firstnamepencil,lastnamepencil,soundbutton;
     ImageView profile,musicgif  ,tool,logininsideprofile,emailview,passwordsettings,birthdateview,namesettings;//set,login
     String urlnamesettings,urlprofile,urlpasswordsettings,urltool,urlbirthdateview,urlemailview,urllogininsideprofile,urlmusicgif,urllnamepencil,urlfnamepencil,urlusernamepencil,urlpasswordpencil;
-    TextView soundstatus;
+    TextView soundstatus,logout;
     EditText username,password,firstname,lastname;
     Button save;
     FirebaseAuth firebaseAuth;
@@ -52,6 +50,7 @@ public class Settings extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
+        logout=findViewById(R.id.logout);
         usernamepencil=findViewById(R.id.usernamepencil);
         passwordpencil=findViewById(R.id.passwordpencil);
         firstnamepencil=findViewById(R.id.firstnamepencil);
@@ -71,7 +70,7 @@ public class Settings extends AppCompatActivity {
         birthdateview=findViewById(R.id.birthdateview);
         namesettings=findViewById(R.id.namesettings);
         tool=findViewById(R.id.tool);
-        
+
         urlbirthdateview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/birthdate.jpg?alt=media&token=78199019-d0d0-42d2-84a0-98110c37f554";
         urlemailview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/email.jpg?alt=media&token=15dc7155-dae7-4a86-bebf-e8deeeb7b75e";
         urlfnamepencil="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/pencil.jpg?alt=media&token=2fbe316b-82f2-4707-89ac-6334c55e32dd";
@@ -168,7 +167,15 @@ public class Settings extends AppCompatActivity {
         });
 
 
-
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UserSharedPreferences(getApplicationContext()).removeUser();
+                Intent i=new Intent(getApplicationContext(),Login.class);
+                startActivity(i);
+                finish();
+            }
+        });
 /*
         lastnamepencil.setOnClickListener(new View.OnClickListener() {
             @Override

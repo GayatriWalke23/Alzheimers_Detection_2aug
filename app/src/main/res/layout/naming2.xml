@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/nature_background"
-    tools:context=".Naming2">
+    tools:context=".Naming2"
+    android:id="@+id/Naming2">
 
 
 
@@ -151,7 +152,7 @@
         android:onClick="resetActivity"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/save_changes"
         android:layout_width="46dp"
         android:layout_height="30dp"
         android:layout_x="210dp"

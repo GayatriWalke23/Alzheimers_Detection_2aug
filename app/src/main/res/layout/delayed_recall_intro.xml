@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".DelayedRecall_Intro">
+    tools:context=".DelayedRecall_Intro"
+    android:id="@+id/DelayedRecall_Intro">
 
     <TextView
         android:id="@+id/textView1"

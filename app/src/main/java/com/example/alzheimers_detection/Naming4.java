@@ -25,6 +25,7 @@ public class Naming4 extends AppCompatActivity {
     String[] user_input={" "," "," "," "," "," "," "," "};
     String[] correct_sequence={"t","o","r","t","o","i","s","e"};
     String[] Score={"zero","one","two","three"};
+    OnSwipeTouchListener onSwipeTouchListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class Naming4 extends AppCompatActivity {
 
 
         final String stage_name="Naming";
+        onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Naming4),stage_name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         tort = findViewById(R.id.progressBar14);
@@ -52,7 +54,7 @@ public class Naming4 extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    PlayGamePopUp p = new PlayGamePopUp();
+                    PopUp_PlayGame p = new PopUp_PlayGame();
                     p.showPopUp(Naming4.this,description,stage_name);
                 }
             }.start();

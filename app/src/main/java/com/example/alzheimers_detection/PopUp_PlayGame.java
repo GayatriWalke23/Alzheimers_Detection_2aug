@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
-class PlayGamePopUp {
+class PopUp_PlayGame {
 
     //calll this method to show a pop up
     @SuppressLint("WrongViewCast")
@@ -34,7 +34,7 @@ class PlayGamePopUp {
         pw.setOutsideTouchable(false);
 
         //Button to close the pop-up
-        ((ImageButton) layout.findViewById(R.id.play)).setOnClickListener(new View.OnClickListener() {
+        layout.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 pw.dismiss();
                 if(stage_name.contains("ExecutiveFunctioning"))

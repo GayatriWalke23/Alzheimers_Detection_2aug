@@ -35,7 +35,21 @@ public class OpeningScreen extends AppCompatActivity {
     }
 
     private void change_activity() {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+        final UserSharedPreferences user=new UserSharedPreferences(getApplicationContext());
+        if(user.getUsername()!="")
+        {
+            Intent i=new Intent(getApplicationContext(),HomeScreen.class);
+            i.putExtra("username",user.getUsername());
+            startActivity(i);
+            finish();
+        }
+
+        else
+        {
+            Intent i=new Intent(getApplicationContext(),Login.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 }
