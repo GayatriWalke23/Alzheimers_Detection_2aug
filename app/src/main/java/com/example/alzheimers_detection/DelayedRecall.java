@@ -4,30 +4,41 @@
 //added images to firebase storage
 package com.example.alzheimers_detection;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class DelayedRecall extends AppCompatActivity {
     private QuestionLibrary myQuestionLibrary = new QuestionLibrary();
     ImageView next;
     public FirebaseAuth mAuth;
+    int num;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
+    int numOfPrevScores;
+    int prevScoreArray[]=new int[5];
+    LinearLayout graph;
+
     String uid;
     OnSwipeTouchListener onSwipeTouchListener;
 
@@ -153,6 +164,30 @@ public class DelayedRecall extends AppCompatActivity {
                         uid=fuser.getUid();
                         dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                         dbUsers.child("delayedRecall").setValue(mScore);
+
+                        DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+
+                        FirebaseUser fuser;
+                        mAuth = FirebaseAuth.getInstance();
+                        fuser = mAuth.getCurrentUser();
+                        uid=fuser.getUid();
+                        userDBRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.child(uid).getValue(User.class);
+                                num=user.getNumOfScores();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.e("UserListActivity", "Error occured");
+                            }
+
+
+                        });
+                        num++;
+                        dbUsers.child("numOfScores").setValue(num);
+
                         Popup_aftergame panel = new Popup_aftergame();
                         panel.showPopUp(DelayedRecall.this, stage_name);
 

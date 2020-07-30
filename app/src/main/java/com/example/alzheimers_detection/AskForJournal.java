@@ -43,7 +43,10 @@ public class AskForJournal extends AppCompatActivity {
         gotojournal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                fuser = mAuth.getCurrentUser();
+                uid=fuser.getUid();
+                dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                dbUsers.child("behaviouralResultOrNot").setValue(1);
                 Intent i=new Intent(getApplicationContext(),JournalQuestions.class);
                 startActivity(i);
             }
@@ -55,7 +58,7 @@ public class AskForJournal extends AppCompatActivity {
                 fuser = mAuth.getCurrentUser();
                 uid=fuser.getUid();
                 dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
-                dbUsers.child("behaviouralResultOrNot").setValue(1);
+                dbUsers.child("behaviouralResultOrNot").setValue(0);
 
                 Intent i=new Intent(getApplicationContext(),Results.class);
                 startActivity(i);

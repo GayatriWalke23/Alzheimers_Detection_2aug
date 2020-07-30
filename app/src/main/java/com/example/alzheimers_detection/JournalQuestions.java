@@ -73,41 +73,52 @@ RadioButton sedentary,lethargic,moderatelyactive,highlyactive,focusedwork,distra
                     dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                     if (set == 1 || set == 2 || set == 3) {
                         score++;
-                        dbUsers.child("mood").setValue(1);
 
                     }
+                    dbUsers.child("mood").setValue(set);
+
                     if(highlyactive.isChecked() || moderatelyactive.isChecked())
                     {
                         score++;
                         dbUsers.child("imWorkingIfeel").setValue(1);
 
                     }
+                    dbUsers.child("imWorkingIfeel").setValue(0);
+
                     if(focusedwork.isChecked())
                     {
                         score++;
                         dbUsers.child("carryingOutMyDailyActivities").setValue(1);
 
                     }
+                    dbUsers.child("carryingOutMyDailyActivities").setValue(1);
+
                     if(regularsleep.isChecked())
                     {
                         score++;
                         dbUsers.child("sleepCycle").setValue(1);
 
                     }
+                    dbUsers.child("sleepCycle").setValue(0);
+
                     if (bodypainnever.isChecked())
                     {
                         score++;
                         dbUsers.child("experienceBodyPain").setValue(1);
 
                     }
+                    dbUsers.child("experienceBodyPain").setValue(0);
+
                     float getrating = ratingBar.getRating();
 
                     if(getrating>=2.5)
                     {
                         score++;
-                        dbUsers.child("starRating").setValue(1);
+                        dbUsers.child("starRating").setValue(getrating);
 
                     }
+                    dbUsers.child("starRating").setValue(getrating);
+
                     dbUsers.child("totalBehaviouralScore").setValue(score);
 
                     Intent i =new Intent(getApplicationContext(),Results.class);

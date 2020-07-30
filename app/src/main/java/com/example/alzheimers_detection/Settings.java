@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,7 +33,7 @@ public class Settings extends AppCompatActivity {
     ImageView usernamepencil,passwordpencil,firstnamepencil,lastnamepencil,soundbutton;
     ImageView profile,musicgif  ,tool,logininsideprofile,emailview,passwordsettings,birthdateview,namesettings;//set,login
     String urlnamesettings,urlprofile,urlpasswordsettings,urltool,urlbirthdateview,urlemailview,urllogininsideprofile,urlmusicgif,urllnamepencil,urlfnamepencil,urlusernamepencil,urlpasswordpencil;
-    TextView soundstatus,logout;
+    TextView soundstatus;
     EditText username,password,firstname,lastname;
     Button save;
     FirebaseAuth firebaseAuth;
@@ -50,7 +51,6 @@ public class Settings extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        logout=findViewById(R.id.logout);
         usernamepencil=findViewById(R.id.usernamepencil);
         passwordpencil=findViewById(R.id.passwordpencil);
         firstnamepencil=findViewById(R.id.firstnamepencil);
@@ -70,6 +70,14 @@ public class Settings extends AppCompatActivity {
         birthdateview=findViewById(R.id.birthdateview);
         namesettings=findViewById(R.id.namesettings);
         tool=findViewById(R.id.tool);
+
+       /* lastname.setCursorVisible(false);
+
+        firstname.setClickable(false);
+        password.setClickable(false);
+        username.setCursorVisible(false);
+*/
+
 
         urlbirthdateview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/birthdate.jpg?alt=media&token=78199019-d0d0-42d2-84a0-98110c37f554";
         urlemailview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/email.jpg?alt=media&token=15dc7155-dae7-4a86-bebf-e8deeeb7b75e";
@@ -128,15 +136,15 @@ public class Settings extends AppCompatActivity {
         password.setHint("");
         username.setHint(pemail);
 
-      /*  usernamepencil.setOnClickListener(new View.OnClickListener() {
+        usernamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flagusername==0) {
-                    username.setClickable(true);
+                    //username.setClickable(true);
                     username.setCursorVisible(true);
                 }
                 else{
-                    username.setClickable(false);
+                    //username.setClickable(false);
                     username.setCursorVisible(false);
                 }
                 flagusername=flagusername==0?1:0;
@@ -144,7 +152,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-*/
+
         soundbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,25 +175,17 @@ public class Settings extends AppCompatActivity {
         });
 
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new UserSharedPreferences(getApplicationContext()).removeUser();
-                Intent i=new Intent(getApplicationContext(),Login.class);
-                startActivity(i);
-                finish();
-            }
-        });
-/*
+
+
         lastnamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flaglname==0) {
-                    lastname.setClickable(true);
+                    //lastname.setClickable(true);
                     lastname.setCursorVisible(true);
                 }
                 else{
-                    lastname.setClickable(false);
+                    //lastname.setClickable(false);
                     lastname.setCursorVisible(false);
                 }
                 flaglname=flaglname==0?1:0;
@@ -196,11 +196,11 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (flagfname==0) {
-                    firstname.setClickable(true);
+                    //firstname.setClickable(true);
                     firstname.setCursorVisible(true);
                 }
                 else{
-                    firstname.setClickable(false);
+                    //firstname.setClickable(false);
                     firstname.setCursorVisible(false);
                 }
                 flagfname=flagfname==0?1:0;
@@ -211,18 +211,18 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (flagPassword==0) {
-                    password.setClickable(true);
+                    //password.setClickable(true);
                     password.setCursorVisible(true);
                 }
                 else{
-                    password.setClickable(false);
+                    //password.setClickable(false);
                     password.setCursorVisible(false);
                 }
                 flagPassword=flagPassword==0?1:0;
             }
         });
 
-*/
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -283,6 +283,7 @@ public class Settings extends AppCompatActivity {
 
                 if(count==3)
                 {
+                    if (password.getText().toString().trim().length()==0 && firstname.getText().toString().trim().length()==0 && username.getText().toString().trim().length()==0 && lastname.getText().toString().trim().length()==0)
                     saveallchanges();
                     Intent i=new Intent(getApplicationContext(),HomeScreen.class);
                     startActivity(i);

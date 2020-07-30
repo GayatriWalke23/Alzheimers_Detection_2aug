@@ -7,4 +7,19 @@
     <color name="black_overlay">#66000000</color>
     <color name="button">#0099CC</color>
     <color name="buttonPressed">#03749A</color>
+    <color name="fill_1">#E53935</color>
+    <color name="empty_1">#EF9A9A</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="fill_2">#8E24AA</color>
+    <color name="empty_2">#E1BEE7</color>
+
+    <color name="fill_3">#00ACC1</color>
+    <color name="empty_3">#B2EBF2</color>
+
+    <color name="fill_4">#F9A825</color>
+    <color name="empty_4">#FFF9C4</color>
+
+    <color name="fill_5">#5C6BC0</color>
+    <color name="empty_5">#C5CAE9</color>
 </resources>
