@@ -3,6 +3,7 @@
 //images added to firebase storage
 package com.example.alzheimers_detection;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,8 +25,11 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -34,14 +38,13 @@ public class Attention extends AppCompatActivity {
     TextView instruction1,instruction2,instruction3;
     double seconds=1,score=0.0;
     ProgressBar progressBar2;
-    String description;
+    String description,uid,username;
     String urldonutdecor2,urldonutdecor,urluncle,urldonutstand,urlopen;
     Button yes,no;
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     OnSwipeTouchListener onSwipeTouchListener;
-    String uid;
     public static Integer[] mThumbIds = {
             R.drawable.tree1, R.drawable.tree2,R.drawable.tree2,  R.drawable.tree3,R.drawable.tree1, R.drawable.tree1,R.drawable.tree1,R.drawable.tree6,R.drawable.tree2, R.drawable.tree6};
     int i;
@@ -54,16 +57,34 @@ public class Attention extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
 
 
-        description = "\nYou are \n“xyz – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
+        mAuth = FirebaseAuth.getInstance();
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        userDBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                username=user.getFirstname();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UserListActivity", "Error occured");
+            }
+
+
+        });
+
+
+        description = "\nYou are \n“"+username+" – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
                 " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
 
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
-
-
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -174,7 +195,7 @@ public class Attention extends AppCompatActivity {
                     {
                         yes.setEnabled(false);
                         no.setEnabled(false);
-                        Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
 
                         Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
                         startActivity(i);
@@ -192,7 +213,6 @@ public class Attention extends AppCompatActivity {
                     if(mThumbIds[i]!=mThumbIds[i-1])
                     {
                         score=score+1;
-
                     }
 
                     i++;

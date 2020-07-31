@@ -43,7 +43,8 @@ ProgressBar progressBar4;
             }
 
             @Override
-            public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+            public boolean onResourceReady(GlideDrawable resource, String model,
+                                           Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                 progressBar4.setVisibility(View.GONE);
                 return false;
             }

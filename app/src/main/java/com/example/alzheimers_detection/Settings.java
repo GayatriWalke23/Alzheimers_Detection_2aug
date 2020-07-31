@@ -4,6 +4,7 @@ package com.example.alzheimers_detection;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -13,6 +14,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,9 +35,12 @@ public class Settings extends AppCompatActivity {
     ImageView usernamepencil,passwordpencil,firstnamepencil,lastnamepencil,soundbutton;
     ImageView profile,musicgif  ,tool,logininsideprofile,emailview,passwordsettings,birthdateview,namesettings;//set,login
     String urlnamesettings,urlprofile,urlpasswordsettings,urltool,urlbirthdateview,urlemailview,urllogininsideprofile,urlmusicgif,urllnamepencil,urlfnamepencil,urlusernamepencil,urlpasswordpencil;
-    TextView soundstatus;
+    TextView soundstatus,logout;
     EditText username,password,firstname,lastname;
     Button save;
+    int dummyyear;
+    DatePicker birthdate;
+    int passwordresetornot=0;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -50,7 +55,8 @@ public class Settings extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-
+        birthdate=findViewById(R.id.birthdate);
+        dummyyear=birthdate.getYear();
         usernamepencil=findViewById(R.id.usernamepencil);
         passwordpencil=findViewById(R.id.passwordpencil);
         firstnamepencil=findViewById(R.id.firstnamepencil);
@@ -71,12 +77,6 @@ public class Settings extends AppCompatActivity {
         namesettings=findViewById(R.id.namesettings);
         tool=findViewById(R.id.tool);
 
-       /* lastname.setCursorVisible(false);
-
-        firstname.setClickable(false);
-        password.setClickable(false);
-        username.setCursorVisible(false);
-*/
 
 
         urlbirthdateview="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/birthdate.jpg?alt=media&token=78199019-d0d0-42d2-84a0-98110c37f554";
@@ -104,39 +104,57 @@ public class Settings extends AppCompatActivity {
         Picasso.with(this).load(urlmusicgif).into(musicgif);
         Picasso.with(this).load(urlusernamepencil).into(usernamepencil);
         Picasso.with(this).load(urlpasswordpencil).into(passwordpencil);
-
+        logout=findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UserSharedPreferences(getApplicationContext()).removeUser();
+                Intent i=new Intent(getApplicationContext(),Login.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseDatabase=FirebaseDatabase.getInstance();
-        uid=firebaseAuth.getCurrentUser().getUid();
         user=firebaseAuth.getCurrentUser();
 
-        dbref=firebaseDatabase.getInstance().getReference("Users/"+uid);
-        dbref.addValueEventListener(new ValueEventListener() {
+        uid=user.getUid();
+
+        final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        FirebaseUser fuser;
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        fuser = firebaseAuth.getCurrentUser();
+        uid=fuser.getUid();
+        userDBRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User myuser=new User();
-                Log.d("my uid",""+uid);
-                myuser.setFirstname(dataSnapshot.child("firstname").getValue(String.class));
-                myuser.setUsername(dataSnapshot.child("email").getValue(String.class));
-                myuser.setLastname(dataSnapshot.child("lastname").getValue(String.class));
-                fname=myuser.getFirstname();
-                lname=myuser.getLastname();
-                pemail=myuser.getUsername();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                fname=user.getFirstname().trim();
+                lname=user.getLastname().trim();
+                pemail=user.getUsername().trim();
+                Log.d("fname",""+fname);
+                firstname.setText(fname, TextView.BufferType.EDITABLE);
+                lastname.setText(lname, TextView.BufferType.EDITABLE);
+                password.setText("");
+                username.setText(pemail, TextView.BufferType.EDITABLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e("UserListActivity", "Error occured");
             }
+
+
         });
 
-        firstname.setHint(fname);
-        lastname.setHint(lname);
-        password.setHint("");
-        username.setHint(pemail);
 
-        usernamepencil.setOnClickListener(new View.OnClickListener() {
+
+
+
+      /*  usernamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flagusername==0) {
@@ -151,23 +169,31 @@ public class Settings extends AppCompatActivity {
 
             }
         });
-
+*/
 
         soundbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (soundflag==0) {
                     //music stop
-                    AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
+
+                    AudioManager audioManager =
+                            (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.adjustVolume(AudioManager.ADJUST_LOWER,
+                            AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+
+
                     soundstatus.setText("Off");
                     soundbutton.setImageResource(R.drawable.off);
+
                 }
                 else{
                     //music on
-                    AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false);
-                    soundstatus.setText("Off");
+                    AudioManager audioManager =
+                            (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+
+                    soundstatus.setText("On");
                     soundbutton.setImageResource(R.drawable.on);
                 }
                 soundflag=soundflag==0?1:0;
@@ -176,7 +202,7 @@ public class Settings extends AppCompatActivity {
 
 
 
-
+/*
         lastnamepencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,86 +248,88 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-
+*/
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count=3;
-                if (flagPassword==1)
+                passwordresetornot=0;
+                if(!(password.getText().toString().trim().equals("")))
                 {
-                    if(!(password.getText().toString().trim()==""))
+                    if(password.getText().toString().trim().length()<6)
                     {
-                        if(password.getText().toString().trim().length()<6)
-                        {
-                            password.requestFocus();
-                            password.setError("Password is too short.Must have 6 characters.");
-                        }
-                        else
-                        {
-                            user.updatePassword(password.getText().toString().trim());
+                        password.requestFocus();
+                        password.setError("Password is too short.Must have 6 characters.");
+                    }
+                    else
+                    {
+                        passwordresetornot=1;
 
-                        }
                     }
                 }
 
-                if (flagusername==1)
-                {
-                    Pattern pattern = Patterns.EMAIL_ADDRESS;
-                    if (username.getText().toString().trim()=="" ||pattern.matcher(username.getText().toString().trim()).matches()==false)
-                    {
-                        username.requestFocus();
-                        username.setError("Please enter valid email!");
-                        count--;
-                    }
 
+
+                Pattern pattern = Patterns.EMAIL_ADDRESS;
+                if (username.getText().toString().trim()=="" ||pattern.matcher(username.getText().toString().trim()).matches()==false)
+                {
+                    username.requestFocus();
+                    username.setError("Please enter valid email!");
+                    count--;
                 }
 
 
 
-                if(flagfname==1)
-                {
-                    if(firstname.getText().toString().trim()=="")
-                    {
-                        firstname.requestFocus();
-                        firstname.setError("First name can't be blank!");
-                        count--;
-                    }
 
+
+
+                if(firstname.getText().toString().trim()=="")
+                {
+                    firstname.requestFocus();
+                    firstname.setError("First name can't be blank!");
+                    count--;
                 }
 
 
-                if(flaglname==1)
-                {
-                    if(lastname.getText().toString().trim()=="")
-                    {
-                        lastname.requestFocus();
-                        lastname.setError("Last name can't be blank!");
-                        count--;
-                    }
 
+
+
+                if(lastname.getText().toString().trim()=="")
+                {
+
+                    lastname.requestFocus();
+                    lastname.setError("Last name can't be blank!");
+                    count--;
                 }
+
 
                 if(count==3)
                 {
-                    if (password.getText().toString().trim().length()==0 && firstname.getText().toString().trim().length()==0 && username.getText().toString().trim().length()==0 && lastname.getText().toString().trim().length()==0)
-                    saveallchanges();
+                    saveallchanges(passwordresetornot);
                     Intent i=new Intent(getApplicationContext(),HomeScreen.class);
                     startActivity(i);
                 }
             }
         });
     }
-    public void saveallchanges()
+    public void saveallchanges(int passwordresetornot)
     {
         dbref=firebaseDatabase.getInstance().getReference("Users/"+uid);
-        if (flagfname==1)
-            dbref.child("firstname").setValue(firstname.getText().toString().trim());
-        Log.d("fname",""+firstname.getText().toString().trim());
-        if (flaglname==1)
-            dbref.child("lastname").setValue(lastname.getText().toString().trim());
-        if(flagusername==1) {
-            dbref.child("username").setValue(username.getText().toString().trim());
-            user.updateEmail(username.getText().toString().trim());
+
+        dbref.child("firstname").setValue(firstname.getText().toString().trim());
+
+        dbref.child("lastname").setValue(lastname.getText().toString().trim());
+
+        dbref.child("username").setValue(username.getText().toString().trim());
+        user.updateEmail(username.getText().toString().trim());
+        if(passwordresetornot==1)
+        {
+            user.updatePassword(password.getText().toString().trim());
+
         }
+
+        dbref.child("birthdate").setValue(""+birthdate.getDayOfMonth()+"-"+(int)(birthdate.getMonth()+1)+"-"+birthdate.getYear());
+
+
     }
 }

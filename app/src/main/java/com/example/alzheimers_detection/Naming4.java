@@ -40,7 +40,8 @@ public class Naming4 extends AppCompatActivity {
         getSupportActionBar().hide();
         tort = findViewById(R.id.progressBar14);
         user_index=-1;
-        x_pos=90;
+        x_pos=40;
+
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
@@ -133,7 +134,7 @@ public class Naming4 extends AppCompatActivity {
                 break;
         }
         animate(x_pos, (Button) button);
-        x_pos = x_pos +152;
+        x_pos = x_pos +125;
     }
 
     private void make_invisible(int dash_number)

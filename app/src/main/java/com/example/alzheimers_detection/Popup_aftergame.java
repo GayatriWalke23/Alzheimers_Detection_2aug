@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -26,7 +27,9 @@ class Popup_aftergame {
         //Get the devices screen density to calculate correct pixel sizes
         float density=c.getResources().getDisplayMetrics().density;
         // create a focusable PopupWindow with the given layout and correct size
-        final PopupWindow pw = new PopupWindow(layout, (int)density*390, (int)density*520, true);
+        //final PopupWindow pw = new PopupWindow(layout, (int)density*390, (int)density*520, true);
+        final PopupWindow pw = new PopupWindow(
+                layout, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         pw.setOutsideTouchable(false);
 
         // display the pop-up in the center

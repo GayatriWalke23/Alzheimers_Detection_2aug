@@ -69,10 +69,6 @@ public class DelayedRecall extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-
-
-
-
         next=findViewById(R.id.next);
         mQuestionView = (TextView) findViewById(R.id.question);
         mButtonChoice1 = (Button) findViewById(R.id.option1);
@@ -191,8 +187,8 @@ public class DelayedRecall extends AppCompatActivity {
                         Popup_aftergame panel = new Popup_aftergame();
                         panel.showPopUp(DelayedRecall.this, stage_name);
 
-                        /*Intent i=new Intent(getApplicationContext(),AskForJournal.class);
-                        startActivity(i);*/
+                        Intent i=new Intent(getApplicationContext(),AskForJournal.class);
+                        startActivity(i);
                     }
                 }
             });

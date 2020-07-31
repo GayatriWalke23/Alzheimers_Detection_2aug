@@ -6,17 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.ImageFormat;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +53,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -55,21 +71,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import static android.util.Base64.DEFAULT;
 
-public class Results extends AppCompatActivity {
-    static String filename;
-float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
-int seconds=1,behaviouralResultOrNot=0;// if 1 , user has played behavioural questions .
-String uid;
-Double totscore,totstages;
-float totalFamilyHistoryScore,totalBehaviouralScore;
-TextView totalscore;
-Bitmap bitmap;
+public class Results extends AppCompatActivity implements View.OnClickListener{
+    static String filename, behavioural_info;
+        float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
+    String progressTableAspects,family_behavioural_info;
+    int seconds=1,behaviouralResultOrNot=0;// if 1 , user has played behavioural questions .
+        String uid;
+        Double totscore,totstages;
+        float totalFamilyHistoryScore,totalBehaviouralScore;
+    TextView totalscore;
+        Bitmap bitmap;
     public FirebaseAuth mAuth;
-    int numOfPrevScores;
     int prevScoreArray[]=new int[5];
+    ArrayList<Element> previousScoresList;
     LinearLayout graph;
 
     @Override
@@ -79,18 +98,18 @@ Bitmap bitmap;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
+        previousScoresList = new ArrayList<>();
         final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
 
         FirebaseUser fuser;
         mAuth = FirebaseAuth.getInstance();
-
-        totalscore=findViewById(R.id.totalscore);
         //graph=findViewById(R.id.graph);
-       //graph.setDrawingCacheEnabled(true);
-
+        //graph.setDrawingCacheEnabled(true);
 
         fuser = mAuth.getCurrentUser();
         uid=fuser.getUid();
+        final int[] numOfPrevScores = new int[1];
+
         userDBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -109,32 +128,57 @@ Bitmap bitmap;
                 executivefunctioningScore=user.getExecutiveFunctioning();
                 totalBehaviouralScore=user.getTotalBehaviouralScore();
                 totalFamilyHistoryScore=user.getTotalFamilyHistoryScore();
+                family_behavioural_info=user.getFamily_behavioural_info();
+                behavioural_info=user.getBehavioural_info();
+                progressTableAspects=user.getProgressTableAspects();
 
+
+                TextView statement = findViewById(R.id.result_statement);
 
 
                 if(behaviouralResultOrNot==0)//If user has played optional behavioural stage
                 {
                     totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
                     totscore = ((0.97) * totscore) + (0.03 * totalFamilyHistoryScore);
-
-
                     totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"/30"+"\n(Stages+Family)");
+
+                    if(totscore > 20){      //value 20 is not verified
+                        statement.setText(getResources().getString(R.string.result2));
+                    } else {
+                        statement.setText(getResources().getString(R.string.result1));
+
+                    }
 
                 }
                 else {//User hasnt played behavioural stage
                     totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
                     totscore = ((0.95) * totscore) + (0.03 * totalFamilyHistoryScore) + (0.02 * totalBehaviouralScore);
                     totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"\n(Stages+Family+Behavioural)");
+
+                    if(totscore > 20){//value 20 is not verified
+                        statement.setText(getResources().getString(R.string.result2));
+                    } else {
+                        statement.setText(getResources().getString(R.string.result1));
+
+                    }
                 }
 
 
-                numOfPrevScores=user.getNumOfScores();
+                numOfPrevScores[0] =user.getNumOfScores();
 
-                if(numOfPrevScores==1) userDBRef.child(uid).child("Score1").setValue(((float)Math.round(totscore * 100) / 100));
+               /* if(numOfPrevScores==1) userDBRef.child(uid).child("Score1").setValue(((float)Math.round(totscore * 100) / 100));
                 else if(numOfPrevScores==2) userDBRef.child(uid).child("Score2").setValue(((float)Math.round(totscore * 100) / 100));
                 else if(numOfPrevScores==3) userDBRef.child(uid).child("Score3").setValue(((float)Math.round(totscore * 100) / 100));
                 else if(numOfPrevScores==4) userDBRef.child(uid).child("Score4").setValue(((float)Math.round(totscore * 100) / 100));
-                else userDBRef.child(uid).child("Score5").setValue(((float)Math.round(totscore * 100) / 100));
+                else userDBRef.child(uid).child("Score5").setValue(((float)Math.round(totscore * 100) / 100));*/
+
+
+                int index = (numOfPrevScores[0] % 5) - 1;
+
+                String tag = "Score" + (index + 1);
+                userDBRef.child(uid).child(tag).setValue(((float)Math.round(totscore * 100) / 100));
+                Calendar cal = Calendar.getInstance();
+                String dateToday = cal.get(Calendar.DATE) +"/"+ (cal.get(Calendar.MONTH) + 1) +"/"+ cal.get(Calendar.YEAR);
 
                 prevScoreArray[0]=user.getScore1();
                 prevScoreArray[1]=user.getScore2();
@@ -143,36 +187,26 @@ Bitmap bitmap;
                 prevScoreArray[4]=user.getScore5();
 
 
+                for( int i=0; i < 5; i++){
+                    if(prevScoreArray[i] != -1){
+                        previousScoresList.add(new Element(prevScoreArray[i],dateToday));
+                    } else{
+                        break;
+                    }
+                }
+
+                //below code is for testing purpose only since no data is generated yet
+               if(previousScoresList.isEmpty()){
+                    previousScoresList.add(new Element(50,"1. 10/1/2020"));
+                    previousScoresList.add(new Element(100,"2. 11/2/2020"));
+                    previousScoresList.add(new Element(100,"3. 27/5/2020"));
+                }
+
                 //ALL PREV SCORE VALUES HAVE COME INTO ARRAY
                 //testing successful
                 //Toast.makeText(getApplicationContext()," "+abstractionScore+" "+attentionScore+" "+executivefunctioningScore,Toast.LENGTH_LONG).show();
 
-
-
-
-                //vaibhavi code start
-                setBar(findViewById(R.id.set1), (int)executivefunctioningScore*100, R.color.fill_5, R.color.empty_5, "Executive Functioning");
-
-                setBar(findViewById(R.id.set2), (int)((namingScore/4)*100), R.color.fill_4, R.color.empty_4, "Naming");
-
-                setBar(findViewById(R.id.set3), (int)((abstractionScore/3)*100), R.color.fill_3, R.color.empty_3, "Abstraction");
-
-                setBar(findViewById(R.id.set4), (int)((calculationScore/3)*100), R.color.fill_2, R.color.empty_2, "Calculation");
-
-                setBar(findViewById(R.id.set5),(int)((orientationScore/6)*100), R.color.fill_1, R.color.empty_1,"Orientation");
-
-                setBar(findViewById(R.id.set6), (int)immediaterecallScore, R.color.fill_5, R.color.empty_5,"Immediate Recall");
-
-                setBar(findViewById(R.id.set7), (int)((attentionScore/3)*100), R.color.fill_4, R.color.empty_4, "Attention");
-
-                setBar(findViewById(R.id.set8), (int)((visuoperceptionScore/6)*100), R.color.fill_3, R.color.empty_3,"Visuoperception");
-
-                setBar(findViewById(R.id.set9), (int)((fluencyScore/2)*100), R.color.fill_2, R.color.empty_2,"Fluency");
-
-                setBar(findViewById(R.id.set10),(int)((delayedrecallScore/5)*100), R.color.fill_1, R.color.empty_1, "Delayed Recall");
-
-               //Vaibhavi code end
-
+                setScoringBoard();
             }
 
             @Override
@@ -183,37 +217,47 @@ Bitmap bitmap;
 
         });
 
-
         //Handler: After 1 second make drawable bitmap of the graphbar
-        seconds=5;
-        final Handler handler2=new Handler();
-        handler2.post(new Runnable() {
+        seconds=1;
+        final Handler handler=new Handler();
+        handler.post(new Runnable() {
             @Override
             public void run() {
+
                 if(seconds>0)
                 {
                     seconds=seconds-1;
-                    handler2.postDelayed(this,1000);
+                    handler.postDelayed(this,1000);
                 }
                 else
                 {
-                    /*
-                    bitmap = Bitmap.createBitmap(graph.getDrawingCache());
-                    Log.d("bitmap",""+bitmap);
-                    testimage.setImageBitmap(bitmap);
-                    testimage.setVisibility(View.VISIBLE);
-                    testimage.invalidate();
-                    */
 
-                    filename=""+uid+".png";
-                    try (FileOutputStream out = new FileOutputStream(filename)) {
-                        // bmp is your Bitmap instance
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    progressTableAspects=progressTableAspects+("\nTrial "+(int) numOfPrevScores[0] +"     "+(int)executivefunctioningScore+" "+(int)namingScore+" "+(int)abstractionScore+" "+(int)calculationScore+" "+(int)orientationScore+" "+(int)immediaterecallScore+" "+(int)attentionScore+" "+(int)visuoperceptionScore+" "+(int)fluencyScore+" "+(int)delayedrecallScore+" "+((float)Math.round(totscore * 100) / 100));
+                    userDBRef.child(uid).child("progressTableAspects").setValue(progressTableAspects);
+
+                    if (behaviouralResultOrNot==1)
+                    {
+                        userDBRef.child(uid).child("textFile").setValue(family_behavioural_info+behavioural_info+progressTableAspects);
                     }
+                    else {
+                        userDBRef.child(uid).child("textFile").setValue(family_behavioural_info+progressTableAspects);
+                    }
+
                 }
             }
         });
+
+        //previous scores
+        findViewById(R.id.previousResults).setOnClickListener(this);
+
+        //line graph button
+         findViewById(R.id.buttonGraph).setOnClickListener(this);
+
+        //previous scores
+        findViewById(R.id.buttonQrc).setOnClickListener(this);
+
+        //line graph button
+        findViewById(R.id.buttonHome).setOnClickListener(this);
     }
 
     @Override
@@ -233,6 +277,123 @@ Bitmap bitmap;
         }
     }
 
+    @Override
+    public void onClick(View v) {
+            int id = v.getId();
+            switch (id){
+                case R.id.previousResults :
+                    LayoutInflater layoutInflater =
+                            (LayoutInflater) getBaseContext()
+                                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView = layoutInflater.inflate(R.layout.scoring_popup, null);
+                    final PopupWindow popupWindow = new PopupWindow(
+                            popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    popupWindow.setOutsideTouchable(true);
+
+
+                    final ScrollView layout = findViewById(R.id.scorescreen);
+
+                    //to set height and width of a popup
+                    int height = layout.getHeight();
+                    popupWindow.setHeight(height / 2);
+                    /*int width = layout.getWidth();
+                    popupWindow.setWidth(2*width/3);*/
+
+
+                    Button cancel = (Button) popupView.findViewById(R.id.button_back);
+
+                    // Lookup the recyclerview in activity layout
+                    RecyclerView rvContacts = popupView.findViewById(R.id.rvContacts);
+
+                    // Initialize contacts
+                    //ArrayList<Element> scoreList = Element.createScoreList(numOfPrevScores);
+                    // Create adapter passing in the sample user data
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(previousScoresList);
+                    // Attach the adapter to the recyclerview to populate items
+                    rvContacts.setAdapter(adapter);
+                    // Set layout manager to position the items
+                    rvContacts.setLayoutManager(new LinearLayoutManager(Results.this));
+                    // That's all!
+
+                    cancel.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow.dismiss();
+                        }
+                    });
+
+                    popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                    break;
+
+
+                case R.id.buttonGraph:
+                    LayoutInflater layoutInflater2 =
+                            (LayoutInflater) getBaseContext()
+                                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView2 = layoutInflater2.inflate(R.layout.linegraph_popup, null);
+                    final PopupWindow popupWindow2 = new PopupWindow(
+                            popupView2, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                    popupWindow2.setOutsideTouchable(true);
+
+
+                    final ScrollView layout2 = findViewById(R.id.scorescreen);
+
+                    //to set height and width of a popup
+                    int height2 = layout2.getHeight();
+                    popupWindow2.setHeight(height2 / 2);
+                    int width2 = layout2.getWidth();
+                    popupWindow2.setWidth(4*width2/5);
+                    setLineGraph(popupView2);
+
+                    Button back = (Button) popupView2.findViewById(R.id.button_back);
+
+
+                    back.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow2.dismiss();
+
+                        }
+                    });
+
+                    popupWindow2.showAtLocation(popupView2, Gravity.CENTER, 0, 0);
+                    break;
+
+
+                case R.id.buttonQrc: Intent i=new Intent(getApplicationContext(),QRC.class);
+                    startActivity(i);
+                    break;
+
+                case R.id.buttonHome: Intent i2=new Intent(getApplicationContext(),HomeScreen.class);
+                    startActivity(i2);
+                    break;
+
+            }
+    }
+    void setScoringBoard(){
+
+            setBar(findViewById(R.id.set1), (int)executivefunctioningScore*100, R.color.fill_5, R.color.empty_5, "Executive Functioning");
+
+            setBar(findViewById(R.id.set2), (int)((namingScore/4)*100), R.color.fill_4, R.color.empty_4, "Naming");
+
+            setBar(findViewById(R.id.set3), (int)((abstractionScore/3)*100), R.color.fill_3, R.color.empty_3, "Abstraction");
+
+            setBar(findViewById(R.id.set4), (int)((calculationScore/3)*100), R.color.fill_2, R.color.empty_2, "Calculation");
+
+            setBar(findViewById(R.id.set5),(int)((orientationScore/6)*100), R.color.fill_1, R.color.empty_1,"Orientation");
+
+            setBar(findViewById(R.id.set6), (int)immediaterecallScore, R.color.fill_5, R.color.empty_5,"Immediate Recall");
+
+            setBar(findViewById(R.id.set7), (int)((attentionScore/3)*100), R.color.fill_4, R.color.empty_4, "Attention");
+
+            setBar(findViewById(R.id.set8), (int)((visuoperceptionScore/6)*100), R.color.fill_3, R.color.empty_3,"Visuoperception");
+
+            setBar(findViewById(R.id.set9), (int)((fluencyScore/2)*100), R.color.fill_2, R.color.empty_2,"Fluency");
+
+            setBar(findViewById(R.id.set10),(int)((delayedrecallScore/5)*100), R.color.fill_1, R.color.empty_1, "Delayed Recall");
+
+    }
+
     void setBar(View set, int score, int fc, int ec, String stagename){
         ProgressBar horizontalProgressBar =set.findViewById(R.id.horizontal_progress_bar);
         TextView name = set.findViewById(R.id.title);
@@ -249,4 +410,79 @@ Bitmap bitmap;
         horizontalProgressBar.setProgress(score);
     }
 
+    void setLineGraph (View v) {
+        LineChart mChart = v.findViewById(R.id.chart);
+        mChart.setTouchEnabled(true);
+        mChart.setPinchZoom(true);
+        Description des = new Description();
+        des.setText(" ");
+        mChart.setDescription(des);
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setPinchZoom(true);
+        mChart.getXAxis().setTextSize(10f);
+        mChart.getXAxis().setTextColor(getResources().getColor(R.color.rowshape));
+
+        mChart.getAxisLeft().setTextSize(15f);
+        mChart.getAxisRight().setTextSize(0f);
+        mChart.getAxisLeft().setTextColor(getResources().getColor(R.color.rowshape));
+
+        ArrayList<Entry> values = new ArrayList<>();
+
+        int size = previousScoresList.size();
+        for(int i=0; i<size; i++){
+            values.add(new Entry(i+1, previousScoresList.get(i).getScoreInt()));
+        }
+
+
+        LineDataSet set1;
+        if (mChart.getData() != null &&
+                mChart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+            mChart.getData().notifyDataChanged();
+            mChart.notifyDataSetChanged();
+        } else {
+            set1 = new LineDataSet(values, " ");
+            set1.setDrawIcons(false);
+            // set1.enableDashedLine(10f, 5f, 0f);
+            //set1.enableDashedHighlightLine(10f, 5f, 0f);
+            set1.setColor(Color.RED);
+            set1.setCircleColor(getResources().getColor(R.color.rowshape));
+
+            set1.setLineWidth(2f);
+            set1.setCircleRadius(6f);
+            set1.setDrawCircleHole(false);
+            set1.setValueTextSize(9f);
+            set1.setDrawFilled(true);
+            set1.setFormLineWidth(1f);
+            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+            set1.setFormSize(10.f);
+            if (Utils.getSDKInt() >= 18) {
+                Drawable drawable = ContextCompat.getDrawable(this, R.drawable.redcolor
+                );
+                set1.setFillDrawable(drawable);
+            } else {
+                set1.setFillColor(Color.BLUE);
+            }
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+            LineData data = new LineData(dataSets);
+            mChart.setData(data);
+        }
+
+        mChart.setDrawGridBackground(false);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+

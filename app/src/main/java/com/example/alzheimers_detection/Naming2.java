@@ -35,7 +35,7 @@ public class Naming2 extends AppCompatActivity {
         getSupportActionBar().hide();
         lion = findViewById(R.id.progressBar12);
         user_index=-1;
-        x_pos=270;
+        x_pos=200;
 
 
           /* Glide.with(this)
@@ -95,7 +95,8 @@ public class Naming2 extends AppCompatActivity {
 
         }
         animate(x_pos, (Button) button);
-        x_pos = x_pos +200;
+        x_pos = x_pos +180;
+
     }
 
     private void make_invisible(int dash_number)

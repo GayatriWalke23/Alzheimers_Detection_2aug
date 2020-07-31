@@ -24,7 +24,7 @@ public class ExecutiveFunctioning_Intro extends AppCompatActivity {
     ImageView coinsgif,caves;
     ProgressBar progressBar;
     String urlcaves,urlcoinsgif;
-
+    Boolean fromHomeScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,17 +57,16 @@ public class ExecutiveFunctioning_Intro extends AppCompatActivity {
             }
         }).into(coinsgif);
 
-
-
         nextfromexecutivefunctioning=findViewById(R.id.nextfromexecutivefunctioning);
 
         nextfromexecutivefunctioning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(getApplicationContext(),ExecutiveFunctioning.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+                    Intent i = new Intent(getApplicationContext(), ExecutiveFunctioning.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+
             }
         });
 

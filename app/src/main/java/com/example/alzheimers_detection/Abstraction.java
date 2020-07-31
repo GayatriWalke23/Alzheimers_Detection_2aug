@@ -1,5 +1,3 @@
-
-
 //Images added to firebase storage
 package com.example.alzheimers_detection;
 
@@ -54,9 +52,6 @@ public class Abstraction extends AppCompatActivity {
 
         description = "\nMultiple items corresponding to three different categories namely -\n Sports, Instruments and Fruits \nare displayed on a shelf."+"\n\nDrag and drop each item into its corresponding " +
                 "basket to empty\n the shelf.";
-
-
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -252,7 +247,6 @@ public class Abstraction extends AppCompatActivity {
                                 seconds=seconds-1;
                                 handler.postDelayed(this,300);
 
-
                             }
                             else if(seconds>0)
                             {
@@ -334,7 +328,6 @@ public class Abstraction extends AppCompatActivity {
                                     handler.post(new Runnable() {
                                         @Override
                                         public void run() {
-
                                             if(seconds>0)
                                             {
                                                 seconds=seconds-1;
@@ -346,8 +339,6 @@ public class Abstraction extends AppCompatActivity {
                                             }
                                         }
                                     });
-
-
                                 }
                             }
                         }

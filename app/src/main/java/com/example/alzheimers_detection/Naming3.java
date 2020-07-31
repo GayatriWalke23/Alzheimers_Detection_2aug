@@ -45,7 +45,8 @@ public class Naming3 extends AppCompatActivity {
         getSupportActionBar().hide();
         frog = findViewById(R.id.progressBar13);
         user_index=-1;
-        x_pos=270;
+        x_pos=200;
+
 
          /* Glide.with(this)
                 .load(url).listener(new RequestListener<String, GlideDrawable>() {
@@ -134,7 +135,7 @@ public class Naming3 extends AppCompatActivity {
 
         }
         animate(x_pos, (Button) button);
-        x_pos = x_pos +200;
+        x_pos = x_pos +180;
     }
 
     private void make_invisible(int dash_number)

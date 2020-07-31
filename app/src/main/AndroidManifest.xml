@@ -29,7 +29,12 @@
         <activity android:name=".OpeningScreen">
 
         </activity> <!-- Login/Sign up/Home Screen -->
-        <activity android:name=".Login" />
+
+        <activity android:name=".Login">
+
+        </activity>
+
+
         <activity android:name=".LoginOtpByPhone" />
         <activity
             android:name=".Signup"
@@ -43,8 +48,12 @@
 
         </activity>
         <activity android:name=".Results" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity android:name=".Chatbot" />
         <activity android:name=".Settings" />
         <activity android:name=".NearbyDoctors" />
@@ -65,7 +74,9 @@
         <activity android:name=".Calculation_Intro" />
         <activity android:name=".Calculation" />
         <activity android:name=".Orientation_Intro" />
-        <activity android:name=".Orientation" />
+        <activity android:name=".Orientation">
+
+        </activity>
         <activity android:name=".ImmediateRecall_Intro" />
         <activity android:name=".Immediate_recallPlayVideo" />
         <activity android:name=".ImmediateRecallVideo" />
@@ -77,13 +88,12 @@
         <activity android:name=".Fluency_Intro" />
         <activity android:name=".Fluency" />
         <activity android:name=".DelayedRecall_Intro" />
-        <activity android:name=".DelayedRecall" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".DelayedRecall" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity><!-- Visually Impaired -->
+        <activity android:name=".WebViewConnectPeople"/>
+        <activity android:name=".MyCommunities"/>
+
+        <!-- Visually Impaired -->
         <uses-library android:name="com.google.android.maps" />
     </application>
 

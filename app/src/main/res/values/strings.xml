@@ -75,4 +75,10 @@
     <string name="Visuoperception_opt12">Book</string>
 
 
+    <!-- Scoring page !-->
+    <string name="scoretitle">Results</string>
+    <string name="result1">You might have Alzheimer\'s Disease</string>
+    <string name="result2">You might not have Alzheimer\'s Disease</string>
+
+
 </resources>

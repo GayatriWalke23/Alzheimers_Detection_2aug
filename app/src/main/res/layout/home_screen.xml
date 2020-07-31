@@ -91,7 +91,7 @@
         android:drawableBottom="?android:attr/actionModeFindDrawable"
         android:drawablePadding="-100dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="News"
+        android:text="Connect"
         android:onClick="GoToNews"
         android:textColor="#FFFFFF"
         android:textSize="16sp"

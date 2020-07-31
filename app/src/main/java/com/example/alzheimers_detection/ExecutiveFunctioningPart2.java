@@ -160,7 +160,6 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
                     }
                     else
                     {
-
                         change_activity(getApplicationContext(),stage_name);
                     }
                 }
@@ -415,8 +414,6 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
             Toast toast=Toast. makeText(getApplicationContext(),"GOOD JOB !",Toast. LENGTH_SHORT);
             toast. show();
             //}
-
-
 
         }
 

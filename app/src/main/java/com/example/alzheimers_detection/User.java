@@ -14,36 +14,75 @@ import java.util.Date;
 
 public class User {
     int closerelative;
-    float executiveFunctioning;
-    float naming;
-    float abstraction;
-    float calculation;
-    float orientation;
-    float immediateRecall;
-    float attention;
-    float visuoperception;
-    float fluency;
-    float delayedRecall;
-    float carryingOutMyDailyActivities;
-    float mood;
-    float imWorkingIfeel;
-    float sleepCycle;
-    float experienceBodyPain;
-    float starRating;
-    float totalBehaviouralScore,floatTotalScore;
-    String firstname,lastname,gender;
+    float executiveFunctioning=-1;
+    float naming=0;
+    float abstraction=0;
+    float calculation=0;
+    float orientation=0;
+    float immediateRecall=0;
+    float attention=0;
+    float visuoperception=0;
+    float fluency=0;
+    float delayedRecall=0;
+    float carryingOutMyDailyActivities=-1;
+    float mood=-1;
+    float imWorkingIfeel=-1;
+    float sleepCycle=-1;
+    float experienceBodyPain=-1;
+    float starRating=-1;
+    float totalBehaviouralScore=-1;
+
     String username;
     String birthdate;
     int countProgressHistory;
-    int behaviouralResultOrNot;
+    int behaviouralResultOrNot=0;
     int headinjury;
     int cardiovasculardisease;
     int downsyndrome;
     int levelofeducation;
     int smoking;
     int drinking;
-    int numOfScores=0,score1,score2,score3,score4,score5;
+    int numOfScores=0,score1=-1,score2=-1,score3=-1,score4=-1,score5=-1;
     String textFile;
+    String family_behavioural_info;
+    String behavioural_info;
+
+    public String getBehavioural_info() {
+        return behavioural_info;
+    }
+
+    public void setBehavioural_info(String behavioural_info) {
+        this.behavioural_info = behavioural_info;
+    }
+
+    String progressTableAspects="\n\n.\nStageno1:Executive Functioning\nStageno2:Naming\nStageno3:Abstraction\nStageno4:Calculation\nStageno5:Orientation\nStageno6:Immediate Recall\nStageno7:Attention\nStageno8:Visuoperception\nStageno9:Fluency\nStageno10:Delayed Recall\n\nTrialNo. 1 2 3 4 5 6 7 8 9 10 Total\n";
+    float TotalScore;
+    String firstname,lastname,gender;
+
+    public String getProgressTableAspects() {
+        return progressTableAspects;
+    }
+
+    public void setProgressTableAspects(String progressTableAspects) {
+        this.progressTableAspects = progressTableAspects;
+    }
+
+    public String getFamily_behavioural_info() {
+        return family_behavioural_info;
+    }
+
+    public void setFamily_behavioural_info(String family_behavioural_info) {
+        this.family_behavioural_info = family_behavioural_info;
+    }
+
+
+    public float getTotalScore() {
+        return TotalScore;
+    }
+
+    public void setTotalScore(float totalScore) {
+        TotalScore = totalScore;
+    }
 
     public String getTextFile() {
         return textFile;

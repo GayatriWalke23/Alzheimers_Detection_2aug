@@ -46,8 +46,9 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Put "instructions" activity in the below Intent and uncomment it
-                //Intent i=new Intent(getApplicationContext(),SignupPhone.class);
-                //startActivity(i);
+                Intent i=new Intent(getApplicationContext(),ExecutiveFunctioning_Intro.class);
+                i.putExtra("fromHomeScreen","yes");
+                startActivity(i);
 
             }
         });
@@ -82,7 +83,7 @@ public class HomeScreen extends AppCompatActivity {
         news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),News.class);
+                Intent i=new Intent(getApplicationContext(),MyCommunities.class);
                 startActivity(i);
             }
         });

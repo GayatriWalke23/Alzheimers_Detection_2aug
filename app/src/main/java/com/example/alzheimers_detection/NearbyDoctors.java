@@ -36,26 +36,26 @@ public class NearbyDoctors extends AppCompatActivity {
         try {
             String text[] = location.getLocation().trim().split(" ");
             String city = text[0].trim();
+            WebView w = findViewById(R.id.web);
 
+            String link = null;
             if (city != "") {
-                WebView w = findViewById(R.id.web);
+
                 String doctor = "neurologist";
-                String link = "https://www.practo.com/search?results_type=doctor&q=%5B%7B%22word%22%3A%22"
+                link = "https://www.practo.com/search?results_type=doctor&q=%5B%7B%22word%22%3A%22"
                         + doctor + "%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=" + city;
+
+
+            }
+
+            if(link != null) {
+                link = "https://www.practo.com/";
+            }
 
                 w.loadUrl(link);
                 w.getSettings().setJavaScriptEnabled(true);
                 w.setWebViewClient(new WebViewClient());
-            } else {
-                try {
-                    Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                    String term = "neurologist near me";
-                    intent.putExtra(SearchManager.QUERY, term);
-                    startActivity(intent);
-                } catch (Exception e) {
 
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }

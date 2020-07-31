@@ -1,11 +1,13 @@
 package com.example.alzheimers_detection;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +22,15 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FamilyHistory extends AppCompatActivity {
+    String levelofeducation,headinjurystr,downsyndromestr,cardiovascular,smoke,drink,closeRelative,name;
+
     RadioButton greaterthan12years,years12,smokingnever,smokingoften,smokingsometimes,drinkingnever,drinkingsometimes,drinkingoften;
     CheckBox cardiovasculardisease,downsyndrome,headinjury;
     RadioGroup smoking,drinking,years;
@@ -92,7 +99,7 @@ public class FamilyHistory extends AppCompatActivity {
                 if (!no.getText().equals("") && !yes.getText().equals("")) {
                     relativeyes.setError("Please select one option!!");
                 } else {
-                    if (relativeyes.isSelected())
+                    if (yes.getText().toString().trim().equals("(Selected)"))
                     {
                         dbUsers.child("closerelative").setValue(1);
                         score--;
@@ -149,5 +156,80 @@ public class FamilyHistory extends AppCompatActivity {
             } });
 
 
-    }
+        final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+        userDBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                name=user.getFirstname()+" "+user.getLastname();
+                if(user.getCardiovasculardisease()==1)
+                {
+                    cardiovascular="Yes";
+                }
+                else
+                {
+                    cardiovascular="No";
+                }
+                if(user.getDownsyndrome()==1)
+                {
+                    downsyndromestr="Yes";
+                }
+                else
+                {
+                    downsyndromestr="No";
+                }
+                if(user.getHeadinjury()==1)
+                {
+                    headinjurystr="Yes";
+                }
+                else
+                {
+                    headinjurystr="No";
+                }
+                if(user.getSmoking()==1)
+                {
+                    smoke="Yes";
+                }
+                else
+                {
+                    smoke="No";
+                }
+                if(user.getDrinking()==1)
+                {
+                    drink="Yes";
+                }
+                else
+                {
+                    drink="No";
+                }
+                if(user.getLevelofeducation()==1)
+                {
+                    levelofeducation="Less than 12 years";
+                }
+                else
+                {
+                    levelofeducation="More than 12 years";
+                }
+                if(user.getCloserelative()==1)
+                {
+                    closeRelative="Yes";
+                }
+                else
+                {
+                    closeRelative="No";
+                }
+                String familyInfo="\nName:"+name+"\nLifestyle & Family History:\nLevel of Education:"+levelofeducation+"\nMedical Condition Experienced:\nHead Injury:"+headinjurystr+"\nDown's Syndrome:"+downsyndromestr+"\nCardiovascular Disease:"+cardiovascular+"\nSmoke:"+smoke+"\nDrink Alcohol:"+drink+"\nClose Relative Diagnosed with Alzheimer's:"+closeRelative+"\n\n";
+                userDBRef.child(uid).child("family_behavioural_info").setValue(familyInfo);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UserListActivity", "Error occured");
+            }
+
+
+        });
+
+        }
 }

@@ -125,13 +125,14 @@ public class Login extends AppCompatActivity {
 
 
 
-       /* forgotpassword.setOnClickListener(new View.OnClickListener() {
+        forgotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i =new Intent(getApplicationContext(),ForgotPassword.class);
+                startActivity(i);
             }
         });
-        */
+
 
 
     }

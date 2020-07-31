@@ -40,7 +40,8 @@ public class Naming1 extends AppCompatActivity {
         onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.Naming1),stage_name);
 
         user_index=-1;
-        x_pos=270;
+        x_pos=110;
+
 
        /* Glide.with(this)
                 .load(url).listener(new RequestListener<String, GlideDrawable>() {
@@ -101,7 +102,7 @@ public class Naming1 extends AppCompatActivity {
 
         }
         animate(x_pos, (Button) button);
-        x_pos = x_pos +200;
+        x_pos = x_pos +180;
     }
 
     private void make_invisible(int dash_number)
