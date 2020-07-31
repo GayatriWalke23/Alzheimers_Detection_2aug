@@ -3,12 +3,23 @@ package com.example.alzheimers_detection;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.UtteranceProgressListener;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,6 +34,12 @@ public class VI_Delayed_Recall extends AppCompatActivity {
     String[] option_for_5;
     String[] option_for_6;
 
+int seconds=1;
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+int num;
     String[] que_no ={"one","two","three","four","five","six"};
     String[] correct_answer ={"left","right","down","left","down","down"};
     String[] Score_points={"zero","one","two","three"};
@@ -40,6 +57,8 @@ public class VI_Delayed_Recall extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
+
         res = getResources();
         questions =res.getStringArray(R.array.DRQuetion);
         option_for_1=res.getStringArray(R.array.DR_Option1);
@@ -163,10 +182,55 @@ public class VI_Delayed_Recall extends AppCompatActivity {
     }
 
     private void change_activity() {
-        Intent myIntent=new Intent(getApplicationContext(),VI_Orientation_intro.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(myIntent);
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("delayedRecall").setValue(score);
+
+        DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        userDBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                num=user.getNumOfScores();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UserListActivity", "Error occured");
+            }
+
+
+        });
+
+
+        seconds=2;
+        final Handler handler=new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                if(seconds>0)
+                {
+                    seconds=seconds-1;
+                    handler.postDelayed(this,1000);
+                }
+                else
+                {
+
+                    num++;
+                    dbUsers.child("numOfScores").setValue(num);
+
+                    Intent myIntent=new Intent(getApplicationContext(),VI_Orientation_intro.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(myIntent);
+                }
+            }
+        });
+
     }
 
     void call_left()

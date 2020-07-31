@@ -13,7 +13,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class VI_Attention extends AppCompatActivity {
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+    int check=0,error=0,score=0;
+
 
     String seq[]={"C","R","A","G","I","A","O","Q","U","P","A","L","Q"};
     int tap[]={'0','0','0','0','0','0','0','0','0','0','0','0','0'};
@@ -26,6 +37,15 @@ public class VI_Attention extends AppCompatActivity {
                     Speak tts = new Speak(VI_Attention.this);
                     tts.speakOut(getString(R.string.after_Attention));
                     check_();
+
+
+                    mAuth = FirebaseAuth.getInstance();
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("attention").setValue(score);
+
+
                     Intent myIntent=new Intent(getApplicationContext(),VI_Calculation_intro.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -88,7 +108,6 @@ public class VI_Attention extends AppCompatActivity {
     }
     void check_()
     {
-        int check=0,error=0,score=0;
         while(check<seq.length)
         {
             if((seq[check]=="A"&&tap[check]!=1)||(seq[check]!="A"&&tap[check]==1))

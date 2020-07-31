@@ -32,11 +32,21 @@ public class Abstraction extends AppCompatActivity {
     ImageView fruitsb,instrumentsb,sportsb;
     int xs,ys,xf,yf,xi,yi;
     private int xdelta,ydelta;
+/*
+        mAuth = FirebaseAuth.getInstance();
+
+ fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("abstraction").setValue(totalscore);
+
+*/
 
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+
     String description;
     String stage_name;
     OnSwipeTouchListener onSwipeTouchListener;

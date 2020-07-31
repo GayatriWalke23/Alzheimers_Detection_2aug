@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -35,26 +36,22 @@ public class NearbyDoctors extends AppCompatActivity {
 
         try {
             String text[] = location.getLocation().trim().split(" ");
-            String city = text[0].trim();
+            String city =city = text[0].trim();
             WebView w = findViewById(R.id.web);
 
             String link = null;
-            if (city != "") {
+            if (city != null && !city.equals("")) {
 
                 String doctor = "neurologist";
                 link = "https://www.practo.com/search?results_type=doctor&q=%5B%7B%22word%22%3A%22"
                         + doctor + "%22%2C%22autocompleted%22%3Atrue%2C%22category%22%3A%22subspeciality%22%7D%5D&city=" + city;
 
-
-            }
-
-            if(link != null) {
+            }else{
                 link = "https://www.practo.com/";
             }
-
-                w.loadUrl(link);
-                w.getSettings().setJavaScriptEnabled(true);
-                w.setWebViewClient(new WebViewClient());
+            w.loadUrl(link);
+            w.getSettings().setJavaScriptEnabled(true);
+            w.setWebViewClient(new WebViewClient());
 
         } catch (IOException e) {
             e.printStackTrace();

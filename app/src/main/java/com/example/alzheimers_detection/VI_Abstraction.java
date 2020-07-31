@@ -10,10 +10,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 public class VI_Abstraction extends AppCompatActivity {
     Speak sp;
     ArrayList<String[]> answer = new ArrayList<>();
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
 
     String[] questions;
     String[] option_for_1;
@@ -32,6 +42,7 @@ public class VI_Abstraction extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         sp = new Speak(this.getApplicationContext());
 
@@ -91,6 +102,11 @@ public class VI_Abstraction extends AppCompatActivity {
                 question_number++;
                 if(question_number >=2) {
                     // next activity and total score!
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("abstraction").setValue(score);
+
                     startActivity(new Intent(getApplicationContext(),VI_Delayed_Recall_intro.class));
                 }
                 if(question_number <que_no.length)

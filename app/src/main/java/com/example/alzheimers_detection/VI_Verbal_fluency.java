@@ -20,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class VI_Verbal_fluency extends AppCompatActivity implements RecognitionListener {
@@ -37,6 +42,14 @@ public class VI_Verbal_fluency extends AppCompatActivity implements RecognitionL
     private Speak tts;
     int correctWords;
 
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +58,7 @@ public class VI_Verbal_fluency extends AppCompatActivity implements RecognitionL
         getSupportActionBar().hide();
 
         askPermission();
+        mAuth = FirebaseAuth.getInstance();
 
         clk = findViewById(R.id.clock);
         allWords = new ArrayList<>();
@@ -309,6 +323,11 @@ public class VI_Verbal_fluency extends AppCompatActivity implements RecognitionL
                     }
 
                     public void onFinish() {
+
+                        fuser = mAuth.getCurrentUser();
+                        uid=fuser.getUid();
+                        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                        dbUsers.child("fluency").setValue(correctWords);
 
                         Intent myIntent=new Intent(getApplicationContext(),VI_Abstraction_intro.class);
                         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

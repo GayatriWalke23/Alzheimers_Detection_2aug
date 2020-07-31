@@ -42,7 +42,7 @@ import java.util.Calendar;
 public class Orientation extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 
-    private static final String TAG = "VI_Start";
+    private static final String TAG = "MainActivity";
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private int year, month, day;
     int score;
@@ -71,6 +71,9 @@ public class Orientation extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
+                description = "\nYou are "+username+", the Chief Editor of “The Alzheimer’s Times “! An incomplete Newspaper format" +
+                        " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
+                        " format.";
 
             }
 
@@ -79,9 +82,6 @@ public class Orientation extends AppCompatActivity {
                 Log.e("UserListActivity", "Error occured");
             }
         });
-        description = "\nYou are "+username+", the Chief Editor of “The Alzheimer’s Times “! An incomplete Newspaper format" +
-                " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
-                " format.";
 
         stage_name="Orientation";
 
@@ -96,6 +96,8 @@ public class Orientation extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
+        if(Play==null||Play.contains("no"))
+        {
             new CountDownTimer(1000,1000){
 
                 @Override
@@ -109,6 +111,7 @@ public class Orientation extends AppCompatActivity {
                 }
             }.start();
 
+        }
 
 
         //date textview listener
@@ -171,7 +174,7 @@ public class Orientation extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         dayTv.setText(popupSpinner.getSelectedItem().toString());
-                       progress ++;
+                        progress ++;
                         Toast.makeText(Orientation.this,Integer.toString(progress),Toast.LENGTH_LONG).show();
                         popupWindow.dismiss();
                         next_activity();

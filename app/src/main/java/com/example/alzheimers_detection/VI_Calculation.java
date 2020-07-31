@@ -12,6 +12,11 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class VI_Calculation extends AppCompatActivity {
@@ -25,6 +30,11 @@ public class VI_Calculation extends AppCompatActivity {
     String[] correct_answer ={"left","right","down"};
     String[] Score_points={"zero","one","two","three"};
 
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
     int score;
     String Score;
     int question_number;
@@ -37,6 +47,8 @@ public class VI_Calculation extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
+
         res = getResources();
         questions =res.getStringArray(R.array.Calculation_que);
         option_for_1=res.getStringArray(R.array.Calculation_Option1);
@@ -132,6 +144,12 @@ public class VI_Calculation extends AppCompatActivity {
     }
 
     private void change_activity() {
+
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("calculation").setValue(score);
+
         Intent myIntent=new Intent(getApplicationContext(),VI_Sentence_Repetition_intro.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

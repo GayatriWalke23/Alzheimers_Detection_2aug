@@ -29,10 +29,18 @@ public class Visuoperception extends AppCompatActivity {
     ImageView picture,eyesgif;
     String urlpicture,urleyesgif;
     float score=0,cnt=0;
+
+
+
+
+
+
+
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
     FirebaseUser fuser;
     String uid;
+
     OnSwipeTouchListener onSwipeTouchListener;
     String description;
     CheckBox readbox,bookbox,orbox,novelbox,pagesbox,wordsbox,notbox,nobox,treebox,manbox,dogbox,catbox;
@@ -209,6 +217,7 @@ public class Visuoperception extends AppCompatActivity {
                 uid=fuser.getUid();
                 dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
                 dbUsers.child("visuoperception").setValue(score);
+
                 Popup_aftergame panel = new Popup_aftergame();
                 panel.showPopUp(Visuoperception.this, stage_name);
                 /*Intent i = new Intent(getApplicationContext(), Fluency_Intro.class);

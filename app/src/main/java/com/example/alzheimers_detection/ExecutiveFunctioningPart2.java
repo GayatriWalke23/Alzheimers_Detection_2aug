@@ -39,6 +39,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
     FirebaseUser fuser;
     OnSwipeTouchListener onSwipeTouchListener;
     String uid;
+    String description;
     int sequence[]=new int[8];
     int index=0;
     int score=1;
@@ -61,7 +62,9 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
-
+                 description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
+                        "collect them into sack such that a number is followed by its corresponding alphabet, in " +
+                        "increasing order, making an alternate trail.";
             }
 
             @Override
@@ -72,9 +75,7 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
 
         });
 
-        final String description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
-                "collect them into sack such that a number is followed by its corresponding alphabet, in " +
-                "increasing order, making an alternate trail.";
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();

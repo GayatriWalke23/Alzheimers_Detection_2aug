@@ -25,6 +25,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -44,6 +49,19 @@ public class VI_Sentence_Repetition extends AppCompatActivity implements TextToS
     private TextView st;
     int c;
 
+
+
+
+
+
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +71,7 @@ public class VI_Sentence_Repetition extends AppCompatActivity implements TextToS
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         //tts = new TextToSpeech(this, this);
         //tts.setSpeechRate(0.7f);
@@ -456,6 +475,12 @@ public class VI_Sentence_Repetition extends AppCompatActivity implements TextToS
     }
 
     private void nextActivity(){
+
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("sentenceRepetition").setValue(score);
+
         Intent myIntent=new Intent(getApplicationContext(),VI_Verbal_fluency_intro.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -77,9 +77,9 @@ import java.util.Calendar;
 import static android.util.Base64.DEFAULT;
 
 public class Results extends AppCompatActivity implements View.OnClickListener{
-    static String filename, behavioural_info;
-    float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
-    String progressTableAspects,family_behavioural_info;
+    static String filename;
+    float executivefunctioningScore,memoryScore,sentenceRepetitionScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
+    String progressTableAspects,behavioural_info,family_behavioural_info;
     int seconds=1,behaviouralResultOrNot=0;// if 1 , user has played behavioural questions .
     String uid;
     Double totscore;
@@ -89,8 +89,10 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
     int numOfPrevScores;
     public FirebaseAuth mAuth;
     int prevScoreArray[]=new int[5];
+    String prevDateArray[]=new String[5];
     ArrayList<Element> previousScoresList;
 
+    int VI;
     LinearLayout graph;
 
     @Override
@@ -114,57 +116,111 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
         userDBRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.child(uid).getValue(User.class);
-                abstractionScore=user.getAbstraction();
-                behaviouralResultOrNot=user.getBehaviouralResultOrNot();
-                attentionScore=user.getAttention();
-                namingScore=user.getNaming();
-                calculationScore=user.getCalculation();
-                orientationScore=user.getOrientation();
-                immediaterecallScore=user.getImmediateRecall();
-                delayedrecallScore=user.getDelayedRecall();
-                visuoperceptionScore=user.getVisuoperception();
-                fluencyScore=user.getFluency();
-                totalscore=findViewById(R.id.totalscore);
-                executivefunctioningScore=user.getExecutiveFunctioning();
-                totalBehaviouralScore=user.getTotalBehaviouralScore();
-                totalFamilyHistoryScore=user.getTotalFamilyHistoryScore();
-                family_behavioural_info=user.getFamily_behavioural_info();
-                behavioural_info=user.getBehavioural_info();
-                progressTableAspects=user.getProgressTableAspects();
-
-
-
                 TextView statement = findViewById(R.id.result_statement);
+                totalscore=findViewById(R.id.totalscore);
 
-
-                if(behaviouralResultOrNot==0)//If user has played optional behavioural stage
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                VI=user.getVI();
+                if (VI==0)
                 {
-                    totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
-                    totscore = ((0.97) * totscore) + (0.03 * totalFamilyHistoryScore);
-                    totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"/30"+"\n(Stages+Family)");
+                    abstractionScore=user.getAbstraction();
+                    behaviouralResultOrNot=user.getBehaviouralResultOrNot();
+                    attentionScore=user.getAttention();
+                    namingScore=user.getNaming();
+                    calculationScore=user.getCalculation();
+                    orientationScore=user.getOrientation();
+                    immediaterecallScore=user.getImmediateRecall();
+                    delayedrecallScore=user.getDelayedRecall();
+                    visuoperceptionScore=user.getVisuoperception();
+                    fluencyScore=user.getFluency();
+                    executivefunctioningScore=user.getExecutiveFunctioning();
+                    totalBehaviouralScore=user.getTotalBehaviouralScore();
+                    totalFamilyHistoryScore=user.getTotalFamilyHistoryScore();
+                    family_behavioural_info=user.getFamily_behavioural_info();
+                    behavioural_info=user.getBehavioural_info();
+                    progressTableAspects=user.getProgressTableAspects();
 
 
-                    if(totscore > 20){      //value 20 is not verified
-                        statement.setText(getResources().getString(R.string.result2));
-                    } else {
-                        statement.setText(getResources().getString(R.string.result1));
+                    if(behaviouralResultOrNot==0)//If user has played optional behavioural stage
+                    {
+                        totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
+                        totscore = ((0.97) * totscore) + (0.03 * totalFamilyHistoryScore);
+                        totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"/30"+"\n(Stages+Family)");
 
+
+                        if(totscore > 20){      //value 20 is not verified
+                            statement.setText(getResources().getString(R.string.result2));
+                        } else {
+                            statement.setText(getResources().getString(R.string.result1));
+
+                        }
+
+                    }
+                    else {//User hasnt played behavioural stage
+                        totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
+                        totscore = ((0.95) * totscore) + (0.03 * totalFamilyHistoryScore) + (0.02 * totalBehaviouralScore);
+                        totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"\n(Stages+Family+Behavioural)");
+
+                        if(totscore > 25){//value 20 is not verified-simran changed it to greater than 25
+                            statement.setText(getResources().getString(R.string.result2));
+                        } else {
+                            statement.setText(getResources().getString(R.string.result1));
+
+                        }
                     }
 
                 }
-                else {//User hasnt played behavioural stage
-                    totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
-                    totscore = ((0.95) * totscore) + (0.03 * totalFamilyHistoryScore) + (0.02 * totalBehaviouralScore);
-                    totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"\n(Stages+Family+Behavioural)");
+                else
+                {
+                    abstractionScore=user.getAbstraction();
+                    behaviouralResultOrNot=user.getBehaviouralResultOrNot();
+                    attentionScore=user.getAttention();
+                    calculationScore=user.getCalculation();
+                    orientationScore=user.getOrientation();
+                    delayedrecallScore=user.getDelayedRecall();
+                    fluencyScore=user.getFluency();
+                    totalBehaviouralScore=user.getTotalBehaviouralScore();
+                    totalFamilyHistoryScore=user.getTotalFamilyHistoryScore();
+                    family_behavioural_info=user.getFamily_behavioural_info();
+                    behavioural_info=user.getBehavioural_info();
+                    progressTableAspects=user.getProgressTableAspects();
+                    sentenceRepetitionScore=user.getSentenceRepetition();
+                    memoryScore=user.getMemory();
 
-                    if(totscore > 20){//value 20 is not verified
-                        statement.setText(getResources().getString(R.string.result2));
-                    } else {
-                        statement.setText(getResources().getString(R.string.result1));
+                    if(behaviouralResultOrNot==0)//If user has played optional behavioural stage
+                    {
+                        totscore = (double) (abstractionScore + attentionScore + calculationScore + memoryScore + sentenceRepetitionScore + delayedrecallScore + orientationScore + fluencyScore );
+                        totscore = ((0.97) * totscore) + (0.03 * totalFamilyHistoryScore);
+                        totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"/30"+"\n(Stages+Family)");
+
+
+                        if(totscore > 20){      //value 20 is not verified
+                            statement.setText(getResources().getString(R.string.result2));
+                        } else {
+                            statement.setText(getResources().getString(R.string.result1));
+
+                        }
 
                     }
+                    else {//User hasnt played behavioural stage
+                        totscore = (double) (abstractionScore + attentionScore + calculationScore + memoryScore + sentenceRepetitionScore + delayedrecallScore + orientationScore + fluencyScore );
+                        totscore = ((0.95) * totscore) + (0.03 * totalFamilyHistoryScore) + (0.02 * totalBehaviouralScore);
+                        totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"\n(Stages+Family+Behavioural)");
+
+                        if(totscore > 25){//value 20 is not verified-simran changed it to greater than 25
+                            statement.setText(getResources().getString(R.string.result2));
+                        } else {
+                            statement.setText(getResources().getString(R.string.result1));
+
+                        }
+                    }
                 }
+
+
+
+
+
+
 
 
                 numOfPrevScores =user.getNumOfScores();
@@ -178,10 +234,8 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
 
                 int index = (numOfPrevScores % 5) - 1;
 
-                String tag = "Score" + (index + 1);
+                String tag = "score" + (index + 1);
                 userDBRef.child(uid).child(tag).setValue(((float)Math.round(totscore * 100) / 100));
-                Calendar cal = Calendar.getInstance();
-                String dateToday = cal.get(Calendar.DATE) +"/"+ (cal.get(Calendar.MONTH) + 1) +"/"+ cal.get(Calendar.YEAR);
 
                 prevScoreArray[0]=user.getScore1();
                 prevScoreArray[1]=user.getScore2();
@@ -189,10 +243,21 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 prevScoreArray[3]=user.getScore4();
                 prevScoreArray[4]=user.getScore5();
 
+                Calendar cal = Calendar.getInstance();
+                String dateToday = cal.get(Calendar.DATE) +"/"+ (cal.get(Calendar.MONTH) + 1) +"/"+ cal.get(Calendar.YEAR);
+                String tagDate = "date" + (index + 1);
+                userDBRef.child(uid).child(tagDate).setValue(dateToday);
+
+                prevDateArray[0]=user.getDate1();
+                prevDateArray[1]=user.getDate2();
+                prevDateArray[2]=user.getDate3();
+                prevDateArray[3]=user.getDate4();
+                prevDateArray[4]=user.getDate5();
+
 
                 for( int i=0; i < 5; i++){
                     if(prevScoreArray[i] != -1){
-                        previousScoresList.add(new Element(prevScoreArray[i],dateToday));
+                        previousScoresList.add(new Element(prevScoreArray[i],prevDateArray[i]));
                     } else{
                         break;
                     }
@@ -233,16 +298,27 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 }
                 else
                 {
+                    if (VI==0) {
+                        progressTableAspects = progressTableAspects + ("\nTrial " + (int) numOfPrevScores + "     " + (int) executivefunctioningScore + " " + (int) namingScore + " " + (int) abstractionScore + " " + (int) calculationScore + " " + (int) orientationScore + " " + (int) immediaterecallScore + " " + (int) attentionScore + " " + (int) visuoperceptionScore + " " + (int) fluencyScore + " " + (int) delayedrecallScore + " " + ((float) Math.round(totscore * 100) / 100));
+                        userDBRef.child(uid).child("progressTableAspects").setValue(progressTableAspects);
 
-                    progressTableAspects=progressTableAspects+("\nTrial "+(int)numOfPrevScores +"     "+(int)executivefunctioningScore+" "+(int)namingScore+" "+(int)abstractionScore+" "+(int)calculationScore+" "+(int)orientationScore+" "+(int)immediaterecallScore+" "+(int)attentionScore+" "+(int)visuoperceptionScore+" "+(int)fluencyScore+" "+(int)delayedrecallScore+" "+((float)Math.round(totscore * 100) / 100));
-                    userDBRef.child(uid).child("progressTableAspects").setValue(progressTableAspects);
-
-                    if (behaviouralResultOrNot==1)
-                    {
-                        userDBRef.child(uid).child("textFile").setValue(family_behavioural_info+behavioural_info+progressTableAspects);
+                        if (behaviouralResultOrNot == 1) {
+                            userDBRef.child(uid).child("textFile").setValue(family_behavioural_info + behavioural_info + progressTableAspects);
+                        } else {
+                            userDBRef.child(uid).child("textFile").setValue(family_behavioural_info + progressTableAspects);
+                        }
                     }
-                    else {
-                        userDBRef.child(uid).child("textFile").setValue(family_behavioural_info+progressTableAspects);
+
+                    else
+                    {
+                        progressTableAspects = progressTableAspects + ("\nTrial " + (int) numOfPrevScores + "     " + (int) memoryScore + " " + (int) attentionScore + " " + (int) calculationScore + " " + (int) sentenceRepetitionScore + " " + (int) fluencyScore + " " + (int) abstractionScore + " " + (int) delayedrecallScore + " " + (int) orientationScore +" " + ((float) Math.round(totscore * 100) / 100));
+                        userDBRef.child(uid).child("progressTableAspects").setValue(progressTableAspects);
+
+                        if (behaviouralResultOrNot == 1) {
+                            userDBRef.child(uid).child("textFile").setValue(family_behavioural_info + behavioural_info + progressTableAspects);
+                        } else {
+                            userDBRef.child(uid).child("textFile").setValue(family_behavioural_info + progressTableAspects);
+                        }
                     }
 
                 }

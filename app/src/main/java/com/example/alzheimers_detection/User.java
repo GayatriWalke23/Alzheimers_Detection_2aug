@@ -22,6 +22,10 @@ public class User {
     float immediateRecall=0;
     float attention=0;
     float visuoperception=0;
+    float memory;
+    float sentenceRepetition;
+
+
     float fluency=0;
     float delayedRecall=0;
     float carryingOutMyDailyActivities=-1;
@@ -37,15 +41,33 @@ public class User {
     int countProgressHistory;
     int behaviouralResultOrNot=0;
     int headinjury;
+    int VI;
     int cardiovasculardisease;
     int downsyndrome;
     int levelofeducation;
     int smoking;
     int drinking;
     int numOfScores=0,score1=-1,score2=-1,score3=-1,score4=-1,score5=-1;
+    String date1="";
+
+
+
+    String date2="";
+    String date3="";
+    String date4="";
+    String date5="";
     String textFile;
     String family_behavioural_info;
     String behavioural_info;
+
+
+
+    String progressTableAspectsVI="\n\n.\nStageno 1: Memory\nStageno 2: Attention\nStageno 3: Calculation\nStageno 4: Sentence Repetition\nStageno 5: Verbal Fluency\nStageno 6: Abstraction\nStageno 7: Delayed Recall\nStageno 8: Orientation\n\n";
+
+    String progressTableAspects="\n\n.\nStageno 1: Executive Functioning\nStageno2:Naming\nStageno3:Abstraction\nStageno4:Calculation\nStageno5:Orientation\nStageno6:Immediate Recall\nStageno7:Attention\nStageno8:Visuoperception\nStageno9:Fluency\nStageno10:Delayed Recall\n\n";
+    float TotalScore;
+    String firstname,lastname,gender;
+
 
     public String getBehavioural_info() {
         return behavioural_info;
@@ -55,9 +77,6 @@ public class User {
         this.behavioural_info = behavioural_info;
     }
 
-    String progressTableAspects="\n\n.\nStageno1:Executive Functioning\nStageno2:Naming\nStageno3:Abstraction\nStageno4:Calculation\nStageno5:Orientation\nStageno6:Immediate Recall\nStageno7:Attention\nStageno8:Visuoperception\nStageno9:Fluency\nStageno10:Delayed Recall\n\nTrialNo. 1 2 3 4 5 6 7 8 9 10 Total\n";
-    float TotalScore;
-    String firstname,lastname,gender;
 
     public String getProgressTableAspects() {
         return progressTableAspects;
@@ -75,6 +94,29 @@ public class User {
         this.family_behavioural_info = family_behavioural_info;
     }
 
+    public float getSentenceRepetition() {
+        return sentenceRepetition;
+    }
+
+    public void setSentenceRepetition(float sentenceRepetition) {
+        this.sentenceRepetition = sentenceRepetition;
+    }
+
+    public int getVI() {
+        return VI;
+    }
+
+    public void setVI(int VI) {
+        this.VI = VI;
+    }
+
+    public float getMemory() {
+        return memory;
+    }
+
+    public void setMemory(float memory) {
+        this.memory = memory;
+    }
 
     public float getTotalScore() {
         return TotalScore;
@@ -111,7 +153,13 @@ public class User {
     public int getScore3() {
         return score3;
     }
+    public String getProgressTableAspectsVI() {
+        return progressTableAspectsVI;
+    }
 
+    public void setProgressTableAspectsVI(String progressTableAspectsVI) {
+        this.progressTableAspectsVI = progressTableAspectsVI;
+    }
     public void setScore3(int score3) {
         this.score3 = score3;
     }
@@ -214,6 +262,45 @@ public class User {
 
     public void setLevelofeducation(int levelofeducation) {
         this.levelofeducation = levelofeducation;
+    }
+    public String getDate3() {
+        return date3;
+    }
+
+    public void setDate3(String date3) {
+        this.date3 = date3;
+    }
+
+    public String getDate5() {
+        return date5;
+    }
+
+    public void setDate5(String date5) {
+        this.date5 = date5;
+    }
+
+    public String getDate4() {
+        return date4;
+    }
+
+    public void setDate4(String date4) {
+        this.date4 = date4;
+    }
+
+    public String getDate2() {
+        return date2;
+    }
+
+    public void setDate2(String date2) {
+        this.date2 = date2;
+    }
+
+    public String getDate1() {
+        return date1;
+    }
+
+    public void setDate1(String date1) {
+        this.date1 = date1;
     }
 
     public int getHeadinjury() {

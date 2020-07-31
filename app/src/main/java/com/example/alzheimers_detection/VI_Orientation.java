@@ -32,6 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -53,6 +58,19 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
     String[] answers;
     private TextView st;
     int c;
+    int score = 0;
+
+
+
+
+
+
+    public FirebaseAuth mAuth;
+    DatabaseReference dbUsers;
+    FirebaseUser fuser;
+    String uid;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,6 +80,7 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        mAuth = FirebaseAuth.getInstance();
 
         //tts = new TextToSpeech(this, this);
         //tts.setSpeechRate(0.7f);
@@ -290,7 +309,7 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
     @Override
     public void onBeginningOfSpeech() {
         Log.i(LOG_TAG, "onBeginningOfSpeech");
-        //Toast.makeText(VI_Start.this, "onBeginningOfSpeech", Toast
+        //Toast.makeText(MainActivity.this, "onBeginningOfSpeech", Toast
         //         .LENGTH_SHORT).show();
     }
 
@@ -436,20 +455,27 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
     }
 
     private void calculateScore(){
-        int score = 0;
 
         Calendar cal = Calendar.getInstance();
 
-        //someone please fill the below array. Thanks :)
-        String arr1[] = {"one","two","three"};
-        String arr2[] = {"first","second","three"};
-        String arr3[] = {"1st","2nd","3rd"};
+        String arr1[] = {"one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve",
+                "thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","twenty-one","twenty-two",
+                "twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine","thirty","thirty-one"};
+        String arr2[] = {"first","second","third","fourth","fifth","sixth","seventh","eighth","ninth","tenth","eleventh","twelfth",
+                "thirteenth","fourteenth","fifteenth","sixteenth","seventeenth","eighteenth","nineteenth","twentieth","twenty-first","twenty-second",
+                "twenty-third","twenty-fourth","twenty-fifth","twenty-sixth","twenty-seventh","twenty-eighth","twenty-ninth","thirtieth","thirty-first"};
+
+        String arr3[] = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","13th","14th","15th","16th","17th",
+                "18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th","28th","29th","30th","31st"};
+        String arr4[] = {"i","ii","iii","iv","v","vi","vii","viii","ix","x","xi","xii","xiii","xiv","xv","xvi","xvii","xviii",
+                "xix","xx","xxi","xxii","xxiii","xxiv","xxv","xxvi","xxvii","xxviii","xxix","xxx","xxxi"};
         //to check date
         int date = cal.get(Calendar.DATE);
         if(answers[0].equalsIgnoreCase(Integer.toString(date))
                 || answers[0].equalsIgnoreCase(arr1[date-1])
                 || answers[0].equalsIgnoreCase(arr2[date-1])
-                || answers[0].equalsIgnoreCase(arr3[date-1]));
+                || answers[0].equalsIgnoreCase(arr3[date-1])
+                || answers[0].equalsIgnoreCase(arr4[date-1]));
         score++;
 
         //to check month
@@ -483,8 +509,8 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
         LocationAPI location = new LocationAPI(VI_Orientation.this);
         String address = "";
         try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -497,8 +523,16 @@ public class VI_Orientation extends AppCompatActivity implements RecognitionList
             e.printStackTrace();
         }
         return address;
+
     }
+
     /*private void nextActivity(){
+
+     fuser = mAuth.getCurrentUser();
+    uid=fuser.getUid();
+    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+        dbUsers.child("orientation").setValue(score);
+
         Intent myIntent=new Intent(getApplicationContext(),VI_Verbal_fluency_intro.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

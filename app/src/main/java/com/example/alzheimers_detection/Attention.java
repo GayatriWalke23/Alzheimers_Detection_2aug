@@ -68,6 +68,8 @@ public class Attention extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
+                description = "\nYou are \n“"+username+" – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
+                        " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
 
             }
 
@@ -80,8 +82,6 @@ public class Attention extends AppCompatActivity {
         });
 
 
-        description = "\nYou are \n“"+username+" – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
-                " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
 
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
