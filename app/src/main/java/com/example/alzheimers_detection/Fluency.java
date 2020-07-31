@@ -86,7 +86,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
 
         if(Play==null||Play.contains("no"))
         {
-            new CountDownTimer(10,10){
+            new CountDownTimer(1000,1000){
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -95,7 +95,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Fluency.this,description,stage_name);
+                    p.showPopUp(Fluency.this,description);
                 }
             }.start();
 
@@ -292,7 +292,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
     public void onBeginningOfSpeech() {
         Log.i(LOG_TAG, "onBeginningOfSpeech");
         changeToGif();
-        //Toast.makeText(MainActivity.this, "onBeginningOfSpeech", Toast
+        //Toast.makeText(VI_Start.this, "onBeginningOfSpeech", Toast
         //         .LENGTH_SHORT).show();
     }
 
@@ -392,7 +392,7 @@ public class Fluency extends AppCompatActivity implements RecognitionListener {
         switch (requestCode) {
             case REQUEST_RECORD_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Toast.makeText(MainActivity.this, "Permission Granted!", Toast
+                    //Toast.makeText(VI_Start.this, "Permission Granted!", Toast
                     //   .LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Fluency.this, "Permission Denied!", Toast

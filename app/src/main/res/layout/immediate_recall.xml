@@ -81,7 +81,6 @@
         android:layout_height="36dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="690dp"
-        android:background="@mipmap/ic_launcher"
         android:textAllCaps="false" />
 
 </RelativeLayout>

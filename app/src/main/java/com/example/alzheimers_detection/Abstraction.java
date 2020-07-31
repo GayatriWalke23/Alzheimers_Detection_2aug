@@ -125,9 +125,7 @@ public class Abstraction extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        if(Play==null||Play.contains("no"))
-        {
-            new CountDownTimer(10,10){
+            new CountDownTimer(1000,1000){
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -136,11 +134,10 @@ public class Abstraction extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Abstraction.this,description,stage_name);
+                    p.showPopUp(Abstraction.this,description);
                 }
             }.start();
 
-        }
 
         grapes.setOnTouchListener(onTouchListener());
         guitar.setOnTouchListener(onTouchListener());
@@ -163,7 +160,7 @@ public class Abstraction extends AppCompatActivity {
                 final int y=(int)event.getRawY();
 //                Log.d(" "+v.getId(),"here at "+x+"  "+y);
 
-                if(x>=618 && x<=835 && y<=2586 && y>=2230)
+                if(x>=400 && x<=760 && y>=1710 && y<=2200)
                 {
                     ((ViewGroup) v.getParent()).removeView(v);
                     countofdroppeditems++;
@@ -225,7 +222,7 @@ public class Abstraction extends AppCompatActivity {
                         }
                     });
                 }
-                if(x>=58 && x<=442 && y>=2240 && y<=2578)
+                if(x>=50 && x<=384 && y>=1710 && y<=2200)
                 {
                     ((ViewGroup) v.getParent()).removeView(v);
                     if(v==ball || v==tennis || v==soccerball)
@@ -285,7 +282,7 @@ public class Abstraction extends AppCompatActivity {
                         }
                     });
                 }
-                if(x>=1055 && x<=1300 && y>=2250 && y<=2544)
+                if(x>=771 && x<=1020 && y>=1710 && y<=2200)
                 {
                     ((ViewGroup) v.getParent()).removeView(v);
 

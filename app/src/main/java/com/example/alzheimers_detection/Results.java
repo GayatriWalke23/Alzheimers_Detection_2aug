@@ -78,17 +78,19 @@ import static android.util.Base64.DEFAULT;
 
 public class Results extends AppCompatActivity implements View.OnClickListener{
     static String filename, behavioural_info;
-        float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
+    float executivefunctioningScore,namingScore,abstractionScore,calculationScore,orientationScore,immediaterecallScore,attentionScore,visuoperceptionScore,fluencyScore,delayedrecallScore;
     String progressTableAspects,family_behavioural_info;
     int seconds=1,behaviouralResultOrNot=0;// if 1 , user has played behavioural questions .
-        String uid;
-        Double totscore,totstages;
-        float totalFamilyHistoryScore,totalBehaviouralScore;
+    String uid;
+    Double totscore;
+    float totalFamilyHistoryScore,totalBehaviouralScore;
     TextView totalscore;
-        Bitmap bitmap;
+    Bitmap bitmap;
+    int numOfPrevScores;
     public FirebaseAuth mAuth;
     int prevScoreArray[]=new int[5];
     ArrayList<Element> previousScoresList;
+
     LinearLayout graph;
 
     @Override
@@ -108,7 +110,6 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
 
         fuser = mAuth.getCurrentUser();
         uid=fuser.getUid();
-        final int[] numOfPrevScores = new int[1];
 
         userDBRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -133,6 +134,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 progressTableAspects=user.getProgressTableAspects();
 
 
+
                 TextView statement = findViewById(R.id.result_statement);
 
 
@@ -141,6 +143,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                     totscore = (double) (abstractionScore + attentionScore + calculationScore + namingScore + visuoperceptionScore + delayedrecallScore + orientationScore + fluencyScore + executivefunctioningScore);
                     totscore = ((0.97) * totscore) + (0.03 * totalFamilyHistoryScore);
                     totalscore.setText("Total Score :"+ ((float)Math.round(totscore * 100) / 100)+"/30"+"\n(Stages+Family)");
+
 
                     if(totscore > 20){      //value 20 is not verified
                         statement.setText(getResources().getString(R.string.result2));
@@ -164,7 +167,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 }
 
 
-                numOfPrevScores[0] =user.getNumOfScores();
+                numOfPrevScores =user.getNumOfScores();
 
                /* if(numOfPrevScores==1) userDBRef.child(uid).child("Score1").setValue(((float)Math.round(totscore * 100) / 100));
                 else if(numOfPrevScores==2) userDBRef.child(uid).child("Score2").setValue(((float)Math.round(totscore * 100) / 100));
@@ -173,7 +176,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 else userDBRef.child(uid).child("Score5").setValue(((float)Math.round(totscore * 100) / 100));*/
 
 
-                int index = (numOfPrevScores[0] % 5) - 1;
+                int index = (numOfPrevScores % 5) - 1;
 
                 String tag = "Score" + (index + 1);
                 userDBRef.child(uid).child(tag).setValue(((float)Math.round(totscore * 100) / 100));
@@ -196,7 +199,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 }
 
                 //below code is for testing purpose only since no data is generated yet
-               if(previousScoresList.isEmpty()){
+                if(previousScoresList.isEmpty()){
                     previousScoresList.add(new Element(50,"1. 10/1/2020"));
                     previousScoresList.add(new Element(100,"2. 11/2/2020"));
                     previousScoresList.add(new Element(100,"3. 27/5/2020"));
@@ -217,8 +220,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
 
         });
 
-        //Handler: After 1 second make drawable bitmap of the graphbar
-        seconds=1;
+        seconds=3;
         final Handler handler=new Handler();
         handler.post(new Runnable() {
             @Override
@@ -232,7 +234,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 else
                 {
 
-                    progressTableAspects=progressTableAspects+("\nTrial "+(int) numOfPrevScores[0] +"     "+(int)executivefunctioningScore+" "+(int)namingScore+" "+(int)abstractionScore+" "+(int)calculationScore+" "+(int)orientationScore+" "+(int)immediaterecallScore+" "+(int)attentionScore+" "+(int)visuoperceptionScore+" "+(int)fluencyScore+" "+(int)delayedrecallScore+" "+((float)Math.round(totscore * 100) / 100));
+                    progressTableAspects=progressTableAspects+("\nTrial "+(int)numOfPrevScores +"     "+(int)executivefunctioningScore+" "+(int)namingScore+" "+(int)abstractionScore+" "+(int)calculationScore+" "+(int)orientationScore+" "+(int)immediaterecallScore+" "+(int)attentionScore+" "+(int)visuoperceptionScore+" "+(int)fluencyScore+" "+(int)delayedrecallScore+" "+((float)Math.round(totscore * 100) / 100));
                     userDBRef.child(uid).child("progressTableAspects").setValue(progressTableAspects);
 
                     if (behaviouralResultOrNot==1)
@@ -251,7 +253,7 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
         findViewById(R.id.previousResults).setOnClickListener(this);
 
         //line graph button
-         findViewById(R.id.buttonGraph).setOnClickListener(this);
+        findViewById(R.id.buttonGraph).setOnClickListener(this);
 
         //previous scores
         findViewById(R.id.buttonQrc).setOnClickListener(this);
@@ -279,118 +281,118 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-            int id = v.getId();
-            switch (id){
-                case R.id.previousResults :
-                    LayoutInflater layoutInflater =
-                            (LayoutInflater) getBaseContext()
-                                    .getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View popupView = layoutInflater.inflate(R.layout.scoring_popup, null);
-                    final PopupWindow popupWindow = new PopupWindow(
-                            popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    popupWindow.setOutsideTouchable(true);
+        int id = v.getId();
+        switch (id){
+            case R.id.previousResults :
+                LayoutInflater layoutInflater =
+                        (LayoutInflater) getBaseContext()
+                                .getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = layoutInflater.inflate(R.layout.scoring_popup, null);
+                final PopupWindow popupWindow = new PopupWindow(
+                        popupView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                popupWindow.setOutsideTouchable(true);
 
 
-                    final ScrollView layout = findViewById(R.id.scorescreen);
+                final ScrollView layout = findViewById(R.id.scorescreen);
 
-                    //to set height and width of a popup
-                    int height = layout.getHeight();
-                    popupWindow.setHeight(height / 2);
+                //to set height and width of a popup
+                int height = layout.getHeight();
+                popupWindow.setHeight(height / 2);
                     /*int width = layout.getWidth();
                     popupWindow.setWidth(2*width/3);*/
 
 
-                    Button cancel = (Button) popupView.findViewById(R.id.button_back);
+                Button cancel = (Button) popupView.findViewById(R.id.button_back);
 
-                    // Lookup the recyclerview in activity layout
-                    RecyclerView rvContacts = popupView.findViewById(R.id.rvContacts);
+                // Lookup the recyclerview in activity layout
+                RecyclerView rvContacts = popupView.findViewById(R.id.rvContacts);
 
-                    // Initialize contacts
-                    //ArrayList<Element> scoreList = Element.createScoreList(numOfPrevScores);
-                    // Create adapter passing in the sample user data
-                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(previousScoresList);
-                    // Attach the adapter to the recyclerview to populate items
-                    rvContacts.setAdapter(adapter);
-                    // Set layout manager to position the items
-                    rvContacts.setLayoutManager(new LinearLayoutManager(Results.this));
-                    // That's all!
+                // Initialize contacts
+                //ArrayList<Element> scoreList = Element.createScoreList(numOfPrevScores);
+                // Create adapter passing in the sample user data
+                RecyclerViewAdapter adapter = new RecyclerViewAdapter(previousScoresList);
+                // Attach the adapter to the recyclerview to populate items
+                rvContacts.setAdapter(adapter);
+                // Set layout manager to position the items
+                rvContacts.setLayoutManager(new LinearLayoutManager(Results.this));
+                // That's all!
 
-                    cancel.setOnClickListener(new Button.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popupWindow.dismiss();
-                        }
-                    });
+                cancel.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
 
-                    popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-                    break;
-
-
-                case R.id.buttonGraph:
-                    LayoutInflater layoutInflater2 =
-                            (LayoutInflater) getBaseContext()
-                                    .getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View popupView2 = layoutInflater2.inflate(R.layout.linegraph_popup, null);
-                    final PopupWindow popupWindow2 = new PopupWindow(
-                            popupView2, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                    popupWindow2.setOutsideTouchable(true);
+                popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                break;
 
 
-                    final ScrollView layout2 = findViewById(R.id.scorescreen);
-
-                    //to set height and width of a popup
-                    int height2 = layout2.getHeight();
-                    popupWindow2.setHeight(height2 / 2);
-                    int width2 = layout2.getWidth();
-                    popupWindow2.setWidth(4*width2/5);
-                    setLineGraph(popupView2);
-
-                    Button back = (Button) popupView2.findViewById(R.id.button_back);
+            case R.id.buttonGraph:
+                LayoutInflater layoutInflater2 =
+                        (LayoutInflater) getBaseContext()
+                                .getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView2 = layoutInflater2.inflate(R.layout.linegraph_popup, null);
+                final PopupWindow popupWindow2 = new PopupWindow(
+                        popupView2, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                popupWindow2.setOutsideTouchable(true);
 
 
-                    back.setOnClickListener(new Button.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            popupWindow2.dismiss();
+                final ScrollView layout2 = findViewById(R.id.scorescreen);
 
-                        }
-                    });
+                //to set height and width of a popup
+                int height2 = layout2.getHeight();
+                popupWindow2.setHeight(height2 / 2);
+                int width2 = layout2.getWidth();
+                popupWindow2.setWidth(4*width2/5);
+                setLineGraph(popupView2);
 
-                    popupWindow2.showAtLocation(popupView2, Gravity.CENTER, 0, 0);
-                    break;
+                Button back = (Button) popupView2.findViewById(R.id.button_back);
 
 
-                case R.id.buttonQrc: Intent i=new Intent(getApplicationContext(),QRC.class);
-                    startActivity(i);
-                    break;
+                back.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow2.dismiss();
 
-                case R.id.buttonHome: Intent i2=new Intent(getApplicationContext(),HomeScreen.class);
-                    startActivity(i2);
-                    break;
+                    }
+                });
 
-            }
+                popupWindow2.showAtLocation(popupView2, Gravity.CENTER, 0, 0);
+                break;
+
+
+            case R.id.buttonQrc: Intent i=new Intent(getApplicationContext(),QRC.class);
+                startActivity(i);
+                break;
+
+            case R.id.buttonHome: Intent i2=new Intent(getApplicationContext(),HomeScreen.class);
+                startActivity(i2);
+                break;
+
+        }
     }
     void setScoringBoard(){
 
-            setBar(findViewById(R.id.set1), (int)executivefunctioningScore*100, R.color.fill_5, R.color.empty_5, "Executive Functioning");
+        setBar(findViewById(R.id.set1), (int)executivefunctioningScore*100, R.color.fill_5, R.color.empty_5, "Executive Functioning");
 
-            setBar(findViewById(R.id.set2), (int)((namingScore/4)*100), R.color.fill_4, R.color.empty_4, "Naming");
+        setBar(findViewById(R.id.set2), (int)((namingScore/4)*100), R.color.fill_4, R.color.empty_4, "Naming");
 
-            setBar(findViewById(R.id.set3), (int)((abstractionScore/3)*100), R.color.fill_3, R.color.empty_3, "Abstraction");
+        setBar(findViewById(R.id.set3), (int)((abstractionScore/3)*100), R.color.fill_3, R.color.empty_3, "Abstraction");
 
-            setBar(findViewById(R.id.set4), (int)((calculationScore/3)*100), R.color.fill_2, R.color.empty_2, "Calculation");
+        setBar(findViewById(R.id.set4), (int)((calculationScore/3)*100), R.color.fill_2, R.color.empty_2, "Calculation");
 
-            setBar(findViewById(R.id.set5),(int)((orientationScore/6)*100), R.color.fill_1, R.color.empty_1,"Orientation");
+        setBar(findViewById(R.id.set5),(int)((orientationScore/6)*100), R.color.fill_1, R.color.empty_1,"Orientation");
 
-            setBar(findViewById(R.id.set6), (int)immediaterecallScore, R.color.fill_5, R.color.empty_5,"Immediate Recall");
+        setBar(findViewById(R.id.set6), (int)immediaterecallScore, R.color.fill_5, R.color.empty_5,"Immediate Recall");
 
-            setBar(findViewById(R.id.set7), (int)((attentionScore/3)*100), R.color.fill_4, R.color.empty_4, "Attention");
+        setBar(findViewById(R.id.set7), (int)((attentionScore/3)*100), R.color.fill_4, R.color.empty_4, "Attention");
 
-            setBar(findViewById(R.id.set8), (int)((visuoperceptionScore/6)*100), R.color.fill_3, R.color.empty_3,"Visuoperception");
+        setBar(findViewById(R.id.set8), (int)((visuoperceptionScore/6)*100), R.color.fill_3, R.color.empty_3,"Visuoperception");
 
-            setBar(findViewById(R.id.set9), (int)((fluencyScore/2)*100), R.color.fill_2, R.color.empty_2,"Fluency");
+        setBar(findViewById(R.id.set9), (int)((fluencyScore/2)*100), R.color.fill_2, R.color.empty_2,"Fluency");
 
-            setBar(findViewById(R.id.set10),(int)((delayedrecallScore/5)*100), R.color.fill_1, R.color.empty_1, "Delayed Recall");
+        setBar(findViewById(R.id.set10),(int)((delayedrecallScore/5)*100), R.color.fill_1, R.color.empty_1, "Delayed Recall");
 
     }
 
@@ -475,14 +477,3 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-

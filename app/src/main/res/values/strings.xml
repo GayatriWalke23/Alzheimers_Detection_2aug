@@ -81,4 +81,164 @@
     <string name="result2">You might not have Alzheimer\'s Disease</string>
 
 
+
+    <!--lANGUAGE -->
+
+    <string name="selectlanguage">select language</string>
+    <string name="english">"English"</string>
+    <string name="hindi">"Hindi"</string>
+
+    <!--Introduction Screens how to play -->
+    <string name="VI_Memory_intro" > Hello . . . this is Stage 1 . . . Memory. . . Listen to the audio </string>
+    <string name="VI_Attention_intro">  Welcome to stage 2  Attention listen to the audio and record   in the exact same way. . .tap to proceed further </string>
+    <string name="VI_Calculation_intro">  Welcome to stage 3 . . . Calculation . . .follow the instructions . . . you listen to . . . and swipe accordingly . . . tap to proceed </string>
+    <string name="VI_Sentence_Repetition_intro"> You are now on stage 4. . . Sentence repetition . . . an audio will be played two times . . . recall and record . . . in same manner . . . tap to listen to the audio  </string>
+    <string name="VI_Verbal_fluency_intro">Hello again . . . you are now on stage 5 . . . Verbal fluency . . . let\'s have a fun activity . . . record as many words as possible . . . from given word . . . lets have 3 rounds for 3 different letters Tap to proceed </string>
+    <string name="VI_Abstraction_intro">  Welcome to stage 6 Abstraction Let\'s check for similarities between objects . . . record two objects belonging to same category   let us have a fun activity of to swipe screen . . . in all directions . . . swipe on the screen according to the instructions you listen to Tap to proceed</string>
+    <string name="VI_Delayed_Recall_intro">  hi . . . this is stage 7 . . .  Delayed recall . . . can you recall the words we told you to remember? . . .  recall and record as many as possible tap to proceed and record </string>
+    <string name="VI_Orientation_intro"> Welcome to stage 8  . . . orientation . ......... tap to start  </string>
+
+    <!--After stage-->
+    <string name="after_VI_Memory" > good job </string>
+    <string name="after_Attention">  good job </string>
+    <string name="after_Calculation"> good job </string>
+    <string name="after_Sentence_Repetition"> good job </string>
+    <string name="after_Verbal_fluency">good job</string>
+    <string name="after_Abstraction"> good job  </string>
+    <string name="after_Delayed_Recall"> good job </string>
+    <string name="after_Orientation">good job  </string>
+
+
+    <!--General instructions for swipe screens-->
+    <string name="Swipeleft" >Swipe left to answer    </string>
+    <string name="Swiperight" >Swipe right to answer   </string>
+    <string name="Swipeup">swipe up to repeat   </string>
+    <string name="Swipedown">Swipe down to answer  </string>
+    <string name="Enter_response"> Enter Your response </string>
+    <string name="tap_procede">Tap to procede</string>
+
+    <!-- Verbal fluency  -->
+    <string name="Text1">Give as many words as you can think of from the letter "A". Press on the screen to speak</string>
+    <string name="Text2">Make sure you don\'t use proper nouns , numbers and different forms of a verb.</string>
+
+    <!--sentence repetition for blind-->
+
+    <string name="sentence1">The car turned the corner.</string>
+    <string name="sentence2">Open the jar carefully.</string>
+    <string name="sentence3">My parents and I went to a movie.</string>
+    <string name="sentence4">The paper and pencil sat idle on the desk.</string>
+    <string name="sentence5">She opened the door.</string>
+    <string name="sentence6">He was eating and talking.</string>
+    <string name="sentence7">He wanted to bring peace to his kingdom.</string>
+    <string name="sentence8">People were anxious and unhappy.</string>
+
+    <!--Delayed recall-->
+
+    <string-array name="DRQuetion">
+        <item>Who did the Caterpillar not ask for help ?</item>
+        <item>What are Crabs shoes used for?</item>
+        <item>Fill in the blank. The Frogs shoe is dash for the Caterpillar.</item>
+        <item>What has the Caterpillar lost ?</item>
+        <item>What does the caterpillar decide to do at the end ?</item>
+        <item>What was the sequence in which caterpillar met her friends?</item>
+    </string-array>
+    <string-array name="DR_Option1">
+        <item>squirrel</item>
+        <item>frog</item>
+        <item>spider</item>
+    </string-array>
+    <string-array name="DR_Option2">
+        <item>swimming</item>
+        <item>walking</item>
+        <item>digging</item>
+    </string-array>
+    <string-array name="DR_Option3">
+        <item>too small</item>
+        <item>too big</item>
+        <item>suitable</item>
+    </string-array>
+    <string-array name="DR_Option4">
+        <item>Shoe </item>
+        <item>Glasses </item>
+        <item> Hat</item>
+    </string-array>
+    <string-array name="DR_Option5">
+        <item>Lay eggs </item>
+        <item> Make a cozy cocoon</item>
+        <item> Look for more shoes</item>
+    </string-array>
+    <string-array name="DR_Option6">
+        <item> Frog -> Spider -> Crab</item>
+        <item> Spider -> Frog -> Crab</item>
+        <item>Crab -> Spider -> Frog </item>
+    </string-array>
+
+
+    <!--Immediate recall/Memory-->
+
+    <string-array name="IRQuetions">
+        <item>What was the sequence in which caterpillar met her friends?</item>
+        <item>What does the caterpillar decide to do at the end ?</item>
+    </string-array>
+    <string-array name="IR_Option1">
+        <item> Frog -> Spider -> Crab</item>
+        <item> Spider -> Frog -> Crab</item>
+        <item>Crab -> Spider -> Frog </item>
+    </string-array>
+    <string-array name="IR_Option2">
+        <item>Lay eggs </item>
+        <item> Make a cozy cocoon</item>
+        <item> Look for more shoes</item>
+    </string-array>
+
+    <!--Abstraction-->
+
+    <string-array name="Abstraction_que">
+        <item>How Train and bus Are alike?</item>
+        <item>How Dog and Cat Are alike?</item>
+    </string-array>
+    <string-array name="Abstraction_Option1">
+        <item>Both are means of transportation</item>
+        <item>Both can move</item>
+        <item>Both have four wheels</item>
+    </string-array>
+    <string-array name="Abstraction_Option2">
+        <item>Both are animals</item>
+        <item>Both are animals</item>
+        <item>Both have four legs</item>
+    </string-array>
+
+
+    <!--   Calculation   -->
+
+    <string-array name="Calculation_que">
+        <item>3/5 or 1/5 which is greater?</item>
+        <item>A burger of 250 calories with pizza of 500 calories or a plate of veggies of 250 calories. Which will add less calories?</item>
+        <item>1 bottle of 1000 ml cold drink or 3 bottles of 250 ml each. Which is a greater quantity?</item>
+    </string-array>
+    <string-array name="Calculation_Option1">
+        <item>3/5</item>
+        <item>1/5</item>
+    </string-array>
+    <string-array name="Calculation_Option2">
+        <item>pizza with burger</item>
+        <item>veggies</item>
+    </string-array>
+    <string-array name="Calculation_Option3">
+        <item>1 bottle of 1000 ml</item>
+        <item>3 bottles of 250 ml each</item>
+    </string-array>
+
+
+    <!--  Orientation -->
+    <string name="intro">Welcome to Alzheimer\'s Detection private limited. Let\'s start with your interview </string>
+    <string name="Q1">Which day of the Month is Today ?</string>
+    <string name="Q2">What month is it , right now ?</string>
+    <string name="Q3">In which year are we ?</string>
+    <string name="Q4">Which day of the week is Today ?</string>
+    <string name="Q5">What country are you from ?</string>
+    <string name="Q6">Which city are you in right now ?</string>
+
+
+
 </resources>

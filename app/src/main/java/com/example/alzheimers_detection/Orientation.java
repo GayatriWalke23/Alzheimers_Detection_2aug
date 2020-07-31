@@ -42,7 +42,7 @@ import java.util.Calendar;
 public class Orientation extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "VI_Start";
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private int year, month, day;
     int score;
@@ -96,8 +96,6 @@ public class Orientation extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        if(Play==null||Play.contains("no"))
-        {
             new CountDownTimer(1000,1000){
 
                 @Override
@@ -107,11 +105,10 @@ public class Orientation extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Orientation.this,description,stage_name);
+                    p.showPopUp(Orientation.this,description);
                 }
             }.start();
 
-        }
 
 
         //date textview listener

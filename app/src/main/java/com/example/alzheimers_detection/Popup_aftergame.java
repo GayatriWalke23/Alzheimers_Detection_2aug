@@ -31,6 +31,8 @@ class Popup_aftergame {
         final PopupWindow pw = new PopupWindow(
                 layout, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         pw.setOutsideTouchable(false);
+        pw.setOutsideTouchable(false);
+        pw.setFocusable(false);
 
         // display the pop-up in the center
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
@@ -92,7 +94,7 @@ class Popup_aftergame {
     }
 
     private void next_stage10(Context c) {
-        Intent myIntent = new Intent(c, Roadmap.class);
+        Intent myIntent = new Intent(c, AskForJournal.class);
         myIntent.putExtra("Play", "no");
         c.startActivity(myIntent);
     }

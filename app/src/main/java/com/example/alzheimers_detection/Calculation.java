@@ -43,10 +43,7 @@ double seconds;
 
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
-
-        if(Play==null||Play.contains("no"))
-        {
-            new CountDownTimer(10,10){
+            new CountDownTimer(1000,1000){
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -55,11 +52,9 @@ double seconds;
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Calculation.this,description,stage_name);
+                    p.showPopUp(Calculation.this,description);
                 }
             }.start();
-
-        }
 
 
     }

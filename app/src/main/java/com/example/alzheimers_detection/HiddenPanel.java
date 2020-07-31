@@ -98,9 +98,9 @@ class HiddenPanel {
         });
     }
     private void next_stage10(Context c) {
-        //Intent myIntent = new Intent(c, DelayedRecall.class);
-        ///myIntent.putExtra("Play", "no");
-        //c.startActivity(myIntent);
+        Intent myIntent = new Intent(c, AskForJournal.class);
+        myIntent.putExtra("Play", "no");
+        c.startActivity(myIntent);
     }
 
     private void next_stage9(Context c) {

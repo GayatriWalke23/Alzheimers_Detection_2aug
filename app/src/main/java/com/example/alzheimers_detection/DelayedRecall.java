@@ -79,9 +79,7 @@ public class DelayedRecall extends AppCompatActivity {
         urlnext="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/nextgreenbutton.png?alt=media&token=60064096-a57e-4aa0-8cb7-511e933d97ca";
         Picasso.with(this).load(urlnext).into(next);
         Picasso.with(this).load(urlcaterpillar).into(caterpillar);
-        if(Play==null||Play.contains("no"))
-        {
-            new CountDownTimer(10,10){
+          new CountDownTimer(1000,1000){
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -90,13 +88,10 @@ public class DelayedRecall extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(DelayedRecall.this,description,stage_name);
+                    p.showPopUp(DelayedRecall.this,description);
                 }
             }.start();
 
-        }
-        else
-        {
             mButtonChoice1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -195,7 +190,6 @@ public class DelayedRecall extends AppCompatActivity {
 
         }
 
-    }
     public  void  updateQuestion()
     {
 

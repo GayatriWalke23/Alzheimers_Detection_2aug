@@ -9,19 +9,25 @@ import android.graphics.Path;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class ExecutiveFunctioningPart2 extends AppCompatActivity {
@@ -37,12 +43,38 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
     int index=0;
     int score=1;
     String stage_name;
+    String username;
 
     int done=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.executive_functioning_part2);
+        final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        FirebaseUser fuser;
+        mAuth = FirebaseAuth.getInstance();
+        fuser = mAuth.getCurrentUser();
+        uid=fuser.getUid();
+        userDBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(uid).getValue(User.class);
+                username=user.getFirstname();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("UserListActivity", "Error occured");
+            }
+
+
+        });
+
+        final String description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
+                "collect them into sack such that a number is followed by its corresponding alphabet, in " +
+                "increasing order, making an alternate trail.";
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
@@ -79,6 +111,19 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
         Picasso.with(this).load(urlb).into(imageViewB);
         Picasso.with(this).load(urlc).into(imageViewC);
         Picasso.with(this).load(urld).into(imageViewD);
+
+        new CountDownTimer(1000,1000){
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                PopUp_PlayGame p = new PopUp_PlayGame();
+                p.showPopUp(ExecutiveFunctioningPart2.this,description);
+            }
+        }.start();
 
 
     }

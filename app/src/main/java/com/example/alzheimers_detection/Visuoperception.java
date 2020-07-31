@@ -67,8 +67,6 @@ public class Visuoperception extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        if(Play==null||Play.contains("no"))
-        {
             new CountDownTimer(1000,1000){
 
             @Override
@@ -78,10 +76,9 @@ public class Visuoperception extends AppCompatActivity {
             @Override
             public void onFinish() {
                 PopUp_PlayGame p = new PopUp_PlayGame();
-                p.showPopUp(Visuoperception.this,description,stage_name);
+                p.showPopUp(Visuoperception.this,description);
             }
         }.start();
-        }
         picture=findViewById(R.id.picture);
         urlpicture="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/picture.jpg?alt=media&token=57797058-ccc8-43ff-99aa-3825503ee41a";
         Picasso.with(this).load(urlpicture).into(picture);

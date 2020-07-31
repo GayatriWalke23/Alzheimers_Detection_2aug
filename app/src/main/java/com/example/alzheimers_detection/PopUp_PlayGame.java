@@ -19,7 +19,7 @@ class PopUp_PlayGame {
     //calll this method to show a pop up
     @SuppressLint("WrongViewCast")
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
-     void showPopUp(final Context c, String gameDescription, final String stage_name){//String stage_name
+     void showPopUp(final Context c, String gameDescription){//String stage_name
         //We need to get the instance of the LayoutInflater, use the context of this activity
         LayoutInflater inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         //Inflate the view from a predefined XML layout (no need for root id, using entire layout)
@@ -35,13 +35,15 @@ class PopUp_PlayGame {
         final PopupWindow pw = new PopupWindow(
                 layout, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
         pw.setOutsideTouchable(false);
+        pw.setFocusable(false);
+        pw.showAtLocation(layout, Gravity.CENTER, 0, 0);
 
         //Button to close the pop-up
 
         layout.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 pw.dismiss();
-                if(stage_name.contains("ExecutiveFunctioning"))
+               /* if(stage_name.contains("ExecutiveFunctioning"))
                     change_stage1(c);
                 if(stage_name.contains("Naming"))
                     change_stage2(c);
@@ -60,7 +62,7 @@ class PopUp_PlayGame {
                 if(stage_name.contains("Fluency"))
                     change_stage9(c);
                 if(stage_name.contains("DelayedRecall"))
-                    change_stage10(c);
+                    change_stage10(c);*/
             }
         });
 

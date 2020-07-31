@@ -45,8 +45,6 @@ public class Naming4 extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        if(Play==null||Play.contains("no"))
-        {
             new CountDownTimer(1000,1000){
 
                 @Override
@@ -56,11 +54,9 @@ public class Naming4 extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Naming4.this,description,stage_name);
+                    p.showPopUp(Naming4.this,description);
                 }
             }.start();
-
-        }
 
         /* Glide.with(this)
                 .load(url).listener(new RequestListener<String, GlideDrawable>() {

@@ -68,13 +68,18 @@ public class ImmediateRecall extends AppCompatActivity {
         urlnext="https://firebasestorage.googleapis.com/v0/b/alzheimers-detection.appspot.com/o/nextgreenbutton.png?alt=media&token=60064096-a57e-4aa0-8cb7-511e933d97ca";
         Picasso.with(this).load(urlnext).into(next);
         Picasso.with(this).load(urlcaterpillar).into(caterpillar);
-        /*if(Play==null||Play.contains("no"))
-        {
-            PopUp_PlayGame p = new PopUp_PlayGame();
-            p.showPopUp(getApplicationContext(),description,stage_name);
+        new CountDownTimer(1000,1000){
 
-        }*/
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
 
+            @Override
+            public void onFinish() {
+                PopUp_PlayGame p = new PopUp_PlayGame();
+                p.showPopUp(ImmediateRecall.this,description);
+            }
+        }.start();
 
         mQuestionView.setText(myQuestionLibrary.mQuestions[counter]);
         mButtonChoice1.setBackgroundResource(R.drawable.roundbuttonimmediaterecall);

@@ -37,7 +37,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.executive_functioning);
-        final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
+        /*final DatabaseReference userDBRef = FirebaseDatabase.getInstance().getReference("Users");
 
         FirebaseUser fuser;
         mAuth = FirebaseAuth.getInstance();
@@ -57,13 +57,11 @@ public class ExecutiveFunctioning extends AppCompatActivity {
             }
 
 
-        });
+        });*/
 
 
         final String stage_name="ExecutiveFunctioning";
-        final String description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
-                "collect them into sack such that a number is followed by its corresponding alphabet, in " +
-                "increasing order, making an alternate trail.";
+
         onSwipeTouchListener = new OnSwipeTouchListener(this, findViewById(R.id.ExecutiveFunctioning),stage_name);
 
 
@@ -79,34 +77,6 @@ public class ExecutiveFunctioning extends AppCompatActivity {
         Intent intent = getIntent();
         final String Play = intent.getStringExtra("Play");
 
-        if(Play==null||Play.contains("no"))
-        {
-            new CountDownTimer(10,10){
-
-                @Override
-                public void onTick(long millisUntilFinished) {
-                }
-
-                @Override
-                public void onFinish() {
-                    new CountDownTimer(100,100){
-
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        @Override
-                        public void onFinish() {
-                            PopUp_PlayGame p = new PopUp_PlayGame();
-                            p.showPopUp(ExecutiveFunctioning.this,description,stage_name);
-                        }
-                    }.start();
-                }
-            }.start();
-
-        }
-        else
-        {
             mysong = MediaPlayer.create(ExecutiveFunctioning.this, R.raw.summer);
             mysong.start();
 
@@ -137,10 +107,7 @@ public class ExecutiveFunctioning extends AppCompatActivity {
                 }
 
                 @Override
-                public void onError() {
-                }
-            });
-        }
+                public void onError() { }});
     }
 
     @Override

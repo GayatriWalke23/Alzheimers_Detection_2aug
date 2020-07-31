@@ -142,10 +142,7 @@ public class Attention extends AppCompatActivity {
             }
         });
         Picasso.with(this).load(urlopen).into(open);
-
-        if(Play==null||Play.contains("no"))
-        {
-            new CountDownTimer(10,10){
+            new CountDownTimer(1000,1000){
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -154,13 +151,10 @@ public class Attention extends AppCompatActivity {
                 @Override
                 public void onFinish() {
                     PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Attention.this,description,stage_name);
+                    p.showPopUp(Attention.this,description);
                 }
             }.start();
 
-        }
-        else
-        {
             yes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -256,13 +250,6 @@ public class Attention extends AppCompatActivity {
             });
 
         }
-
-
-
-
-
-
-    }
     public void afterDonutLoad()
     {
         instruction3.setVisibility(View.INVISIBLE);
