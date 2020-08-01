@@ -32,4 +32,8 @@ public class HomeScreen extends AppCompatActivity {
         Intent i=new Intent(getApplicationContext(),Results.class);
         startActivity(i);
     }
+    public void Settings(View view) {
+        Intent i = new Intent(getApplicationContext(),Settings.class);
+        startActivity(i);
+    }
 }

@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class Orientation extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private int year, month, day;
     int score;
+    int seconds=3;
     String stage_name,username;
     public FirebaseAuth mAuth;
     DatabaseReference dbUsers;
@@ -71,9 +73,31 @@ public class Orientation extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
-                description = "\nYou are "+username+", the Chief Editor of “The Alzheimer’s Times “! An incomplete Newspaper format" +
-                        " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
-                        " format.";
+                seconds=3;
+                final Handler handler=new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(seconds>0)
+                        {
+                            seconds=seconds-1;
+                            handler.postDelayed(this,1000);
+                        }
+                        else
+                        {
+                            if(username==null)
+                            {
+                                username="xyz";
+                            }
+
+                            description = "\nYou are "+username+", the Chief Editor of “The Alzheimer’s Times “! An incomplete Newspaper format" +
+                                    " \nwill be shown.\nClick on the highlighted fields to select the appropriate details and complete the" +
+                                    " format.";
+
+                        }
+                    }
+                });
 
             }
 

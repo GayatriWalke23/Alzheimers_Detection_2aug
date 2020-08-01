@@ -8,15 +8,6 @@
     tools:context=".Calculation"
     android:id="@+id/Calculation">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/left"
-        android:layout_width="494dp"
-        android:layout_height="321dp"
-        android:layout_x="-49dp"
-        android:layout_y="-31dp"
-
-        android:src="@drawable/rainbow" />
-
     <!--<ImageView
         android:id="@+id/cloud2a"
         android:layout_width="349dp"
@@ -39,60 +30,60 @@
 
     <ImageView
         android:id="@+id/cloud1a"
-        android:layout_width="262dp"
-        android:layout_height="206dp"
-        android:layout_x="18dp"
-        android:layout_y="267dp"
+        android:layout_width="322dp"
+        android:layout_height="291dp"
+        android:layout_x="22dp"
+        android:layout_y="90dp"
         android:onClick="click"
         android:visibility="visible"
         app:srcCompat="@drawable/cloud1a" />
 
     <ImageView
         android:id="@+id/cloud1b"
-        android:layout_width="241dp"
-        android:layout_height="278dp"
-        android:layout_x="130dp"
-        android:layout_y="521dp"
+        android:layout_width="314dp"
+        android:layout_height="363dp"
+        android:layout_x="76dp"
+        android:layout_y="416dp"
         android:onClick="click"
         android:visibility="visible"
         app:srcCompat="@drawable/cloud1b" />
 
     <ImageView
         android:id="@+id/cloud3a"
-        android:layout_width="228dp"
-        android:layout_height="183dp"
-        android:layout_x="36dp"
-        android:layout_y="246dp"
+        android:layout_width="310dp"
+        android:layout_height="288dp"
+        android:layout_x="32dp"
+        android:layout_y="88dp"
         android:onClick="click"
         android:visibility="gone"
         app:srcCompat="@drawable/cloud3a" />
 
     <ImageView
         android:id="@+id/cloud3b"
-        android:layout_width="249dp"
-        android:layout_height="171dp"
-        android:layout_x="148dp"
-        android:layout_y="458dp"
+        android:layout_width="326dp"
+        android:layout_height="280dp"
+        android:layout_x="60dp"
+        android:layout_y="421dp"
         android:onClick="click"
         android:visibility="gone"
         app:srcCompat="@drawable/cloud3b" />
 
     <ImageView
         android:id="@+id/cloud4a"
-        android:layout_width="279dp"
-        android:layout_height="199dp"
-        android:layout_x="108dp"
-        android:layout_y="224dp"
+        android:layout_width="365dp"
+        android:layout_height="317dp"
+        android:layout_x="12dp"
+        android:layout_y="88dp"
         android:onClick="click"
         android:visibility="gone"
         app:srcCompat="@drawable/cloud4a" />
 
     <ImageView
         android:id="@+id/cloud4b"
-        android:layout_width="261dp"
-        android:layout_height="247dp"
-        android:layout_x="42dp"
-        android:layout_y="460dp"
+        android:layout_width="381dp"
+        android:layout_height="312dp"
+        android:layout_x="34dp"
+        android:layout_y="419dp"
         android:onClick="click"
         android:visibility="gone"
         app:srcCompat="@drawable/cloud4b" />

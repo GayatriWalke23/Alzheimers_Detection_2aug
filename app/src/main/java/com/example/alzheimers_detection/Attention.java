@@ -68,8 +68,30 @@ public class Attention extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
-                description = "\nYou are \n“"+username+" – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
-                        " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
+                seconds=3;
+                final Handler handler=new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(seconds>0)
+                        {
+                            seconds=seconds-1;
+                            handler.postDelayed(this,1000);
+                        }
+                        else
+                        {
+                            if(username==null)
+                            {
+                                username="xyz";
+                            }
+                            description = "\nYou are \n“"+username+" – The Doughnut Seller“.\n\nLook at each doughnut carefully and answer in terms of" +
+                                    " \n“YES / NO” based on whether the previous doughnut is same as the current one.";
+
+
+                        }
+                    }
+                });
 
             }
 
@@ -142,114 +164,114 @@ public class Attention extends AppCompatActivity {
             }
         });
         Picasso.with(this).load(urlopen).into(open);
-            new CountDownTimer(1000,1000){
+        new CountDownTimer(1000,1000){
 
-                @Override
-                public void onTick(long millisUntilFinished) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                PopUp_PlayGame p = new PopUp_PlayGame();
+                p.showPopUp(Attention.this,description);
+            }
+        }.start();
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mThumbIds[i]==mThumbIds[i-1])
+                {
+                    score=score+1;
                 }
-
-                @Override
-                public void onFinish() {
-                    PopUp_PlayGame p = new PopUp_PlayGame();
-                    p.showPopUp(Attention.this,description);
-                }
-            }.start();
-
-            yes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(mThumbIds[i]==mThumbIds[i-1])
-                    {
-                        score=score+1;
-                    }
-                    i++;
-                    if(!(i==mThumbIds.length))
-                    {
-                        picture.setImageResource(R.drawable.blank);
-                        picture.setAlpha(0);
-                        seconds=1;
-                        final Handler handler2=new Handler();
-                        handler2.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(seconds>0)
-                                {
-                                    seconds=seconds-1;
-                                    handler2.postDelayed(this,1000);
-                                }
-                                else
-                                {
-                                    picture.setImageResource(mThumbIds[i]);
-                                    picture.setAlpha(255);
-                                }
+                i++;
+                if(!(i==mThumbIds.length))
+                {
+                    picture.setImageResource(R.drawable.blank);
+                    picture.setAlpha(0);
+                    seconds=1;
+                    final Handler handler2=new Handler();
+                    handler2.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(seconds>0)
+                            {
+                                seconds=seconds-1;
+                                handler2.postDelayed(this,1000);
                             }
-                        });
-                    }
-                    else
-                    {
-                        yes.setEnabled(false);
-                        no.setEnabled(false);
-                       // Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
-
-                        Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
-                        startActivity(i);
-                        Log.d("score",""+(score/3));
-
-
-                    }
-                }
-            });
-
-
-            no.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(mThumbIds[i]!=mThumbIds[i-1])
-                    {
-                        score=score+1;
-                    }
-
-                    i++;
-                    if(!(i==mThumbIds.length))
-                    {
-                        picture.setImageResource(R.drawable.blank);
-                        picture.setAlpha(0);
-                        seconds=1;
-                        final Handler handler2=new Handler();
-                        handler2.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(seconds>0)
-                                {
-                                    seconds=seconds-1;
-                                    handler2.postDelayed(this,1000);
-                                }
-                                else
-                                {
-                                    picture.setImageResource(mThumbIds[i]);
-                                    picture.setAlpha(255);
-                                }
+                            else
+                            {
+                                picture.setImageResource(mThumbIds[i]);
+                                picture.setAlpha(255);
                             }
-                        });
-                    }
-                    else
-                    {
-                        yes.setEnabled(false);
-                        no.setEnabled(false);
-                        Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
-
-                        fuser = mAuth.getCurrentUser();
-                        uid=fuser.getUid();
-                        dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
-                        dbUsers.child("attention").setValue((score/3));
-                        Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
-                        startActivity(i);
-                        Log.d("score",""+(score/3));
-                    }
+                        }
+                    });
                 }
-            });
+                else
+                {
+                    yes.setEnabled(false);
+                    no.setEnabled(false);
+                    // Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
 
-        }
+                    Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
+                    startActivity(i);
+                    Log.d("score",""+(score/3));
+
+
+                }
+            }
+        });
+
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mThumbIds[i]!=mThumbIds[i-1])
+                {
+                    score=score+1;
+                }
+
+                i++;
+                if(!(i==mThumbIds.length))
+                {
+                    picture.setImageResource(R.drawable.blank);
+                    picture.setAlpha(0);
+                    seconds=1;
+                    final Handler handler2=new Handler();
+                    handler2.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(seconds>0)
+                            {
+                                seconds=seconds-1;
+                                handler2.postDelayed(this,1000);
+                            }
+                            else
+                            {
+                                picture.setImageResource(mThumbIds[i]);
+                                picture.setAlpha(255);
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    yes.setEnabled(false);
+                    no.setEnabled(false);
+                    Toast.makeText(getApplicationContext(),"score:"+(score/3),Toast.LENGTH_LONG).show();
+
+                    fuser = mAuth.getCurrentUser();
+                    uid=fuser.getUid();
+                    dbUsers= FirebaseDatabase.getInstance().getReference("Users/"+uid);
+                    dbUsers.child("attention").setValue((score/3));
+                    Intent i=new Intent(getApplicationContext(), Visuoperception_Intro.class);
+                    startActivity(i);
+                    Log.d("score",""+(score/3));
+                }
+            }
+        });
+
+    }
     public void afterDonutLoad()
     {
         instruction3.setVisibility(View.INVISIBLE);

@@ -135,13 +135,5 @@
         android:rotation="-20"
         />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="284dp"
-        android:layout_y="483dp" />
-
 
 </AbsoluteLayout>

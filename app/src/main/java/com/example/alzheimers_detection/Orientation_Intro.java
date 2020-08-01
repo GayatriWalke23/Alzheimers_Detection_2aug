@@ -21,7 +21,7 @@ String urlorientationview;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.orientation_intro);
-        progressBar9 =findViewById(R.id.progressBar9);
+        //progressBar9 =findViewById(R.id.progressBar9);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         /*Glide.with(this)

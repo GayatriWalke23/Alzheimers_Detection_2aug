@@ -1,6 +1,3 @@
-
-
-//added images to firebase
 package com.example.alzheimers_detection;
 
 import android.animation.ObjectAnimator;
@@ -62,9 +59,31 @@ public class ExecutiveFunctioningPart2 extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.child(uid).getValue(User.class);
                 username=user.getFirstname();
-                 description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
-                        "collect them into sack such that a number is followed by its corresponding alphabet, in " +
-                        "increasing order, making an alternate trail.";
+                seconds=3;
+                final Handler handler=new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if(seconds>0)
+                        {
+                            seconds=seconds-1;
+                            handler.postDelayed(this,1000);
+                        }
+                        else
+                        {
+                            if(username==null)
+                            {
+                                username="xyz";
+                            }
+
+                            description = "You are “ "+username+" the Thief ! ”"+"\nEach coin inside the cave has a number or alphabet engraved on it.\n\nTap these coins to " +
+                                    "collect them into sack such that a number is followed by its corresponding alphabet, in " +
+                                    "increasing order, making an alternate trail.";
+                        }
+                    }
+                });
+
             }
 
             @Override

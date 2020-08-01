@@ -88,8 +88,7 @@ memory which appears in moderate to severe Alzheimer's Disease"
         android:layout_height="282dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:scaleType="fitXY"
-        android:background="@mipmap/ic_launcher"/>
+        android:scaleType="fitXY" />
     <ProgressBar
         android:id="@+id/progressBar8"
         style="?android:attr/progressBarStyle"
