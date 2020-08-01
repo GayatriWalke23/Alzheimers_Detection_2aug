@@ -81,44 +81,47 @@
     <string name="result2">You might not have Alzheimer\'s Disease</string>
 
 
-
     <!--lANGUAGE -->
 
     <string name="selectlanguage">select language</string>
     <string name="english">"English"</string>
     <string name="hindi">"Hindi"</string>
 
+    <!--                            VI                         -->
+
+    <string name="VI_Instructions">        Welcome to Alzheimers Detection Game. . . Necessary instructions will be recited to you before the starting of each stage,follow those instructions to ace the stage    </string>
+
     <!--Introduction Screens how to play -->
-    <string name="VI_Memory_intro" > Hello . . . this is Stage 1 . . . Memory. . . Listen to the audio </string>
-    <string name="VI_Attention_intro">  Welcome to stage 2  Attention listen to the audio and record   in the exact same way. . .tap to proceed further </string>
-    <string name="VI_Calculation_intro">  Welcome to stage 3 . . . Calculation . . .follow the instructions . . . you listen to . . . and swipe accordingly . . . tap to proceed </string>
-    <string name="VI_Sentence_Repetition_intro"> You are now on stage 4. . . Sentence repetition . . . an audio will be played two times . . . recall and record . . . in same manner . . . tap to listen to the audio  </string>
-    <string name="VI_Verbal_fluency_intro">Hello again . . . you are now on stage 5 . . . Verbal fluency . . . let\'s have a fun activity . . . record as many words as possible . . . from given word . . . lets have 3 rounds for 3 different letters Tap to proceed </string>
-    <string name="VI_Abstraction_intro">  Welcome to stage 6 Abstraction Let\'s check for similarities between objects . . . record two objects belonging to same category   let us have a fun activity of to swipe screen . . . in all directions . . . swipe on the screen according to the instructions you listen to Tap to proceed</string>
-    <string name="VI_Delayed_Recall_intro">  hi . . . this is stage 7 . . .  Delayed recall . . . can you recall the words we told you to remember? . . .  recall and record as many as possible tap to proceed and record </string>
-    <string name="VI_Orientation_intro"> Welcome to stage 8  . . . orientation . ......... tap to start  </string>
+    <string name="VI_Memory_intro"> Welcome to Stage 1 . . . Memory. . . Listen to the story of the caterpillar carefully and then answer the questions accordingly. . </string>
+    <string name="VI_Attention_intro">  Welcome to stage 2. . .  Attention . . .You will hear a series of alphabets. . .tap on the screen, everytime the alphabet. . . A is heard. . .please tap to proceed further</string>
+    <string name="VI_Calculation_intro">  Welcome to stage 3 . . . Calculation . . .You will be asked 3 questions,calculate mentally and speak out the larger value . . . please tap to proceed further </string>
+    <string name="VI_Sentence_Repetition_intro"> You are now on stage 4. . . Sentence repetition . . . sentences will be recited to you two times . . . recall and record these sentences. . . in exactly the same manner . . . tap to listen to the first sentence  </string>
+    <string name="VI_Verbal_fluency_intro">Hello again . . . you are now on stage 5 . . . Verbal fluency . . . let\'s have a fun activity . . . record as many words as possible . . . from the given alphabet . . .  Tap to proceed further </string>
+    <string name="VI_Abstraction_intro">  Welcome to stage 6 Abstraction Let\'s check for similarities between objects . ..you will be required to swipe the screen according to the instructions which you will hear shortly. . .  Tap to proceed further</string>
+    <string name="VI_Delayed_Recall_intro"> This is stage 7 . . .  Delayed recall . . . Recall the story you heard about the Caterpillars Adventures  . .  answer a few more questions now. . . Tap to proceed further</string>
+    <string name="VI_Orientation_intro"> Welcome to stage 8  . . . orientation, the last stage of the game...In this stage, The Alzheimer’s Detection Pvt. Ltd. are hiring full time employees. You are one of the aspiring job seekers , you land a telephonic interview chance with them. You will be asked 6 simple questions , give one word answers for them and increase your chances to get shortlisted.. . .Tap to proceed further    </string>
 
     <!--After stage-->
-    <string name="after_VI_Memory" > good job </string>
+    <string name="after_VI_Memory"> Well Done! </string>
     <string name="after_Attention">  good job </string>
-    <string name="after_Calculation"> good job </string>
+    <string name="after_Calculation"> Well Done! </string>
     <string name="after_Sentence_Repetition"> good job </string>
-    <string name="after_Verbal_fluency">good job</string>
+    <string name="after_Verbal_fluency">Well Done!</string>
     <string name="after_Abstraction"> good job  </string>
-    <string name="after_Delayed_Recall"> good job </string>
+    <string name="after_Delayed_Recall"> Well Done! </string>
     <string name="after_Orientation">good job  </string>
 
 
     <!--General instructions for swipe screens-->
-    <string name="Swipeleft" >Swipe left to answer    </string>
-    <string name="Swiperight" >Swipe right to answer   </string>
+    <string name="Swipeleft">Swipe left to answer    </string>
+    <string name="Swiperight">Swipe right to answer   </string>
     <string name="Swipeup">swipe up to repeat   </string>
     <string name="Swipedown">Swipe down to answer  </string>
     <string name="Enter_response"> Enter Your response </string>
-    <string name="tap_procede">Tap to procede</string>
+    <string name="tap_procede">please tap to proceed further</string>
 
     <!-- Verbal fluency  -->
-    <string name="Text1">Give as many words as you can think of from the letter "A". Press on the screen to speak</string>
+    <string name="Text1">Give as many words as you can think of from the letter "A".. Press on the screen to speak</string>
     <string name="Text2">Make sure you don\'t use proper nouns , numbers and different forms of a verb.</string>
 
     <!--sentence repetition for blind-->
@@ -199,13 +202,13 @@
     </string-array>
     <string-array name="Abstraction_Option1">
         <item>Both are means of transportation</item>
-        <item>Both can move</item>
+        <item>Both can move on their own</item>
         <item>Both have four wheels</item>
     </string-array>
     <string-array name="Abstraction_Option2">
+        <item>Both are reptiles</item>
         <item>Both are animals</item>
-        <item>Both are animals</item>
-        <item>Both have four legs</item>
+        <item>Both can talk</item>
     </string-array>
 
 
@@ -213,7 +216,7 @@
 
     <string-array name="Calculation_que">
         <item>3/5 or 1/5 which is greater?</item>
-        <item>A burger of 250 calories with pizza of 500 calories or a plate of veggies of 250 calories. Which will add less calories?</item>
+        <item>A burger of 250 calories with pizza of 500 calories or a plate of veggies of 250 calories. Which will have less calories?</item>
         <item>1 bottle of 1000 ml cold drink or 3 bottles of 250 ml each. Which is a greater quantity?</item>
     </string-array>
     <string-array name="Calculation_Option1">
@@ -231,14 +234,13 @@
 
 
     <!--  Orientation -->
-    <string name="intro">Welcome to Alzheimer\'s Detection private limited. Let\'s start with your interview </string>
+    <string name="intro">Welcome to Alzheimer\'s Detection private limited... Let\'s start with your interview </string>
     <string name="Q1">Which day of the Month is Today ?</string>
     <string name="Q2">What month is it , right now ?</string>
     <string name="Q3">In which year are we ?</string>
     <string name="Q4">Which day of the week is Today ?</string>
     <string name="Q5">What country are you from ?</string>
     <string name="Q6">Which city are you in right now ?</string>
-
 
 
 </resources>

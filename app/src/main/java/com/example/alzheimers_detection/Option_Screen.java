@@ -26,7 +26,6 @@ public class Option_Screen extends AppCompatActivity {
 
     public void Start_Vi(View view)
     {
-        Intent i=new Intent(getApplicationContext(),VI_Start.class);
-        startActivity(i);
+
     }
 }

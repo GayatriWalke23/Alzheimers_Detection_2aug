@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QRC"></activity>
+        <activity android:name=".Instructions"></activity>
 
         <meta-data
             android:name="com.google.android.actions"
@@ -29,15 +29,11 @@
         <activity android:name=".OpeningScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Login/Sign up/Home Screen -->
-
-        <activity android:name=".Login">
-
-        </activity>
-
-
+        <activity android:name=".Login"></activity>
         <activity android:name=".LoginOtpByPhone" />
         <activity
             android:name=".Signup"
@@ -47,12 +43,9 @@
         <activity android:name=".SignupPhone" />
         <activity android:name=".AskForJournal" />
         <activity android:name=".JournalQuestions" />
-        <activity android:name=".HomeScreen"/>
+        <activity android:name=".HomeScreen" />
         <activity android:name=".Results" />
-
-        <activity android:name=".Chatbot" />
         <activity android:name=".Settings" />
-        <activity android:name=".NearbyDoctors" />
         <activity android:name=".FamilyHistory" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".Option_Screen" />
@@ -70,7 +63,7 @@
         <activity android:name=".Calculation_Intro" />
         <activity android:name=".Calculation" />
         <activity android:name=".Orientation_Intro" />
-        <activity android:name=".Orientation"/>
+        <activity android:name=".Orientation" />
         <activity android:name=".ImmediateRecall_Intro" />
         <activity android:name=".Immediate_recallPlayVideo" />
         <activity android:name=".ImmediateRecallVideo" />
@@ -83,32 +76,7 @@
         <activity android:name=".Fluency" />
         <activity android:name=".DelayedRecall_Intro" />
         <activity android:name=".DelayedRecall" />
-        <activity android:name=".WebViewConnectPeople"/>
-        <activity android:name=".MyCommunities"/>
-
-        <!-- Visually Impaired -->
-        <activity android:name=".VI_Start"    android:noHistory="true"/>
-        <activity android:name=".VI_Memory_intro"    android:noHistory="true"/>
-        <activity android:name=".VI_Memory"   android:noHistory="true"/>
-        <activity android:name=".VI_Memory_ans"   android:noHistory="true"/>
-        <activity android:name=".VI_Attention_intro"  android:noHistory="true"/>
-        <activity android:name=".VI_Attention"   android:noHistory="true"/>
-        <activity android:name=".VI_Calculation_intro"  android:noHistory="true"/>
-        <activity android:name=".VI_Calculation"   android:noHistory="true"/>
-        <activity android:name=".VI_Calculation_ans"   android:noHistory="true"/>
-        <activity android:name=".VI_Sentence_Repetition_intro"   android:noHistory="true"/>
-        <activity android:name=".VI_Sentence_Repetition"   android:noHistory="true"/>
-        <activity android:name=".VI_Verbal_fluency_intro"   android:noHistory="true"/>
-        <activity android:name=".VI_Verbal_fluency"   android:noHistory="true"/>
-        <activity android:name=".VI_Abstraction_intro"   android:noHistory="true"/>
-        <activity android:name=".VI_Abstraction"   android:noHistory="true"/>
-        <activity android:name=".VI_Abstraction_ans"   android:noHistory="true"/>
-        <activity android:name=".VI_Delayed_Recall_intro"    android:noHistory="true"/>
-        <activity android:name=".VI_Delayed_Recall"   android:noHistory="true"/>
-        <activity android:name=".VI_Delayed_Recall_ans"   android:noHistory="true"/>
-        <activity android:name=".VI_Orientation_intro"   android:noHistory="true"/>
-        <activity android:name=".VI_Orientation"   android:noHistory="true"/>
-
+         <!-- Visually Impaired -->
 
         <uses-library android:name="com.google.android.maps" />
     </application>

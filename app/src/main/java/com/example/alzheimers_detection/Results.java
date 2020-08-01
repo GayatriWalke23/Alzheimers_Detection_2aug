@@ -438,8 +438,8 @@ public class Results extends AppCompatActivity implements View.OnClickListener{
                 break;
 
 
-            case R.id.buttonQrc: Intent i=new Intent(getApplicationContext(),QRC.class);
-                startActivity(i);
+            case R.id.buttonQrc: //Intent i=new Intent(getApplicationContext(),QRC.class);
+                //startActivity(i);
                 break;
 
             case R.id.buttonHome: Intent i2=new Intent(getApplicationContext(),HomeScreen.class);

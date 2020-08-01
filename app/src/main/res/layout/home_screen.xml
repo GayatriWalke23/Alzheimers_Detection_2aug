@@ -4,151 +4,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
     android:background="#FFFFFF"
-    android:id="@+id/HomeScreen"
     tools:context=".HomeScreen">
 
-    <Button
-        android:id="@+id/playgame"
-        android:layout_width="380dp"
-        android:layout_height="170dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="20dp"
-        android:background="#2D4D7C"
-        android:drawableBottom="@android:drawable/ic_media_play"
-        android:drawablePadding="-110dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Play Game"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
-
-    <Button
-        android:id="@+id/instructions"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/playgame"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="7dp"
-        android:background="#EBEC0D05"
-        android:drawableBottom="@android:drawable/ic_menu_directions"
-        android:drawablePadding="-100dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:isScrollContainer="false"
-        android:text="Instructions"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Welcome to"
+        android:textSize="22sp"
         android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/results"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/playgame"
-        android:layout_alignRight="@id/instructions"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Alzheimer's"
+        android:textColor="#FF6D00"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        app:fontFamily="@font/amarante" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="-190dp"
-        android:background="#E4E009"
-        android:drawableBottom="?attr/actionModePasteDrawable"
-        android:drawablePadding="-100dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Results"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="italic" />
-
-    <Button
-        android:id="@+id/nearbydoctors"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/instructions"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="7dp"
-        android:background="#24C31F"
-        android:drawableBottom="@android:drawable/ic_menu_mylocation"
-        android:drawablePadding="-100dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Nearby Doctors"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="italic" />
-
-    <Button
-        android:id="@+id/news"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/results"
-        android:layout_alignRight="@id/nearbydoctors"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="-190dp"
-        android:background="#EE3AB1C6"
-        android:drawableBottom="?android:attr/actionModeFindDrawable"
-        android:drawablePadding="-100dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Connect"
-        android:onClick="GoToNews"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/textView2"
+        android:text="Detection"
+        android:textColor="#051CAE"
+        android:textSize="30sp"
         android:textStyle="italic"
-        tools:ignore="OnClick"
-        tools:targetApi="lollipop" />
+        app:fontFamily="@font/amarante" />
 
-    <Button
-        android:id="@+id/chatwithus"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/nearbydoctors"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="7dp"
-        android:background="#7C07B6"
-        android:drawableBottom="@android:drawable/stat_notify_chat"
-        android:drawablePadding="-95dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Chat With Us"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        android:textStyle="italic" />
-
-    <Button
-        android:id="@+id/settings"
-        android:layout_width="182dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/news"
-        android:layout_alignRight="@id/chatwithus"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentBottom="false"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="-190dp"
-        android:background="#F36F0D"
-        android:drawableBottom="@android:drawable/ic_menu_manage"
-        android:drawablePadding="-100dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Settings"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/textView3"
+        android:text="Game"
+        android:textColor="#F81111"
+        android:textSize="30sp"
         android:textStyle="italic"
-        />
+        app:fontFamily="@font/amarante" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Play Game"
+        android:textSize="24sp"
+        app:fontFamily="@font/andika" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="350dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="25dp"
-        app:srcCompat="@drawable/gamename" />
+        android:layout_width="199dp"
+        android:layout_height="123dp"
+        android:layout_below="@id/textView4"
+        android:layout_centerHorizontal="true"
+        android:onClick="Playy"
+        android:layout_marginTop="79dp"
+        app:srcCompat="@drawable/playgame" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="166dp"
+        android:layout_height="107dp"
+        android:layout_below="@id/imageView"
+        android:layout_marginLeft="-20dp"
+        android:layout_marginTop="148dp"
+        android:onClick="instructions"
+        app:srcCompat="@drawable/instruction" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="128dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@drawable/welcome" />
+        android:layout_width="143dp"
+        android:layout_height="101dp"
+        android:layout_below="@id/imageView"
+        android:layout_marginLeft="-17dp"
+        android:layout_marginTop="148dp"
+        android:layout_toRightOf="@id/imageView3"
+        android:onClick="Results"
+        app:srcCompat="@drawable/results" />
+
+    <ImageView
+    android:id="@+id/imageView3"
+    android:layout_width="162dp"
+    android:layout_height="108dp"
+    android:layout_below="@id/imageView"
+    android:layout_marginLeft="-49dp"
+    android:layout_marginTop="142dp"
+    android:layout_toRightOf="@id/textView2"
+    app:srcCompat="@drawable/settings" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:text="Instructions"
+        android:textSize="20sp"
+        app:fontFamily="@font/andika" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Settings"
+        android:textSize="20sp"
+        app:fontFamily="@font/andika" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView3"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/textView7"
+        android:text="Results"
+        android:textSize="20sp"
+        app:fontFamily="@font/andika" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignBottom="@id/textView7"
+        android:layout_alignParentBottom="true"
+        android:baselineAlignBottom="false"
+        app:srcCompat="@drawable/mylogo" />
 
 </RelativeLayout>
