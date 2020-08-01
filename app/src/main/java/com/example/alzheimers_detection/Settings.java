@@ -177,10 +177,8 @@ public class Settings extends AppCompatActivity {
                 if (soundflag==0) {
                     //music stop
 
-                    AudioManager audioManager =
-                            (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.adjustVolume(AudioManager.ADJUST_LOWER,
-                            AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                    AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
 
 
                     soundstatus.setText("Off");
@@ -189,9 +187,8 @@ public class Settings extends AppCompatActivity {
                 }
                 else{
                     //music on
-                    AudioManager audioManager =
-                            (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-                    audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+                    AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                    amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false);
 
                     soundstatus.setText("On");
                     soundbutton.setImageResource(R.drawable.on);
